@@ -1,0 +1,1365 @@
+; Options: -in -smt2
+(set-option :produce-unsat-assumptions true)
+
+(declare-fun start!71700 () Bool)
+
+(assert start!71700)
+
+(declare-fun b!833869 () Bool)
+
+(declare-fun res!567014 () Bool)
+
+(declare-fun e!465227 () Bool)
+
+(assert (=> b!833869 (=> (not res!567014) (not e!465227))))
+
+(declare-fun _size!7 () (_ BitVec 32))
+
+(declare-fun _vacant!7 () (_ BitVec 32))
+
+(declare-fun oldMask!2 () (_ BitVec 32))
+
+(assert (=> b!833869 (= res!567014 (and (bvsge _size!7 #b00000000000000000000000000000000) (bvsle _size!7 (bvadd #b00000000000000000000000000000001 oldMask!2)) (bvsge _vacant!7 #b00000000000000000000000000000000)))))
+
+(declare-fun b!833870 () Bool)
+
+(declare-datatypes ((Unit!28586 0))(
+  ( (Unit!28587) )
+))
+(declare-datatypes ((tuple2!10186 0))(
+  ( (tuple2!10187 (_1!5104 Unit!28586) (_2!5104 (_ BitVec 32))) )
+))
+(declare-fun lt!378643 () tuple2!10186)
+
+(declare-fun e!465228 () tuple2!10186)
+
+(declare-fun computeNewMaskWhile!18 ((_ BitVec 32) (_ BitVec 32) (_ BitVec 32) (_ BitVec 32)) tuple2!10186)
+
+(assert (=> b!833870 (= e!465228 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 (_2!5104 lt!378643)))))
+
+(declare-fun b!833871 () Bool)
+
+(declare-fun Unit!28588 () Unit!28586)
+
+(assert (=> b!833871 (= e!465228 (tuple2!10187 Unit!28588 (_2!5104 lt!378643)))))
+
+(declare-fun b!833872 () Bool)
+
+(declare-fun e!465226 () Bool)
+
+(assert (=> b!833872 (= e!465227 e!465226)))
+
+(declare-fun res!567012 () Bool)
+
+(assert (=> b!833872 (=> res!567012 e!465226)))
+
+(declare-fun lt!378642 () tuple2!10186)
+
+(declare-fun validMask!0 ((_ BitVec 32)) Bool)
+
+(assert (=> b!833872 (= res!567012 (not (validMask!0 (_2!5104 lt!378642))))))
+
+(assert (=> b!833872 (= lt!378642 e!465228)))
+
+(declare-fun c!90824 () Bool)
+
+(assert (=> b!833872 (= c!90824 (and (bvsgt (_2!5104 lt!378643) #b00000000000000000000000000001000) (bvslt (bvmul _size!7 #b00000000000000000000000000001000) (_2!5104 lt!378643)) (bvsge (bvadd #b00000000000000000000000000000001 (bvand (bvashr (_2!5104 lt!378643) #b00000000000000000000000000000001) #b00111111111111111111111111111111)) _size!7)))))
+
+(declare-fun Unit!28589 () Unit!28586)
+
+(declare-fun Unit!28590 () Unit!28586)
+
+(assert (=> b!833872 (= lt!378643 (ite (and (bvsge (bvmul #b00000000000000000000000000000010 (bvadd _size!7 _vacant!7)) oldMask!2) (bvsle (bvmul _vacant!7 #b00000000000000000000000000000101) oldMask!2)) (tuple2!10187 Unit!28589 (bvand (bvadd #b00000000000000000000000000000001 (bvshl oldMask!2 #b00000000000000000000000000000001)) #b00111111111111111111111111111111)) (tuple2!10187 Unit!28590 oldMask!2)))))
+
+(declare-fun res!567013 () Bool)
+
+(assert (=> start!71700 (=> (not res!567013) (not e!465227))))
+
+(assert (=> start!71700 (= res!567013 (validMask!0 oldMask!2))))
+
+(assert (=> start!71700 e!465227))
+
+(assert (=> start!71700 true))
+
+(declare-fun b!833873 () Bool)
+
+(assert (=> b!833873 (= e!465226 (bvsgt _size!7 (bvadd #b00000000000000000000000000000001 (_2!5104 lt!378642))))))
+
+(assert (= (and start!71700 res!567013) b!833869))
+
+(assert (= (and b!833869 res!567014) b!833872))
+
+(assert (= (and b!833872 c!90824) b!833870))
+
+(assert (= (and b!833872 (not c!90824)) b!833871))
+
+(assert (= (and b!833872 (not res!567012)) b!833873))
+
+(declare-fun m!778843 () Bool)
+
+(assert (=> b!833870 m!778843))
+
+(declare-fun m!778845 () Bool)
+
+(assert (=> b!833872 m!778845))
+
+(declare-fun m!778847 () Bool)
+
+(assert (=> start!71700 m!778847))
+
+(check-sat (not start!71700) (not b!833872) (not b!833870))
+(check-sat)
+(get-model)
+
+(declare-fun d!107367 () Bool)
+
+(assert (=> d!107367 (= (validMask!0 oldMask!2) (and (or (= oldMask!2 #b00000000000000000000000000000111) (= oldMask!2 #b00000000000000000000000000001111) (= oldMask!2 #b00000000000000000000000000011111) (= oldMask!2 #b00000000000000000000000000111111) (= oldMask!2 #b00000000000000000000000001111111) (= oldMask!2 #b00000000000000000000000011111111) (= oldMask!2 #b00000000000000000000000111111111) (= oldMask!2 #b00000000000000000000001111111111) (= oldMask!2 #b00000000000000000000011111111111) (= oldMask!2 #b00000000000000000000111111111111) (= oldMask!2 #b00000000000000000001111111111111) (= oldMask!2 #b00000000000000000011111111111111) (= oldMask!2 #b00000000000000000111111111111111) (= oldMask!2 #b00000000000000001111111111111111) (= oldMask!2 #b00000000000000011111111111111111) (= oldMask!2 #b00000000000000111111111111111111) (= oldMask!2 #b00000000000001111111111111111111) (= oldMask!2 #b00000000000011111111111111111111) (= oldMask!2 #b00000000000111111111111111111111) (= oldMask!2 #b00000000001111111111111111111111) (= oldMask!2 #b00000000011111111111111111111111) (= oldMask!2 #b00000000111111111111111111111111) (= oldMask!2 #b00000001111111111111111111111111) (= oldMask!2 #b00000011111111111111111111111111) (= oldMask!2 #b00000111111111111111111111111111) (= oldMask!2 #b00001111111111111111111111111111) (= oldMask!2 #b00011111111111111111111111111111) (= oldMask!2 #b00111111111111111111111111111111)) (bvsle oldMask!2 #b00111111111111111111111111111111)))))
+
+(assert (=> start!71700 d!107367))
+
+(declare-fun d!107373 () Bool)
+
+(assert (=> d!107373 (= (validMask!0 (_2!5104 lt!378642)) (and (or (= (_2!5104 lt!378642) #b00000000000000000000000000000111) (= (_2!5104 lt!378642) #b00000000000000000000000000001111) (= (_2!5104 lt!378642) #b00000000000000000000000000011111) (= (_2!5104 lt!378642) #b00000000000000000000000000111111) (= (_2!5104 lt!378642) #b00000000000000000000000001111111) (= (_2!5104 lt!378642) #b00000000000000000000000011111111) (= (_2!5104 lt!378642) #b00000000000000000000000111111111) (= (_2!5104 lt!378642) #b00000000000000000000001111111111) (= (_2!5104 lt!378642) #b00000000000000000000011111111111) (= (_2!5104 lt!378642) #b00000000000000000000111111111111) (= (_2!5104 lt!378642) #b00000000000000000001111111111111) (= (_2!5104 lt!378642) #b00000000000000000011111111111111) (= (_2!5104 lt!378642) #b00000000000000000111111111111111) (= (_2!5104 lt!378642) #b00000000000000001111111111111111) (= (_2!5104 lt!378642) #b00000000000000011111111111111111) (= (_2!5104 lt!378642) #b00000000000000111111111111111111) (= (_2!5104 lt!378642) #b00000000000001111111111111111111) (= (_2!5104 lt!378642) #b00000000000011111111111111111111) (= (_2!5104 lt!378642) #b00000000000111111111111111111111) (= (_2!5104 lt!378642) #b00000000001111111111111111111111) (= (_2!5104 lt!378642) #b00000000011111111111111111111111) (= (_2!5104 lt!378642) #b00000000111111111111111111111111) (= (_2!5104 lt!378642) #b00000001111111111111111111111111) (= (_2!5104 lt!378642) #b00000011111111111111111111111111) (= (_2!5104 lt!378642) #b00000111111111111111111111111111) (= (_2!5104 lt!378642) #b00001111111111111111111111111111) (= (_2!5104 lt!378642) #b00011111111111111111111111111111) (= (_2!5104 lt!378642) #b00111111111111111111111111111111)) (bvsle (_2!5104 lt!378642) #b00111111111111111111111111111111)))))
+
+(assert (=> b!833872 d!107373))
+
+(declare-fun d!107375 () Bool)
+
+(declare-fun lt!378666 () tuple2!10186)
+
+(assert (=> d!107375 (or (bvsle (_2!5104 lt!378666) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378666)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378666) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465246 () tuple2!10186)
+
+(assert (=> d!107375 (= lt!378666 e!465246)))
+
+(declare-fun c!90836 () Bool)
+
+(declare-fun lt!378667 () (_ BitVec 32))
+
+(assert (=> d!107375 (= c!90836 (and (bvsgt lt!378667 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378667) (bvsge (bvadd (bvand (bvashr lt!378667 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107375 (= lt!378667 (bvlshr (_2!5104 lt!378643) #b00000000000000000000000000000001))))
+
+(assert (=> d!107375 (and (bvsgt (_2!5104 lt!378643) #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378643)) (bvsge (bvadd (bvand (bvashr (_2!5104 lt!378643) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107375 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 (_2!5104 lt!378643)) lt!378666)))
+
+(declare-fun b!833905 () Bool)
+
+(assert (=> b!833905 (= e!465246 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378667))))
+
+(declare-fun b!833906 () Bool)
+
+(declare-fun Unit!28598 () Unit!28586)
+
+(assert (=> b!833906 (= e!465246 (tuple2!10187 Unit!28598 lt!378667))))
+
+(assert (= (and d!107375 c!90836) b!833905))
+
+(assert (= (and d!107375 (not c!90836)) b!833906))
+
+(declare-fun m!778862 () Bool)
+
+(assert (=> b!833905 m!778862))
+
+(assert (=> b!833870 d!107375))
+
+(check-sat (not b!833905))
+(check-sat)
+(get-model)
+
+(declare-fun d!107377 () Bool)
+
+(declare-fun lt!378668 () tuple2!10186)
+
+(assert (=> d!107377 (or (bvsle (_2!5104 lt!378668) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378668)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378668) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465247 () tuple2!10186)
+
+(assert (=> d!107377 (= lt!378668 e!465247)))
+
+(declare-fun c!90837 () Bool)
+
+(declare-fun lt!378669 () (_ BitVec 32))
+
+(assert (=> d!107377 (= c!90837 (and (bvsgt lt!378669 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378669) (bvsge (bvadd (bvand (bvashr lt!378669 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107377 (= lt!378669 (bvlshr lt!378667 #b00000000000000000000000000000001))))
+
+(assert (=> d!107377 (and (bvsgt lt!378667 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378667) (bvsge (bvadd (bvand (bvashr lt!378667 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107377 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378667) lt!378668)))
+
+(declare-fun b!833907 () Bool)
+
+(assert (=> b!833907 (= e!465247 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378669))))
+
+(declare-fun b!833908 () Bool)
+
+(declare-fun Unit!28599 () Unit!28586)
+
+(assert (=> b!833908 (= e!465247 (tuple2!10187 Unit!28599 lt!378669))))
+
+(assert (= (and d!107377 c!90837) b!833907))
+
+(assert (= (and d!107377 (not c!90837)) b!833908))
+
+(declare-fun m!778864 () Bool)
+
+(assert (=> b!833907 m!778864))
+
+(assert (=> b!833905 d!107377))
+
+(check-sat (not b!833907))
+(check-sat)
+(get-model)
+
+(declare-fun d!107379 () Bool)
+
+(declare-fun lt!378670 () tuple2!10186)
+
+(assert (=> d!107379 (or (bvsle (_2!5104 lt!378670) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378670)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378670) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465248 () tuple2!10186)
+
+(assert (=> d!107379 (= lt!378670 e!465248)))
+
+(declare-fun c!90838 () Bool)
+
+(declare-fun lt!378671 () (_ BitVec 32))
+
+(assert (=> d!107379 (= c!90838 (and (bvsgt lt!378671 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378671) (bvsge (bvadd (bvand (bvashr lt!378671 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107379 (= lt!378671 (bvlshr lt!378669 #b00000000000000000000000000000001))))
+
+(assert (=> d!107379 (and (bvsgt lt!378669 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378669) (bvsge (bvadd (bvand (bvashr lt!378669 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107379 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378669) lt!378670)))
+
+(declare-fun b!833909 () Bool)
+
+(assert (=> b!833909 (= e!465248 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378671))))
+
+(declare-fun b!833910 () Bool)
+
+(declare-fun Unit!28600 () Unit!28586)
+
+(assert (=> b!833910 (= e!465248 (tuple2!10187 Unit!28600 lt!378671))))
+
+(assert (= (and d!107379 c!90838) b!833909))
+
+(assert (= (and d!107379 (not c!90838)) b!833910))
+
+(declare-fun m!778866 () Bool)
+
+(assert (=> b!833909 m!778866))
+
+(assert (=> b!833907 d!107379))
+
+(check-sat (not b!833909))
+(check-sat)
+(get-model)
+
+(declare-fun d!107383 () Bool)
+
+(declare-fun lt!378674 () tuple2!10186)
+
+(assert (=> d!107383 (or (bvsle (_2!5104 lt!378674) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378674)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378674) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465250 () tuple2!10186)
+
+(assert (=> d!107383 (= lt!378674 e!465250)))
+
+(declare-fun c!90840 () Bool)
+
+(declare-fun lt!378675 () (_ BitVec 32))
+
+(assert (=> d!107383 (= c!90840 (and (bvsgt lt!378675 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378675) (bvsge (bvadd (bvand (bvashr lt!378675 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107383 (= lt!378675 (bvlshr lt!378671 #b00000000000000000000000000000001))))
+
+(assert (=> d!107383 (and (bvsgt lt!378671 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378671) (bvsge (bvadd (bvand (bvashr lt!378671 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107383 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378671) lt!378674)))
+
+(declare-fun b!833913 () Bool)
+
+(assert (=> b!833913 (= e!465250 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378675))))
+
+(declare-fun b!833914 () Bool)
+
+(declare-fun Unit!28602 () Unit!28586)
+
+(assert (=> b!833914 (= e!465250 (tuple2!10187 Unit!28602 lt!378675))))
+
+(assert (= (and d!107383 c!90840) b!833913))
+
+(assert (= (and d!107383 (not c!90840)) b!833914))
+
+(declare-fun m!778870 () Bool)
+
+(assert (=> b!833913 m!778870))
+
+(assert (=> b!833909 d!107383))
+
+(check-sat (not b!833913))
+(check-sat)
+(get-model)
+
+(declare-fun d!107385 () Bool)
+
+(declare-fun lt!378676 () tuple2!10186)
+
+(assert (=> d!107385 (or (bvsle (_2!5104 lt!378676) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378676)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378676) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465251 () tuple2!10186)
+
+(assert (=> d!107385 (= lt!378676 e!465251)))
+
+(declare-fun c!90841 () Bool)
+
+(declare-fun lt!378677 () (_ BitVec 32))
+
+(assert (=> d!107385 (= c!90841 (and (bvsgt lt!378677 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378677) (bvsge (bvadd (bvand (bvashr lt!378677 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107385 (= lt!378677 (bvlshr lt!378675 #b00000000000000000000000000000001))))
+
+(assert (=> d!107385 (and (bvsgt lt!378675 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378675) (bvsge (bvadd (bvand (bvashr lt!378675 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107385 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378675) lt!378676)))
+
+(declare-fun b!833915 () Bool)
+
+(assert (=> b!833915 (= e!465251 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378677))))
+
+(declare-fun b!833916 () Bool)
+
+(declare-fun Unit!28603 () Unit!28586)
+
+(assert (=> b!833916 (= e!465251 (tuple2!10187 Unit!28603 lt!378677))))
+
+(assert (= (and d!107385 c!90841) b!833915))
+
+(assert (= (and d!107385 (not c!90841)) b!833916))
+
+(declare-fun m!778872 () Bool)
+
+(assert (=> b!833915 m!778872))
+
+(assert (=> b!833913 d!107385))
+
+(check-sat (not b!833915))
+(check-sat)
+(get-model)
+
+(declare-fun d!107389 () Bool)
+
+(declare-fun lt!378680 () tuple2!10186)
+
+(assert (=> d!107389 (or (bvsle (_2!5104 lt!378680) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378680)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378680) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465253 () tuple2!10186)
+
+(assert (=> d!107389 (= lt!378680 e!465253)))
+
+(declare-fun c!90843 () Bool)
+
+(declare-fun lt!378681 () (_ BitVec 32))
+
+(assert (=> d!107389 (= c!90843 (and (bvsgt lt!378681 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378681) (bvsge (bvadd (bvand (bvashr lt!378681 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107389 (= lt!378681 (bvlshr lt!378677 #b00000000000000000000000000000001))))
+
+(assert (=> d!107389 (and (bvsgt lt!378677 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378677) (bvsge (bvadd (bvand (bvashr lt!378677 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107389 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378677) lt!378680)))
+
+(declare-fun b!833919 () Bool)
+
+(assert (=> b!833919 (= e!465253 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378681))))
+
+(declare-fun b!833920 () Bool)
+
+(declare-fun Unit!28605 () Unit!28586)
+
+(assert (=> b!833920 (= e!465253 (tuple2!10187 Unit!28605 lt!378681))))
+
+(assert (= (and d!107389 c!90843) b!833919))
+
+(assert (= (and d!107389 (not c!90843)) b!833920))
+
+(declare-fun m!778876 () Bool)
+
+(assert (=> b!833919 m!778876))
+
+(assert (=> b!833915 d!107389))
+
+(check-sat (not b!833919))
+(check-sat)
+(get-model)
+
+(declare-fun d!107391 () Bool)
+
+(declare-fun lt!378682 () tuple2!10186)
+
+(assert (=> d!107391 (or (bvsle (_2!5104 lt!378682) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378682)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378682) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465254 () tuple2!10186)
+
+(assert (=> d!107391 (= lt!378682 e!465254)))
+
+(declare-fun c!90844 () Bool)
+
+(declare-fun lt!378683 () (_ BitVec 32))
+
+(assert (=> d!107391 (= c!90844 (and (bvsgt lt!378683 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378683) (bvsge (bvadd (bvand (bvashr lt!378683 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107391 (= lt!378683 (bvlshr lt!378681 #b00000000000000000000000000000001))))
+
+(assert (=> d!107391 (and (bvsgt lt!378681 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378681) (bvsge (bvadd (bvand (bvashr lt!378681 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107391 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378681) lt!378682)))
+
+(declare-fun b!833921 () Bool)
+
+(assert (=> b!833921 (= e!465254 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378683))))
+
+(declare-fun b!833922 () Bool)
+
+(declare-fun Unit!28606 () Unit!28586)
+
+(assert (=> b!833922 (= e!465254 (tuple2!10187 Unit!28606 lt!378683))))
+
+(assert (= (and d!107391 c!90844) b!833921))
+
+(assert (= (and d!107391 (not c!90844)) b!833922))
+
+(declare-fun m!778878 () Bool)
+
+(assert (=> b!833921 m!778878))
+
+(assert (=> b!833919 d!107391))
+
+(check-sat (not b!833921))
+(check-sat)
+(get-model)
+
+(declare-fun d!107393 () Bool)
+
+(declare-fun lt!378684 () tuple2!10186)
+
+(assert (=> d!107393 (or (bvsle (_2!5104 lt!378684) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378684)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378684) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465255 () tuple2!10186)
+
+(assert (=> d!107393 (= lt!378684 e!465255)))
+
+(declare-fun c!90845 () Bool)
+
+(declare-fun lt!378685 () (_ BitVec 32))
+
+(assert (=> d!107393 (= c!90845 (and (bvsgt lt!378685 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378685) (bvsge (bvadd (bvand (bvashr lt!378685 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107393 (= lt!378685 (bvlshr lt!378683 #b00000000000000000000000000000001))))
+
+(assert (=> d!107393 (and (bvsgt lt!378683 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378683) (bvsge (bvadd (bvand (bvashr lt!378683 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107393 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378683) lt!378684)))
+
+(declare-fun b!833923 () Bool)
+
+(assert (=> b!833923 (= e!465255 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378685))))
+
+(declare-fun b!833924 () Bool)
+
+(declare-fun Unit!28607 () Unit!28586)
+
+(assert (=> b!833924 (= e!465255 (tuple2!10187 Unit!28607 lt!378685))))
+
+(assert (= (and d!107393 c!90845) b!833923))
+
+(assert (= (and d!107393 (not c!90845)) b!833924))
+
+(declare-fun m!778880 () Bool)
+
+(assert (=> b!833923 m!778880))
+
+(assert (=> b!833921 d!107393))
+
+(check-sat (not b!833923))
+(check-sat)
+(get-model)
+
+(declare-fun d!107397 () Bool)
+
+(declare-fun lt!378688 () tuple2!10186)
+
+(assert (=> d!107397 (or (bvsle (_2!5104 lt!378688) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378688)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378688) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465257 () tuple2!10186)
+
+(assert (=> d!107397 (= lt!378688 e!465257)))
+
+(declare-fun c!90847 () Bool)
+
+(declare-fun lt!378689 () (_ BitVec 32))
+
+(assert (=> d!107397 (= c!90847 (and (bvsgt lt!378689 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378689) (bvsge (bvadd (bvand (bvashr lt!378689 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107397 (= lt!378689 (bvlshr lt!378685 #b00000000000000000000000000000001))))
+
+(assert (=> d!107397 (and (bvsgt lt!378685 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378685) (bvsge (bvadd (bvand (bvashr lt!378685 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107397 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378685) lt!378688)))
+
+(declare-fun b!833927 () Bool)
+
+(assert (=> b!833927 (= e!465257 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378689))))
+
+(declare-fun b!833928 () Bool)
+
+(declare-fun Unit!28609 () Unit!28586)
+
+(assert (=> b!833928 (= e!465257 (tuple2!10187 Unit!28609 lt!378689))))
+
+(assert (= (and d!107397 c!90847) b!833927))
+
+(assert (= (and d!107397 (not c!90847)) b!833928))
+
+(declare-fun m!778884 () Bool)
+
+(assert (=> b!833927 m!778884))
+
+(assert (=> b!833923 d!107397))
+
+(check-sat (not b!833927))
+(check-sat)
+(get-model)
+
+(declare-fun d!107399 () Bool)
+
+(declare-fun lt!378690 () tuple2!10186)
+
+(assert (=> d!107399 (or (bvsle (_2!5104 lt!378690) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378690)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378690) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465258 () tuple2!10186)
+
+(assert (=> d!107399 (= lt!378690 e!465258)))
+
+(declare-fun c!90848 () Bool)
+
+(declare-fun lt!378691 () (_ BitVec 32))
+
+(assert (=> d!107399 (= c!90848 (and (bvsgt lt!378691 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378691) (bvsge (bvadd (bvand (bvashr lt!378691 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107399 (= lt!378691 (bvlshr lt!378689 #b00000000000000000000000000000001))))
+
+(assert (=> d!107399 (and (bvsgt lt!378689 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378689) (bvsge (bvadd (bvand (bvashr lt!378689 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107399 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378689) lt!378690)))
+
+(declare-fun b!833929 () Bool)
+
+(assert (=> b!833929 (= e!465258 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378691))))
+
+(declare-fun b!833930 () Bool)
+
+(declare-fun Unit!28610 () Unit!28586)
+
+(assert (=> b!833930 (= e!465258 (tuple2!10187 Unit!28610 lt!378691))))
+
+(assert (= (and d!107399 c!90848) b!833929))
+
+(assert (= (and d!107399 (not c!90848)) b!833930))
+
+(declare-fun m!778886 () Bool)
+
+(assert (=> b!833929 m!778886))
+
+(assert (=> b!833927 d!107399))
+
+(check-sat (not b!833929))
+(check-sat)
+(get-model)
+
+(declare-fun d!107401 () Bool)
+
+(declare-fun lt!378692 () tuple2!10186)
+
+(assert (=> d!107401 (or (bvsle (_2!5104 lt!378692) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378692)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378692) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465259 () tuple2!10186)
+
+(assert (=> d!107401 (= lt!378692 e!465259)))
+
+(declare-fun c!90849 () Bool)
+
+(declare-fun lt!378693 () (_ BitVec 32))
+
+(assert (=> d!107401 (= c!90849 (and (bvsgt lt!378693 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378693) (bvsge (bvadd (bvand (bvashr lt!378693 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107401 (= lt!378693 (bvlshr lt!378691 #b00000000000000000000000000000001))))
+
+(assert (=> d!107401 (and (bvsgt lt!378691 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378691) (bvsge (bvadd (bvand (bvashr lt!378691 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107401 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378691) lt!378692)))
+
+(declare-fun b!833931 () Bool)
+
+(assert (=> b!833931 (= e!465259 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378693))))
+
+(declare-fun b!833932 () Bool)
+
+(declare-fun Unit!28611 () Unit!28586)
+
+(assert (=> b!833932 (= e!465259 (tuple2!10187 Unit!28611 lt!378693))))
+
+(assert (= (and d!107401 c!90849) b!833931))
+
+(assert (= (and d!107401 (not c!90849)) b!833932))
+
+(declare-fun m!778888 () Bool)
+
+(assert (=> b!833931 m!778888))
+
+(assert (=> b!833929 d!107401))
+
+(check-sat (not b!833931))
+(check-sat)
+(get-model)
+
+(declare-fun d!107403 () Bool)
+
+(declare-fun lt!378694 () tuple2!10186)
+
+(assert (=> d!107403 (or (bvsle (_2!5104 lt!378694) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378694)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378694) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465260 () tuple2!10186)
+
+(assert (=> d!107403 (= lt!378694 e!465260)))
+
+(declare-fun c!90850 () Bool)
+
+(declare-fun lt!378695 () (_ BitVec 32))
+
+(assert (=> d!107403 (= c!90850 (and (bvsgt lt!378695 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378695) (bvsge (bvadd (bvand (bvashr lt!378695 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107403 (= lt!378695 (bvlshr lt!378693 #b00000000000000000000000000000001))))
+
+(assert (=> d!107403 (and (bvsgt lt!378693 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378693) (bvsge (bvadd (bvand (bvashr lt!378693 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107403 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378693) lt!378694)))
+
+(declare-fun b!833933 () Bool)
+
+(assert (=> b!833933 (= e!465260 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378695))))
+
+(declare-fun b!833934 () Bool)
+
+(declare-fun Unit!28612 () Unit!28586)
+
+(assert (=> b!833934 (= e!465260 (tuple2!10187 Unit!28612 lt!378695))))
+
+(assert (= (and d!107403 c!90850) b!833933))
+
+(assert (= (and d!107403 (not c!90850)) b!833934))
+
+(declare-fun m!778890 () Bool)
+
+(assert (=> b!833933 m!778890))
+
+(assert (=> b!833931 d!107403))
+
+(check-sat (not b!833933))
+(check-sat)
+(get-model)
+
+(declare-fun d!107407 () Bool)
+
+(declare-fun lt!378698 () tuple2!10186)
+
+(assert (=> d!107407 (or (bvsle (_2!5104 lt!378698) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378698)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378698) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465262 () tuple2!10186)
+
+(assert (=> d!107407 (= lt!378698 e!465262)))
+
+(declare-fun c!90852 () Bool)
+
+(declare-fun lt!378699 () (_ BitVec 32))
+
+(assert (=> d!107407 (= c!90852 (and (bvsgt lt!378699 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378699) (bvsge (bvadd (bvand (bvashr lt!378699 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107407 (= lt!378699 (bvlshr lt!378695 #b00000000000000000000000000000001))))
+
+(assert (=> d!107407 (and (bvsgt lt!378695 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378695) (bvsge (bvadd (bvand (bvashr lt!378695 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107407 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378695) lt!378698)))
+
+(declare-fun b!833937 () Bool)
+
+(assert (=> b!833937 (= e!465262 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378699))))
+
+(declare-fun b!833938 () Bool)
+
+(declare-fun Unit!28614 () Unit!28586)
+
+(assert (=> b!833938 (= e!465262 (tuple2!10187 Unit!28614 lt!378699))))
+
+(assert (= (and d!107407 c!90852) b!833937))
+
+(assert (= (and d!107407 (not c!90852)) b!833938))
+
+(declare-fun m!778894 () Bool)
+
+(assert (=> b!833937 m!778894))
+
+(assert (=> b!833933 d!107407))
+
+(check-sat (not b!833937))
+(check-sat)
+(get-model)
+
+(declare-fun d!107409 () Bool)
+
+(declare-fun lt!378700 () tuple2!10186)
+
+(assert (=> d!107409 (or (bvsle (_2!5104 lt!378700) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378700)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378700) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465263 () tuple2!10186)
+
+(assert (=> d!107409 (= lt!378700 e!465263)))
+
+(declare-fun c!90853 () Bool)
+
+(declare-fun lt!378701 () (_ BitVec 32))
+
+(assert (=> d!107409 (= c!90853 (and (bvsgt lt!378701 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378701) (bvsge (bvadd (bvand (bvashr lt!378701 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107409 (= lt!378701 (bvlshr lt!378699 #b00000000000000000000000000000001))))
+
+(assert (=> d!107409 (and (bvsgt lt!378699 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378699) (bvsge (bvadd (bvand (bvashr lt!378699 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107409 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378699) lt!378700)))
+
+(declare-fun b!833939 () Bool)
+
+(assert (=> b!833939 (= e!465263 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378701))))
+
+(declare-fun b!833940 () Bool)
+
+(declare-fun Unit!28615 () Unit!28586)
+
+(assert (=> b!833940 (= e!465263 (tuple2!10187 Unit!28615 lt!378701))))
+
+(assert (= (and d!107409 c!90853) b!833939))
+
+(assert (= (and d!107409 (not c!90853)) b!833940))
+
+(declare-fun m!778896 () Bool)
+
+(assert (=> b!833939 m!778896))
+
+(assert (=> b!833937 d!107409))
+
+(check-sat (not b!833939))
+(check-sat)
+(get-model)
+
+(declare-fun d!107413 () Bool)
+
+(declare-fun lt!378704 () tuple2!10186)
+
+(assert (=> d!107413 (or (bvsle (_2!5104 lt!378704) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378704)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378704) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465265 () tuple2!10186)
+
+(assert (=> d!107413 (= lt!378704 e!465265)))
+
+(declare-fun c!90855 () Bool)
+
+(declare-fun lt!378705 () (_ BitVec 32))
+
+(assert (=> d!107413 (= c!90855 (and (bvsgt lt!378705 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378705) (bvsge (bvadd (bvand (bvashr lt!378705 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107413 (= lt!378705 (bvlshr lt!378701 #b00000000000000000000000000000001))))
+
+(assert (=> d!107413 (and (bvsgt lt!378701 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378701) (bvsge (bvadd (bvand (bvashr lt!378701 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107413 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378701) lt!378704)))
+
+(declare-fun b!833943 () Bool)
+
+(assert (=> b!833943 (= e!465265 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378705))))
+
+(declare-fun b!833944 () Bool)
+
+(declare-fun Unit!28617 () Unit!28586)
+
+(assert (=> b!833944 (= e!465265 (tuple2!10187 Unit!28617 lt!378705))))
+
+(assert (= (and d!107413 c!90855) b!833943))
+
+(assert (= (and d!107413 (not c!90855)) b!833944))
+
+(declare-fun m!778900 () Bool)
+
+(assert (=> b!833943 m!778900))
+
+(assert (=> b!833939 d!107413))
+
+(check-sat (not b!833943))
+(check-sat)
+(get-model)
+
+(declare-fun d!107415 () Bool)
+
+(declare-fun lt!378706 () tuple2!10186)
+
+(assert (=> d!107415 (or (bvsle (_2!5104 lt!378706) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378706)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378706) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465266 () tuple2!10186)
+
+(assert (=> d!107415 (= lt!378706 e!465266)))
+
+(declare-fun c!90856 () Bool)
+
+(declare-fun lt!378707 () (_ BitVec 32))
+
+(assert (=> d!107415 (= c!90856 (and (bvsgt lt!378707 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378707) (bvsge (bvadd (bvand (bvashr lt!378707 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107415 (= lt!378707 (bvlshr lt!378705 #b00000000000000000000000000000001))))
+
+(assert (=> d!107415 (and (bvsgt lt!378705 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378705) (bvsge (bvadd (bvand (bvashr lt!378705 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107415 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378705) lt!378706)))
+
+(declare-fun b!833945 () Bool)
+
+(assert (=> b!833945 (= e!465266 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378707))))
+
+(declare-fun b!833946 () Bool)
+
+(declare-fun Unit!28618 () Unit!28586)
+
+(assert (=> b!833946 (= e!465266 (tuple2!10187 Unit!28618 lt!378707))))
+
+(assert (= (and d!107415 c!90856) b!833945))
+
+(assert (= (and d!107415 (not c!90856)) b!833946))
+
+(declare-fun m!778902 () Bool)
+
+(assert (=> b!833945 m!778902))
+
+(assert (=> b!833943 d!107415))
+
+(check-sat (not b!833945))
+(check-sat)
+(get-model)
+
+(declare-fun d!107417 () Bool)
+
+(declare-fun lt!378708 () tuple2!10186)
+
+(assert (=> d!107417 (or (bvsle (_2!5104 lt!378708) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378708)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378708) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465267 () tuple2!10186)
+
+(assert (=> d!107417 (= lt!378708 e!465267)))
+
+(declare-fun c!90857 () Bool)
+
+(declare-fun lt!378709 () (_ BitVec 32))
+
+(assert (=> d!107417 (= c!90857 (and (bvsgt lt!378709 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378709) (bvsge (bvadd (bvand (bvashr lt!378709 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107417 (= lt!378709 (bvlshr lt!378707 #b00000000000000000000000000000001))))
+
+(assert (=> d!107417 (and (bvsgt lt!378707 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378707) (bvsge (bvadd (bvand (bvashr lt!378707 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107417 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378707) lt!378708)))
+
+(declare-fun b!833947 () Bool)
+
+(assert (=> b!833947 (= e!465267 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378709))))
+
+(declare-fun b!833948 () Bool)
+
+(declare-fun Unit!28619 () Unit!28586)
+
+(assert (=> b!833948 (= e!465267 (tuple2!10187 Unit!28619 lt!378709))))
+
+(assert (= (and d!107417 c!90857) b!833947))
+
+(assert (= (and d!107417 (not c!90857)) b!833948))
+
+(declare-fun m!778904 () Bool)
+
+(assert (=> b!833947 m!778904))
+
+(assert (=> b!833945 d!107417))
+
+(check-sat (not b!833947))
+(check-sat)
+(get-model)
+
+(declare-fun d!107421 () Bool)
+
+(declare-fun lt!378712 () tuple2!10186)
+
+(assert (=> d!107421 (or (bvsle (_2!5104 lt!378712) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378712)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378712) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465269 () tuple2!10186)
+
+(assert (=> d!107421 (= lt!378712 e!465269)))
+
+(declare-fun c!90859 () Bool)
+
+(declare-fun lt!378713 () (_ BitVec 32))
+
+(assert (=> d!107421 (= c!90859 (and (bvsgt lt!378713 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378713) (bvsge (bvadd (bvand (bvashr lt!378713 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107421 (= lt!378713 (bvlshr lt!378709 #b00000000000000000000000000000001))))
+
+(assert (=> d!107421 (and (bvsgt lt!378709 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378709) (bvsge (bvadd (bvand (bvashr lt!378709 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107421 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378709) lt!378712)))
+
+(declare-fun b!833951 () Bool)
+
+(assert (=> b!833951 (= e!465269 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378713))))
+
+(declare-fun b!833952 () Bool)
+
+(declare-fun Unit!28621 () Unit!28586)
+
+(assert (=> b!833952 (= e!465269 (tuple2!10187 Unit!28621 lt!378713))))
+
+(assert (= (and d!107421 c!90859) b!833951))
+
+(assert (= (and d!107421 (not c!90859)) b!833952))
+
+(declare-fun m!778908 () Bool)
+
+(assert (=> b!833951 m!778908))
+
+(assert (=> b!833947 d!107421))
+
+(check-sat (not b!833951))
+(check-sat)
+(get-model)
+
+(declare-fun d!107423 () Bool)
+
+(declare-fun lt!378714 () tuple2!10186)
+
+(assert (=> d!107423 (or (bvsle (_2!5104 lt!378714) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378714)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378714) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465270 () tuple2!10186)
+
+(assert (=> d!107423 (= lt!378714 e!465270)))
+
+(declare-fun c!90860 () Bool)
+
+(declare-fun lt!378715 () (_ BitVec 32))
+
+(assert (=> d!107423 (= c!90860 (and (bvsgt lt!378715 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378715) (bvsge (bvadd (bvand (bvashr lt!378715 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107423 (= lt!378715 (bvlshr lt!378713 #b00000000000000000000000000000001))))
+
+(assert (=> d!107423 (and (bvsgt lt!378713 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378713) (bvsge (bvadd (bvand (bvashr lt!378713 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107423 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378713) lt!378714)))
+
+(declare-fun b!833953 () Bool)
+
+(assert (=> b!833953 (= e!465270 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378715))))
+
+(declare-fun b!833954 () Bool)
+
+(declare-fun Unit!28622 () Unit!28586)
+
+(assert (=> b!833954 (= e!465270 (tuple2!10187 Unit!28622 lt!378715))))
+
+(assert (= (and d!107423 c!90860) b!833953))
+
+(assert (= (and d!107423 (not c!90860)) b!833954))
+
+(declare-fun m!778910 () Bool)
+
+(assert (=> b!833953 m!778910))
+
+(assert (=> b!833951 d!107423))
+
+(check-sat (not b!833953))
+(check-sat)
+(get-model)
+
+(declare-fun d!107425 () Bool)
+
+(declare-fun lt!378716 () tuple2!10186)
+
+(assert (=> d!107425 (or (bvsle (_2!5104 lt!378716) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378716)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378716) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465271 () tuple2!10186)
+
+(assert (=> d!107425 (= lt!378716 e!465271)))
+
+(declare-fun c!90861 () Bool)
+
+(declare-fun lt!378717 () (_ BitVec 32))
+
+(assert (=> d!107425 (= c!90861 (and (bvsgt lt!378717 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378717) (bvsge (bvadd (bvand (bvashr lt!378717 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107425 (= lt!378717 (bvlshr lt!378715 #b00000000000000000000000000000001))))
+
+(assert (=> d!107425 (and (bvsgt lt!378715 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378715) (bvsge (bvadd (bvand (bvashr lt!378715 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107425 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378715) lt!378716)))
+
+(declare-fun b!833955 () Bool)
+
+(assert (=> b!833955 (= e!465271 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378717))))
+
+(declare-fun b!833956 () Bool)
+
+(declare-fun Unit!28623 () Unit!28586)
+
+(assert (=> b!833956 (= e!465271 (tuple2!10187 Unit!28623 lt!378717))))
+
+(assert (= (and d!107425 c!90861) b!833955))
+
+(assert (= (and d!107425 (not c!90861)) b!833956))
+
+(declare-fun m!778912 () Bool)
+
+(assert (=> b!833955 m!778912))
+
+(assert (=> b!833953 d!107425))
+
+(check-sat (not b!833955))
+(check-sat)
+(get-model)
+
+(declare-fun d!107427 () Bool)
+
+(declare-fun lt!378718 () tuple2!10186)
+
+(assert (=> d!107427 (or (bvsle (_2!5104 lt!378718) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378718)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378718) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465272 () tuple2!10186)
+
+(assert (=> d!107427 (= lt!378718 e!465272)))
+
+(declare-fun c!90862 () Bool)
+
+(declare-fun lt!378719 () (_ BitVec 32))
+
+(assert (=> d!107427 (= c!90862 (and (bvsgt lt!378719 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378719) (bvsge (bvadd (bvand (bvashr lt!378719 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107427 (= lt!378719 (bvlshr lt!378717 #b00000000000000000000000000000001))))
+
+(assert (=> d!107427 (and (bvsgt lt!378717 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378717) (bvsge (bvadd (bvand (bvashr lt!378717 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107427 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378717) lt!378718)))
+
+(declare-fun b!833957 () Bool)
+
+(assert (=> b!833957 (= e!465272 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378719))))
+
+(declare-fun b!833958 () Bool)
+
+(declare-fun Unit!28624 () Unit!28586)
+
+(assert (=> b!833958 (= e!465272 (tuple2!10187 Unit!28624 lt!378719))))
+
+(assert (= (and d!107427 c!90862) b!833957))
+
+(assert (= (and d!107427 (not c!90862)) b!833958))
+
+(declare-fun m!778914 () Bool)
+
+(assert (=> b!833957 m!778914))
+
+(assert (=> b!833955 d!107427))
+
+(check-sat (not b!833957))
+(check-sat)
+(get-model)
+
+(declare-fun d!107429 () Bool)
+
+(declare-fun lt!378720 () tuple2!10186)
+
+(assert (=> d!107429 (or (bvsle (_2!5104 lt!378720) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378720)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378720) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465273 () tuple2!10186)
+
+(assert (=> d!107429 (= lt!378720 e!465273)))
+
+(declare-fun c!90863 () Bool)
+
+(declare-fun lt!378721 () (_ BitVec 32))
+
+(assert (=> d!107429 (= c!90863 (and (bvsgt lt!378721 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378721) (bvsge (bvadd (bvand (bvashr lt!378721 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107429 (= lt!378721 (bvlshr lt!378719 #b00000000000000000000000000000001))))
+
+(assert (=> d!107429 (and (bvsgt lt!378719 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378719) (bvsge (bvadd (bvand (bvashr lt!378719 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107429 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378719) lt!378720)))
+
+(declare-fun b!833959 () Bool)
+
+(assert (=> b!833959 (= e!465273 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378721))))
+
+(declare-fun b!833960 () Bool)
+
+(declare-fun Unit!28625 () Unit!28586)
+
+(assert (=> b!833960 (= e!465273 (tuple2!10187 Unit!28625 lt!378721))))
+
+(assert (= (and d!107429 c!90863) b!833959))
+
+(assert (= (and d!107429 (not c!90863)) b!833960))
+
+(declare-fun m!778916 () Bool)
+
+(assert (=> b!833959 m!778916))
+
+(assert (=> b!833957 d!107429))
+
+(check-sat (not b!833959))
+(check-sat)
+(get-model)
+
+(declare-fun d!107431 () Bool)
+
+(declare-fun lt!378722 () tuple2!10186)
+
+(assert (=> d!107431 (or (bvsle (_2!5104 lt!378722) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378722)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378722) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465274 () tuple2!10186)
+
+(assert (=> d!107431 (= lt!378722 e!465274)))
+
+(declare-fun c!90864 () Bool)
+
+(declare-fun lt!378723 () (_ BitVec 32))
+
+(assert (=> d!107431 (= c!90864 (and (bvsgt lt!378723 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378723) (bvsge (bvadd (bvand (bvashr lt!378723 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107431 (= lt!378723 (bvlshr lt!378721 #b00000000000000000000000000000001))))
+
+(assert (=> d!107431 (and (bvsgt lt!378721 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378721) (bvsge (bvadd (bvand (bvashr lt!378721 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107431 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378721) lt!378722)))
+
+(declare-fun b!833961 () Bool)
+
+(assert (=> b!833961 (= e!465274 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378723))))
+
+(declare-fun b!833962 () Bool)
+
+(declare-fun Unit!28626 () Unit!28586)
+
+(assert (=> b!833962 (= e!465274 (tuple2!10187 Unit!28626 lt!378723))))
+
+(assert (= (and d!107431 c!90864) b!833961))
+
+(assert (= (and d!107431 (not c!90864)) b!833962))
+
+(declare-fun m!778918 () Bool)
+
+(assert (=> b!833961 m!778918))
+
+(assert (=> b!833959 d!107431))
+
+(check-sat (not b!833961))
+(check-sat)
+(get-model)
+
+(declare-fun d!107433 () Bool)
+
+(declare-fun lt!378724 () tuple2!10186)
+
+(assert (=> d!107433 (or (bvsle (_2!5104 lt!378724) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378724)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378724) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465275 () tuple2!10186)
+
+(assert (=> d!107433 (= lt!378724 e!465275)))
+
+(declare-fun c!90865 () Bool)
+
+(declare-fun lt!378725 () (_ BitVec 32))
+
+(assert (=> d!107433 (= c!90865 (and (bvsgt lt!378725 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378725) (bvsge (bvadd (bvand (bvashr lt!378725 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107433 (= lt!378725 (bvlshr lt!378723 #b00000000000000000000000000000001))))
+
+(assert (=> d!107433 (and (bvsgt lt!378723 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378723) (bvsge (bvadd (bvand (bvashr lt!378723 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107433 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378723) lt!378724)))
+
+(declare-fun b!833963 () Bool)
+
+(assert (=> b!833963 (= e!465275 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378725))))
+
+(declare-fun b!833964 () Bool)
+
+(declare-fun Unit!28627 () Unit!28586)
+
+(assert (=> b!833964 (= e!465275 (tuple2!10187 Unit!28627 lt!378725))))
+
+(assert (= (and d!107433 c!90865) b!833963))
+
+(assert (= (and d!107433 (not c!90865)) b!833964))
+
+(declare-fun m!778920 () Bool)
+
+(assert (=> b!833963 m!778920))
+
+(assert (=> b!833961 d!107433))
+
+(check-sat (not b!833963))
+(check-sat)
+(get-model)
+
+(declare-fun d!107437 () Bool)
+
+(declare-fun lt!378728 () tuple2!10186)
+
+(assert (=> d!107437 (or (bvsle (_2!5104 lt!378728) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378728)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378728) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465277 () tuple2!10186)
+
+(assert (=> d!107437 (= lt!378728 e!465277)))
+
+(declare-fun c!90867 () Bool)
+
+(declare-fun lt!378729 () (_ BitVec 32))
+
+(assert (=> d!107437 (= c!90867 (and (bvsgt lt!378729 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378729) (bvsge (bvadd (bvand (bvashr lt!378729 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107437 (= lt!378729 (bvlshr lt!378725 #b00000000000000000000000000000001))))
+
+(assert (=> d!107437 (and (bvsgt lt!378725 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378725) (bvsge (bvadd (bvand (bvashr lt!378725 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107437 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378725) lt!378728)))
+
+(declare-fun b!833967 () Bool)
+
+(assert (=> b!833967 (= e!465277 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378729))))
+
+(declare-fun b!833968 () Bool)
+
+(declare-fun Unit!28629 () Unit!28586)
+
+(assert (=> b!833968 (= e!465277 (tuple2!10187 Unit!28629 lt!378729))))
+
+(assert (= (and d!107437 c!90867) b!833967))
+
+(assert (= (and d!107437 (not c!90867)) b!833968))
+
+(declare-fun m!778924 () Bool)
+
+(assert (=> b!833967 m!778924))
+
+(assert (=> b!833963 d!107437))
+
+(check-sat (not b!833967))
+(check-sat)
+(get-model)
+
+(declare-fun d!107439 () Bool)
+
+(declare-fun lt!378730 () tuple2!10186)
+
+(assert (=> d!107439 (or (bvsle (_2!5104 lt!378730) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378730)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378730) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465278 () tuple2!10186)
+
+(assert (=> d!107439 (= lt!378730 e!465278)))
+
+(declare-fun c!90868 () Bool)
+
+(declare-fun lt!378731 () (_ BitVec 32))
+
+(assert (=> d!107439 (= c!90868 (and (bvsgt lt!378731 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378731) (bvsge (bvadd (bvand (bvashr lt!378731 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107439 (= lt!378731 (bvlshr lt!378729 #b00000000000000000000000000000001))))
+
+(assert (=> d!107439 (and (bvsgt lt!378729 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378729) (bvsge (bvadd (bvand (bvashr lt!378729 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107439 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378729) lt!378730)))
+
+(declare-fun b!833969 () Bool)
+
+(assert (=> b!833969 (= e!465278 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378731))))
+
+(declare-fun b!833970 () Bool)
+
+(declare-fun Unit!28630 () Unit!28586)
+
+(assert (=> b!833970 (= e!465278 (tuple2!10187 Unit!28630 lt!378731))))
+
+(assert (= (and d!107439 c!90868) b!833969))
+
+(assert (= (and d!107439 (not c!90868)) b!833970))
+
+(declare-fun m!778926 () Bool)
+
+(assert (=> b!833969 m!778926))
+
+(assert (=> b!833967 d!107439))
+
+(check-sat (not b!833969))
+(check-sat)
+(get-model)
+
+(declare-fun d!107441 () Bool)
+
+(declare-fun lt!378732 () tuple2!10186)
+
+(assert (=> d!107441 (or (bvsle (_2!5104 lt!378732) #b00000000000000000000000000001000) (bvsge (bvmul #b00000000000000000000000000001000 _size!7) (_2!5104 lt!378732)) (bvslt (bvadd (bvand (bvashr (_2!5104 lt!378732) #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(declare-fun e!465279 () tuple2!10186)
+
+(assert (=> d!107441 (= lt!378732 e!465279)))
+
+(declare-fun c!90869 () Bool)
+
+(declare-fun lt!378733 () (_ BitVec 32))
+
+(assert (=> d!107441 (= c!90869 (and (bvsgt lt!378733 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378733) (bvsge (bvadd (bvand (bvashr lt!378733 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7)))))
+
+(assert (=> d!107441 (= lt!378733 (bvlshr lt!378731 #b00000000000000000000000000000001))))
+
+(assert (=> d!107441 (and (bvsgt lt!378731 #b00000000000000000000000000001000) (bvslt (bvmul #b00000000000000000000000000001000 _size!7) lt!378731) (bvsge (bvadd (bvand (bvashr lt!378731 #b00000000000000000000000000000001) #b00111111111111111111111111111111) #b00000000000000000000000000000001) _size!7))))
+
+(assert (=> d!107441 (= (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378731) lt!378732)))
+
+(declare-fun b!833971 () Bool)
+
+(assert (=> b!833971 (= e!465279 (computeNewMaskWhile!18 _size!7 _vacant!7 oldMask!2 lt!378733))))
+
+(declare-fun b!833972 () Bool)
+
+(declare-fun Unit!28631 () Unit!28586)
+
+(assert (=> b!833972 (= e!465279 (tuple2!10187 Unit!28631 lt!378733))))
+
+(assert (= (and d!107441 c!90869) b!833971))
+
+(assert (= (and d!107441 (not c!90869)) b!833972))
+
+(declare-fun m!778928 () Bool)
+
+(assert (=> b!833971 m!778928))
+
+(assert (=> b!833969 d!107441))
+
+(check-sat (not b!833971))
+(check-sat)
