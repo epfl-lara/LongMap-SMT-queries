@@ -2,6 +2,7 @@ import os
 from enum import Enum
 import subprocess
 import pandas as pd
+import re
 
 class Solver(Enum):
     def __str__(self):
@@ -48,7 +49,17 @@ def parse_time_stats_from_output(lines) -> TimeStats:
             if l.startswith("Percent of CPU this job got:"):
                 cpu_percent = float(l.split(":")[1].strip().replace("%", "")) / 100
             if l.startswith("Elapsed (wall clock) time (h:mm:ss or m:ss):"):
-                wall_clock_time = l.split(": ")[1].strip()
+                # regex to recognise the format to know whether it is m:ss or h:mm:ss
+                s = l.split(": ")[1].strip()
+                m = re.match(r"(\d+):(\d+):(\d+(?:\.\d+)?)", s)
+                if m:
+                    wall_clock_time = float(m.group(3)) + float(m.group(2))*60 + float(m.group(1))*60*60
+                else:
+                    m = re.match(r"(\d+):(\d+(?:\.\d+)?)", s)
+                    if m:
+                        wall_clock_time = float(m.group(2)) + float(m.group(1))*60
+                    else:
+                        wall_clock_time = -1
             if l.startswith("Maximum resident set size (kbytes):"):
                 max_resident_set_size = int(l.split(":")[1].strip())
             if l.startswith("Exit status:"):
@@ -132,7 +143,7 @@ def run_benchmark_smt_solver(solver: Solver, path_to_smt2_file: str, timeout: in
 
 # go through the folder and run the solver on each file
 output_csv = "benchmark_results.csv"
-columns=["Solver", "Query ID", "Stainless solving time (sec)" "Elapsed User Space Time", "Elapsed Kernel Time", "CPU Percent", "Elapsed Wall Clock Time (h:mm:ss or m:ss)", "Maxium Resident Set Size", "Exit Status", "Voluntary Context Switches", "Involuntary Context Switches", "Swaps", "Attempts DEV"]
+columns=["Solver", "Query ID", "Stainless solving time (sec)", "Elapsed User Space Time (sec)", "Elapsed Kernel Time (sec)", "CPU Percent", "Elapsed Wall Clock Time (sec)", "Maxium Resident Set Size (kbytes)", "Exit Status", "Voluntary Context Switches", "Involuntary Context Switches", "Swaps", "Attempts DEV"]
 with open(output_csv, "w") as f:
   f.write(",".join(columns) + "\n")
 dir = "smt-queries-longmap"
@@ -152,7 +163,7 @@ for file in os.listdir(dir):
         print(f"Solver: {solver}")
         print(f"Query ID: {query_id}")
         print("\n")
-        stainless_solving_time_sec = df[df['SMT Query ID'] == int(query_id)]['Solving Time (sec)'].values[0]
+        stainless_solving_time_sec = float(df[df['SMT Query ID'] == int(query_id)]['Solving Time (sec)'].values[0])
         print(f"Stainless solving time: {stainless_solving_time_sec}")
         results[(solver, query_id)] = time_stats
         d = [solver, query_id, stainless_solving_time_sec, time_stats.user_time, time_stats.system_time, time_stats.cpu_percent, time_stats.wall_clock_time, time_stats.max_resident_set_size, time_stats.exit_status, time_stats.voluntary_context_switches, time_stats.involuntary_context_switches, time_stats.swaps, attempts]
