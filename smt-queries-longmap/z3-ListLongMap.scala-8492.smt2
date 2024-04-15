@@ -1,45 +1,45 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!103484 () Bool)
+(declare-fun start!103474 () Bool)
 
-(assert start!103484)
+(assert start!103474)
 
-(assert (=> start!103484 false))
+(assert (=> start!103474 false))
 
-(assert (=> start!103484 true))
+(assert (=> start!103474 true))
 
-(declare-datatypes ((B!1780 0))(
-  ( (B!1781 (val!15652 Int)) )
+(declare-datatypes ((B!1778 0))(
+  ( (B!1779 (val!15651 Int)) )
 ))
-(declare-datatypes ((tuple2!20176 0))(
-  ( (tuple2!20177 (_1!10099 (_ BitVec 64)) (_2!10099 B!1780)) )
+(declare-datatypes ((tuple2!20258 0))(
+  ( (tuple2!20259 (_1!10140 (_ BitVec 64)) (_2!10140 B!1778)) )
 ))
-(declare-datatypes ((List!27317 0))(
-  ( (Nil!27314) (Cons!27313 (h!28522 tuple2!20176) (t!40780 List!27317)) )
+(declare-datatypes ((List!27378 0))(
+  ( (Nil!27375) (Cons!27374 (h!28583 tuple2!20258) (t!40832 List!27378)) )
 ))
-(declare-datatypes ((ListLongMap!18145 0))(
-  ( (ListLongMap!18146 (toList!9088 List!27317)) )
+(declare-datatypes ((ListLongMap!18227 0))(
+  ( (ListLongMap!18228 (toList!9129 List!27378)) )
 ))
-(declare-fun lm!211 () ListLongMap!18145)
+(declare-fun lm!211 () ListLongMap!18227)
 
-(declare-fun e!703077 () Bool)
+(declare-fun e!703023 () Bool)
 
-(declare-fun inv!42750 (ListLongMap!18145) Bool)
+(declare-fun inv!42749 (ListLongMap!18227) Bool)
 
-(assert (=> start!103484 (and (inv!42750 lm!211) e!703077)))
+(assert (=> start!103474 (and (inv!42749 lm!211) e!703023)))
 
-(declare-fun b!1240442 () Bool)
+(declare-fun b!1240351 () Bool)
 
-(declare-fun tp!92504 () Bool)
+(declare-fun tp!92501 () Bool)
 
-(assert (=> b!1240442 (= e!703077 tp!92504)))
+(assert (=> b!1240351 (= e!703023 tp!92501)))
 
-(assert (= start!103484 b!1240442))
+(assert (= start!103474 b!1240351))
 
-(declare-fun m!1143735 () Bool)
+(declare-fun m!1143201 () Bool)
 
-(assert (=> start!103484 m!1143735))
+(assert (=> start!103474 m!1143201))
 
-(check-sat (not start!103484) (not b!1240442))
+(check-sat (not start!103474) (not b!1240351))
 (check-sat)

@@ -1,137 +1,137 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!2492 () Bool)
+(declare-fun start!2490 () Bool)
 
-(assert start!2492)
+(assert start!2490)
 
-(declare-fun b_free!513 () Bool)
+(declare-fun b_free!511 () Bool)
 
-(declare-fun b_next!513 () Bool)
+(declare-fun b_next!511 () Bool)
 
-(assert (=> start!2492 (= b_free!513 (not b_next!513))))
+(assert (=> start!2490 (= b_free!511 (not b_next!511))))
 
-(declare-fun tp!2638 () Bool)
+(declare-fun tp!2633 () Bool)
 
-(declare-fun b_and!959 () Bool)
+(declare-fun b_and!957 () Bool)
 
-(assert (=> start!2492 (= tp!2638 b_and!959)))
+(assert (=> start!2490 (= tp!2633 b_and!957)))
 
-(declare-fun res!11728 () Bool)
+(declare-fun res!11722 () Bool)
 
-(declare-fun e!9451 () Bool)
+(declare-fun e!9445 () Bool)
 
-(assert (=> start!2492 (=> (not res!11728) (not e!9451))))
+(assert (=> start!2490 (=> (not res!11722) (not e!9445))))
 
-(declare-datatypes ((B!634 0))(
-  ( (B!635 (val!415 Int)) )
+(declare-datatypes ((B!632 0))(
+  ( (B!633 (val!414 Int)) )
 ))
-(declare-datatypes ((tuple2!630 0))(
-  ( (tuple2!631 (_1!315 (_ BitVec 64)) (_2!315 B!634)) )
+(declare-datatypes ((tuple2!624 0))(
+  ( (tuple2!625 (_1!312 (_ BitVec 64)) (_2!312 B!632)) )
 ))
-(declare-datatypes ((List!489 0))(
-  ( (Nil!486) (Cons!485 (h!1051 tuple2!630) (t!2927 List!489)) )
+(declare-datatypes ((List!483 0))(
+  ( (Nil!480) (Cons!479 (h!1045 tuple2!624) (t!2921 List!483)) )
 ))
-(declare-datatypes ((ListLongMap!461 0))(
-  ( (ListLongMap!462 (toList!246 List!489)) )
+(declare-datatypes ((ListLongMap!455 0))(
+  ( (ListLongMap!456 (toList!243 List!483)) )
 ))
-(declare-fun lm!238 () ListLongMap!461)
+(declare-fun lm!238 () ListLongMap!455)
 
 (declare-fun p!262 () Int)
 
-(declare-fun forall!120 (List!489 Int) Bool)
+(declare-fun forall!119 (List!483 Int) Bool)
 
-(assert (=> start!2492 (= res!11728 (forall!120 (toList!246 lm!238) p!262))))
+(assert (=> start!2490 (= res!11722 (forall!119 (toList!243 lm!238) p!262))))
 
-(assert (=> start!2492 e!9451))
+(assert (=> start!2490 e!9445))
 
-(declare-fun e!9452 () Bool)
+(declare-fun e!9446 () Bool)
 
-(declare-fun inv!817 (ListLongMap!461) Bool)
+(declare-fun inv!816 (ListLongMap!455) Bool)
 
-(assert (=> start!2492 (and (inv!817 lm!238) e!9452)))
+(assert (=> start!2490 (and (inv!816 lm!238) e!9446)))
 
-(assert (=> start!2492 tp!2638))
+(assert (=> start!2490 tp!2633))
 
-(assert (=> start!2492 true))
+(assert (=> start!2490 true))
 
-(declare-fun b!15531 () Bool)
+(declare-fun b!15522 () Bool)
 
-(declare-fun res!11727 () Bool)
+(declare-fun res!11721 () Bool)
 
-(assert (=> b!15531 (=> (not res!11727) (not e!9451))))
+(assert (=> b!15522 (=> (not res!11721) (not e!9445))))
 
-(declare-datatypes ((List!490 0))(
-  ( (Nil!487) (Cons!486 (h!1052 (_ BitVec 64)) (t!2928 List!490)) )
+(declare-datatypes ((List!484 0))(
+  ( (Nil!481) (Cons!480 (h!1046 (_ BitVec 64)) (t!2922 List!484)) )
 ))
-(declare-fun l!1612 () List!490)
+(declare-fun l!1612 () List!484)
 
-(declare-fun isEmpty!130 (List!490) Bool)
+(declare-fun isEmpty!129 (List!484) Bool)
 
-(assert (=> b!15531 (= res!11727 (not (isEmpty!130 l!1612)))))
+(assert (=> b!15522 (= res!11721 (not (isEmpty!129 l!1612)))))
 
-(declare-fun b!15532 () Bool)
+(declare-fun b!15523 () Bool)
 
-(assert (=> b!15532 (= e!9451 (not true))))
+(assert (=> b!15523 (= e!9445 (not true))))
 
-(declare-fun lt!3788 () (_ BitVec 64))
+(declare-fun lt!3782 () (_ BitVec 64))
 
-(declare-fun -!19 (ListLongMap!461 (_ BitVec 64)) ListLongMap!461)
+(declare-fun -!18 (ListLongMap!455 (_ BitVec 64)) ListLongMap!455)
 
-(assert (=> b!15532 (forall!120 (toList!246 (-!19 lm!238 lt!3788)) p!262)))
+(assert (=> b!15523 (forall!119 (toList!243 (-!18 lm!238 lt!3782)) p!262)))
 
-(declare-datatypes ((Unit!302 0))(
-  ( (Unit!303) )
+(declare-datatypes ((Unit!310 0))(
+  ( (Unit!311) )
 ))
-(declare-fun lt!3789 () Unit!302)
+(declare-fun lt!3783 () Unit!310)
 
-(declare-fun removeValidProp!12 (ListLongMap!461 Int (_ BitVec 64)) Unit!302)
+(declare-fun removeValidProp!11 (ListLongMap!455 Int (_ BitVec 64)) Unit!310)
 
-(assert (=> b!15532 (= lt!3789 (removeValidProp!12 lm!238 p!262 lt!3788))))
+(assert (=> b!15523 (= lt!3783 (removeValidProp!11 lm!238 p!262 lt!3782))))
 
-(declare-fun head!810 (List!490) (_ BitVec 64))
+(declare-fun head!809 (List!484) (_ BitVec 64))
 
-(assert (=> b!15532 (= lt!3788 (head!810 l!1612))))
+(assert (=> b!15523 (= lt!3782 (head!809 l!1612))))
 
-(declare-fun b!15533 () Bool)
+(declare-fun b!15524 () Bool)
 
-(declare-fun tp!2639 () Bool)
+(declare-fun tp!2632 () Bool)
 
-(assert (=> b!15533 (= e!9452 tp!2639)))
+(assert (=> b!15524 (= e!9446 tp!2632)))
 
-(assert (= (and start!2492 res!11728) b!15531))
+(assert (= (and start!2490 res!11722) b!15522))
 
-(assert (= (and b!15531 res!11727) b!15532))
+(assert (= (and b!15522 res!11721) b!15523))
 
-(assert (= start!2492 b!15533))
+(assert (= start!2490 b!15524))
 
-(declare-fun m!10453 () Bool)
+(declare-fun m!10431 () Bool)
 
-(assert (=> start!2492 m!10453))
+(assert (=> start!2490 m!10431))
 
-(declare-fun m!10455 () Bool)
+(declare-fun m!10433 () Bool)
 
-(assert (=> start!2492 m!10455))
+(assert (=> start!2490 m!10433))
 
-(declare-fun m!10457 () Bool)
+(declare-fun m!10435 () Bool)
 
-(assert (=> b!15531 m!10457))
+(assert (=> b!15522 m!10435))
 
-(declare-fun m!10459 () Bool)
+(declare-fun m!10437 () Bool)
 
-(assert (=> b!15532 m!10459))
+(assert (=> b!15523 m!10437))
 
-(declare-fun m!10461 () Bool)
+(declare-fun m!10439 () Bool)
 
-(assert (=> b!15532 m!10461))
+(assert (=> b!15523 m!10439))
 
-(declare-fun m!10463 () Bool)
+(declare-fun m!10441 () Bool)
 
-(assert (=> b!15532 m!10463))
+(assert (=> b!15523 m!10441))
 
-(declare-fun m!10465 () Bool)
+(declare-fun m!10443 () Bool)
 
-(assert (=> b!15532 m!10465))
+(assert (=> b!15523 m!10443))
 
-(check-sat (not b!15533) (not b!15532) b_and!959 (not start!2492) (not b!15531) (not b_next!513))
-(check-sat b_and!959 (not b_next!513))
+(check-sat (not b!15523) b_and!957 (not b!15524) (not b!15522) (not b_next!511) (not start!2490))
+(check-sat b_and!957 (not b_next!511))

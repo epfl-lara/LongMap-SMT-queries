@@ -5,51 +5,58 @@
 
 (assert start!7086)
 
-(declare-fun res!26679 () Bool)
+(declare-fun res!26656 () Bool)
 
-(declare-fun e!28954 () Bool)
+(declare-fun e!28905 () Bool)
 
-(assert (=> start!7086 (=> (not res!26679) (not e!28954))))
+(assert (=> start!7086 (=> (not res!26656) (not e!28905))))
 
-(declare-datatypes ((V!2365 0))(
-  ( (V!2366 (val!994 Int)) )
+(declare-datatypes ((V!2363 0))(
+  ( (V!2364 (val!993 Int)) )
 ))
-(declare-datatypes ((ValueCell!708 0))(
-  ( (ValueCellFull!708 (v!2096 V!2365)) (EmptyCell!708) )
+(declare-datatypes ((ValueCell!707 0))(
+  ( (ValueCellFull!707 (v!2093 V!2363)) (EmptyCell!707) )
 ))
-(declare-fun c!12 () ValueCell!708)
+(declare-fun c!12 () ValueCell!707)
 
-(declare-fun isFull!2 (ValueCell!708) Bool)
+(declare-fun isFull!1 (ValueCell!707) Bool)
 
-(assert (=> start!7086 (= res!26679 (isFull!2 c!12))))
+(assert (=> start!7086 (= res!26656 (isFull!1 c!12))))
 
-(assert (=> start!7086 e!28954))
+(assert (=> start!7086 e!28905))
 
-(declare-fun e!28955 () Bool)
+(declare-fun e!28906 () Bool)
 
-(assert (=> start!7086 e!28955))
+(assert (=> start!7086 e!28906))
 
-(declare-fun b!45485 () Bool)
+(declare-fun b!45413 () Bool)
 
 (get-info :version)
 
-(assert (=> b!45485 (= e!28954 (not ((_ is ValueCellFull!708) c!12)))))
+(assert (=> b!45413 (= e!28905 (not ((_ is ValueCellFull!707) c!12)))))
 
-(declare-fun b!45486 () Bool)
+(declare-fun b!45414 () Bool)
 
-(declare-fun tp_is_empty!1911 () Bool)
+(declare-fun tp_is_empty!1909 () Bool)
 
-(assert (=> b!45486 (= e!28955 tp_is_empty!1911)))
+(assert (=> b!45414 (= e!28906 tp_is_empty!1909)))
 
-(assert (= (and start!7086 res!26679) b!45485))
+(assert (= (and start!7086 res!26656) b!45413))
 
-(assert (= (and start!7086 ((_ is ValueCellFull!708) c!12)) b!45486))
+(assert (= (and start!7086 ((_ is ValueCellFull!707) c!12)) b!45414))
 
-(declare-fun m!40043 () Bool)
+(declare-fun m!39959 () Bool)
 
-(assert (=> start!7086 m!40043))
+(assert (=> start!7086 m!39959))
 
-(check-sat (not start!7086) tp_is_empty!1911)
+(check-sat (not start!7086) tp_is_empty!1909)
 (check-sat)
 (get-model)
 
+(declare-fun d!8839 () Bool)
+
+(assert (=> d!8839 (= (isFull!1 c!12) ((_ is ValueCellFull!707) c!12))))
+
+(assert (=> start!7086 d!8839))
+
+(check-sat tp_is_empty!1909)

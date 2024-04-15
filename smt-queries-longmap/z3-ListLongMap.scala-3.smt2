@@ -1,57 +1,57 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!150 () Bool)
+(declare-fun start!148 () Bool)
 
-(assert start!150)
+(assert start!148)
 
-(declare-fun b_free!15 () Bool)
+(declare-fun b_free!13 () Bool)
 
-(declare-fun b_next!15 () Bool)
+(declare-fun b_next!13 () Bool)
 
-(assert (=> start!150 (= b_free!15 (not b_next!15))))
+(assert (=> start!148 (= b_free!13 (not b_next!13))))
 
-(declare-fun tp!50 () Bool)
+(declare-fun tp!44 () Bool)
 
-(declare-fun b_and!39 () Bool)
+(declare-fun b_and!37 () Bool)
 
-(assert (=> start!150 (= tp!50 b_and!39)))
+(assert (=> start!148 (= tp!44 b_and!37)))
 
-(assert (=> start!150 false))
+(assert (=> start!148 false))
 
-(declare-datatypes ((B!250 0))(
-  ( (B!251 (val!7 Int)) )
+(declare-datatypes ((B!248 0))(
+  ( (B!249 (val!6 Int)) )
 ))
-(declare-datatypes ((tuple2!14 0))(
-  ( (tuple2!15 (_1!7 (_ BitVec 64)) (_2!7 B!250)) )
+(declare-datatypes ((tuple2!12 0))(
+  ( (tuple2!13 (_1!6 (_ BitVec 64)) (_2!6 B!248)) )
 ))
-(declare-datatypes ((List!16 0))(
-  ( (Nil!13) (Cons!12 (h!578 tuple2!14) (t!2035 List!16)) )
+(declare-datatypes ((List!15 0))(
+  ( (Nil!12) (Cons!11 (h!577 tuple2!12) (t!2034 List!15)) )
 ))
-(declare-datatypes ((ListLongMap!19 0))(
-  ( (ListLongMap!20 (toList!25 List!16)) )
+(declare-datatypes ((ListLongMap!17 0))(
+  ( (ListLongMap!18 (toList!24 List!15)) )
 ))
-(declare-fun lm!258 () ListLongMap!19)
+(declare-fun lm!258 () ListLongMap!17)
 
-(declare-fun e!312 () Bool)
+(declare-fun e!309 () Bool)
 
-(declare-fun inv!32 (ListLongMap!19) Bool)
+(declare-fun inv!31 (ListLongMap!17) Bool)
 
-(assert (=> start!150 (and (inv!32 lm!258) e!312)))
+(assert (=> start!148 (and (inv!31 lm!258) e!309)))
 
-(assert (=> start!150 tp!50))
+(assert (=> start!148 tp!44))
 
-(declare-fun b!1767 () Bool)
+(declare-fun b!1764 () Bool)
 
-(declare-fun tp!49 () Bool)
+(declare-fun tp!43 () Bool)
 
-(assert (=> b!1767 (= e!312 tp!49)))
+(assert (=> b!1764 (= e!309 tp!43)))
 
-(assert (= start!150 b!1767))
+(assert (= start!148 b!1764))
 
-(declare-fun m!449 () Bool)
+(declare-fun m!447 () Bool)
 
-(assert (=> start!150 m!449))
+(assert (=> start!148 m!447))
 
-(check-sat (not start!150) (not b!1767) b_and!39 (not b_next!15))
-(check-sat b_and!39 (not b_next!15))
+(check-sat (not start!148) (not b!1764) b_and!37 (not b_next!13))
+(check-sat b_and!37 (not b_next!13))

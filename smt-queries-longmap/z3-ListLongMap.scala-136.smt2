@@ -1,137 +1,137 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!2456 () Bool)
+(declare-fun start!2454 () Bool)
 
-(assert start!2456)
+(assert start!2454)
 
-(declare-fun b_free!495 () Bool)
+(declare-fun b_free!493 () Bool)
 
-(declare-fun b_next!495 () Bool)
+(declare-fun b_next!493 () Bool)
 
-(assert (=> start!2456 (= b_free!495 (not b_next!495))))
+(assert (=> start!2454 (= b_free!493 (not b_next!493))))
 
-(declare-fun tp!2576 () Bool)
+(declare-fun tp!2570 () Bool)
 
-(declare-fun b_and!935 () Bool)
+(declare-fun b_and!933 () Bool)
 
-(assert (=> start!2456 (= tp!2576 b_and!935)))
+(assert (=> start!2454 (= tp!2570 b_and!933)))
 
-(declare-fun res!11683 () Bool)
+(declare-fun res!11676 () Bool)
 
-(declare-fun e!9370 () Bool)
+(declare-fun e!9365 () Bool)
 
-(assert (=> start!2456 (=> (not res!11683) (not e!9370))))
+(assert (=> start!2454 (=> (not res!11676) (not e!9365))))
 
-(declare-datatypes ((B!616 0))(
-  ( (B!617 (val!406 Int)) )
+(declare-datatypes ((B!614 0))(
+  ( (B!615 (val!405 Int)) )
 ))
-(declare-datatypes ((tuple2!612 0))(
-  ( (tuple2!613 (_1!306 (_ BitVec 64)) (_2!306 B!616)) )
+(declare-datatypes ((tuple2!606 0))(
+  ( (tuple2!607 (_1!303 (_ BitVec 64)) (_2!303 B!614)) )
 ))
-(declare-datatypes ((List!474 0))(
-  ( (Nil!471) (Cons!470 (h!1036 tuple2!612) (t!2906 List!474)) )
+(declare-datatypes ((List!468 0))(
+  ( (Nil!465) (Cons!464 (h!1030 tuple2!606) (t!2900 List!468)) )
 ))
-(declare-datatypes ((ListLongMap!443 0))(
-  ( (ListLongMap!444 (toList!237 List!474)) )
+(declare-datatypes ((ListLongMap!437 0))(
+  ( (ListLongMap!438 (toList!234 List!468)) )
 ))
-(declare-fun lm!238 () ListLongMap!443)
+(declare-fun lm!238 () ListLongMap!437)
 
 (declare-fun p!262 () Int)
 
-(declare-fun forall!114 (List!474 Int) Bool)
+(declare-fun forall!113 (List!468 Int) Bool)
 
-(assert (=> start!2456 (= res!11683 (forall!114 (toList!237 lm!238) p!262))))
+(assert (=> start!2454 (= res!11676 (forall!113 (toList!234 lm!238) p!262))))
 
-(assert (=> start!2456 e!9370))
+(assert (=> start!2454 e!9365))
 
-(declare-fun e!9371 () Bool)
+(declare-fun e!9364 () Bool)
 
-(declare-fun inv!793 (ListLongMap!443) Bool)
+(declare-fun inv!792 (ListLongMap!437) Bool)
 
-(assert (=> start!2456 (and (inv!793 lm!238) e!9371)))
+(assert (=> start!2454 (and (inv!792 lm!238) e!9364)))
 
-(assert (=> start!2456 tp!2576))
+(assert (=> start!2454 tp!2570))
 
-(assert (=> start!2456 true))
+(assert (=> start!2454 true))
 
-(declare-fun b!15426 () Bool)
+(declare-fun b!15417 () Bool)
 
-(declare-fun res!11682 () Bool)
+(declare-fun res!11677 () Bool)
 
-(assert (=> b!15426 (=> (not res!11682) (not e!9370))))
+(assert (=> b!15417 (=> (not res!11677) (not e!9365))))
 
-(declare-datatypes ((List!475 0))(
-  ( (Nil!472) (Cons!471 (h!1037 (_ BitVec 64)) (t!2907 List!475)) )
+(declare-datatypes ((List!469 0))(
+  ( (Nil!466) (Cons!465 (h!1031 (_ BitVec 64)) (t!2901 List!469)) )
 ))
-(declare-fun l!1612 () List!475)
+(declare-fun l!1612 () List!469)
 
-(declare-fun isEmpty!127 (List!475) Bool)
+(declare-fun isEmpty!126 (List!469) Bool)
 
-(assert (=> b!15426 (= res!11682 (not (isEmpty!127 l!1612)))))
+(assert (=> b!15417 (= res!11677 (not (isEmpty!126 l!1612)))))
 
-(declare-fun b!15427 () Bool)
+(declare-fun b!15418 () Bool)
 
-(assert (=> b!15427 (= e!9370 (not true))))
+(assert (=> b!15418 (= e!9365 (not true))))
 
-(declare-fun lt!3762 () (_ BitVec 64))
+(declare-fun lt!3756 () (_ BitVec 64))
 
-(declare-fun -!16 (ListLongMap!443 (_ BitVec 64)) ListLongMap!443)
+(declare-fun -!15 (ListLongMap!437 (_ BitVec 64)) ListLongMap!437)
 
-(assert (=> b!15427 (forall!114 (toList!237 (-!16 lm!238 lt!3762)) p!262)))
+(assert (=> b!15418 (forall!113 (toList!234 (-!15 lm!238 lt!3756)) p!262)))
 
-(declare-datatypes ((Unit!296 0))(
-  ( (Unit!297) )
+(declare-datatypes ((Unit!304 0))(
+  ( (Unit!305) )
 ))
-(declare-fun lt!3761 () Unit!296)
+(declare-fun lt!3755 () Unit!304)
 
-(declare-fun removeValidProp!9 (ListLongMap!443 Int (_ BitVec 64)) Unit!296)
+(declare-fun removeValidProp!8 (ListLongMap!437 Int (_ BitVec 64)) Unit!304)
 
-(assert (=> b!15427 (= lt!3761 (removeValidProp!9 lm!238 p!262 lt!3762))))
+(assert (=> b!15418 (= lt!3755 (removeValidProp!8 lm!238 p!262 lt!3756))))
 
-(declare-fun head!807 (List!475) (_ BitVec 64))
+(declare-fun head!806 (List!469) (_ BitVec 64))
 
-(assert (=> b!15427 (= lt!3762 (head!807 l!1612))))
+(assert (=> b!15418 (= lt!3756 (head!806 l!1612))))
 
-(declare-fun b!15428 () Bool)
+(declare-fun b!15419 () Bool)
 
-(declare-fun tp!2575 () Bool)
+(declare-fun tp!2569 () Bool)
 
-(assert (=> b!15428 (= e!9371 tp!2575)))
+(assert (=> b!15419 (= e!9364 tp!2569)))
 
-(assert (= (and start!2456 res!11683) b!15426))
+(assert (= (and start!2454 res!11676) b!15417))
 
-(assert (= (and b!15426 res!11682) b!15427))
+(assert (= (and b!15417 res!11677) b!15418))
 
-(assert (= start!2456 b!15428))
+(assert (= start!2454 b!15419))
 
-(declare-fun m!10363 () Bool)
+(declare-fun m!10341 () Bool)
 
-(assert (=> start!2456 m!10363))
+(assert (=> start!2454 m!10341))
 
-(declare-fun m!10365 () Bool)
+(declare-fun m!10343 () Bool)
 
-(assert (=> start!2456 m!10365))
+(assert (=> start!2454 m!10343))
 
-(declare-fun m!10367 () Bool)
+(declare-fun m!10345 () Bool)
 
-(assert (=> b!15426 m!10367))
+(assert (=> b!15417 m!10345))
 
-(declare-fun m!10369 () Bool)
+(declare-fun m!10347 () Bool)
 
-(assert (=> b!15427 m!10369))
+(assert (=> b!15418 m!10347))
 
-(declare-fun m!10371 () Bool)
+(declare-fun m!10349 () Bool)
 
-(assert (=> b!15427 m!10371))
+(assert (=> b!15418 m!10349))
 
-(declare-fun m!10373 () Bool)
+(declare-fun m!10351 () Bool)
 
-(assert (=> b!15427 m!10373))
+(assert (=> b!15418 m!10351))
 
-(declare-fun m!10375 () Bool)
+(declare-fun m!10353 () Bool)
 
-(assert (=> b!15427 m!10375))
+(assert (=> b!15418 m!10353))
 
-(check-sat b_and!935 (not b!15428) (not b_next!495) (not b!15427) (not b!15426) (not start!2456))
-(check-sat b_and!935 (not b_next!495))
+(check-sat (not b_next!493) b_and!933 (not b!15419) (not b!15417) (not b!15418) (not start!2454))
+(check-sat b_and!933 (not b_next!493))
