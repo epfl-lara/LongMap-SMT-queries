@@ -1,66 +1,66 @@
 ; Options: -q --produce-models --incremental --print-success --lang smt2.6
-(declare-fun start!138422 () Bool)
+(declare-fun start!138390 () Bool)
 
-(assert start!138422)
+(assert start!138390)
 
-(declare-fun res!1083353 () Bool)
+(declare-fun res!1083228 () Bool)
 
-(declare-fun e!885857 () Bool)
+(declare-fun e!885668 () Bool)
 
-(assert (=> start!138422 (=> (not res!1083353) (not e!885857))))
+(assert (=> start!138390 (=> (not res!1083228) (not e!885668))))
 
-(declare-datatypes ((B!3038 0))(
-  ( (B!3039 (val!19881 Int)) )
+(declare-datatypes ((B!3042 0))(
+  ( (B!3043 (val!19883 Int)) )
 ))
-(declare-datatypes ((tuple2!25930 0))(
-  ( (tuple2!25931 (_1!12976 (_ BitVec 64)) (_2!12976 B!3038)) )
+(declare-datatypes ((tuple2!26002 0))(
+  ( (tuple2!26003 (_1!13012 (_ BitVec 64)) (_2!13012 B!3042)) )
 ))
-(declare-datatypes ((List!37001 0))(
-  ( (Nil!36998) (Cons!36997 (h!38540 tuple2!25930) (t!51931 List!37001)) )
+(declare-datatypes ((List!37044 0))(
+  ( (Nil!37041) (Cons!37040 (h!38584 tuple2!26002) (t!51966 List!37044)) )
 ))
-(declare-fun l!636 () List!37001)
+(declare-fun l!636 () List!37044)
 
-(declare-fun isStrictlySorted!1223 (List!37001) Bool)
+(declare-fun isStrictlySorted!1223 (List!37044) Bool)
 
-(assert (=> start!138422 (= res!1083353 (isStrictlySorted!1223 l!636))))
+(assert (=> start!138390 (= res!1083228 (isStrictlySorted!1223 l!636))))
 
-(assert (=> start!138422 e!885857))
+(assert (=> start!138390 e!885668))
 
-(declare-fun e!885858 () Bool)
+(declare-fun e!885669 () Bool)
 
-(assert (=> start!138422 e!885858))
+(assert (=> start!138390 e!885669))
 
-(assert (=> start!138422 true))
+(assert (=> start!138390 true))
 
-(declare-fun b!1586344 () Bool)
+(declare-fun b!1586040 () Bool)
 
 (declare-fun key!185 () (_ BitVec 64))
 
-(assert (=> b!1586344 (= e!885857 (and (or (not (is-Cons!36997 l!636)) (not (= (_1!12976 (h!38540 l!636)) key!185))) (or (not (is-Cons!36997 l!636)) (bvsle (_1!12976 (h!38540 l!636)) key!185)) (or (not (is-Cons!36997 l!636)) (bvsge (_1!12976 (h!38540 l!636)) key!185)) (not (is-Nil!36998 l!636))))))
+(assert (=> b!1586040 (= e!885668 (and (or (not (is-Cons!37040 l!636)) (not (= (_1!13012 (h!38584 l!636)) key!185))) (or (not (is-Cons!37040 l!636)) (bvsle (_1!13012 (h!38584 l!636)) key!185)) (or (not (is-Cons!37040 l!636)) (bvsge (_1!13012 (h!38584 l!636)) key!185)) (not (is-Nil!37041 l!636))))))
 
-(declare-fun b!1586345 () Bool)
+(declare-fun b!1586041 () Bool)
 
-(declare-fun tp_is_empty!39571 () Bool)
+(declare-fun tp_is_empty!39575 () Bool)
 
-(declare-fun tp!115416 () Bool)
+(declare-fun tp!115422 () Bool)
 
-(assert (=> b!1586345 (= e!885858 (and tp_is_empty!39571 tp!115416))))
+(assert (=> b!1586041 (= e!885669 (and tp_is_empty!39575 tp!115422))))
 
-(assert (= (and start!138422 res!1083353) b!1586344))
+(assert (= (and start!138390 res!1083228) b!1586040))
 
-(assert (= (and start!138422 (is-Cons!36997 l!636)) b!1586345))
+(assert (= (and start!138390 (is-Cons!37040 l!636)) b!1586041))
 
-(declare-fun m!1454733 () Bool)
+(declare-fun m!1453855 () Bool)
 
-(assert (=> start!138422 m!1454733))
+(assert (=> start!138390 m!1453855))
 
 (push 1)
 
-(assert (not start!138422))
+(assert (not start!138390))
 
-(assert (not b!1586345))
+(assert (not b!1586041))
 
-(assert tp_is_empty!39571)
+(assert tp_is_empty!39575)
 
 (check-sat)
 

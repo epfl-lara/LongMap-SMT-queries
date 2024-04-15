@@ -1,92 +1,92 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!43766 () Bool)
+(declare-fun start!43752 () Bool)
 
-(assert start!43766)
+(assert start!43752)
 
-(declare-fun res!288269 () Bool)
+(declare-fun res!288133 () Bool)
 
-(declare-fun e!284789 () Bool)
+(declare-fun e!284610 () Bool)
 
-(assert (=> start!43766 (=> (not res!288269) (not e!284789))))
+(assert (=> start!43752 (=> (not res!288133) (not e!284610))))
 
-(declare-datatypes ((B!1096 0))(
-  ( (B!1097 (val!7000 Int)) )
+(declare-datatypes ((B!1094 0))(
+  ( (B!1095 (val!6999 Int)) )
 ))
-(declare-datatypes ((tuple2!9202 0))(
-  ( (tuple2!9203 (_1!4612 (_ BitVec 64)) (_2!4612 B!1096)) )
+(declare-datatypes ((tuple2!9250 0))(
+  ( (tuple2!9251 (_1!4636 (_ BitVec 64)) (_2!4636 B!1094)) )
 ))
-(declare-datatypes ((List!9264 0))(
-  ( (Nil!9261) (Cons!9260 (h!10116 tuple2!9202) (t!15486 List!9264)) )
+(declare-datatypes ((List!9301 0))(
+  ( (Nil!9298) (Cons!9297 (h!10153 tuple2!9250) (t!15514 List!9301)) )
 ))
-(declare-fun l!956 () List!9264)
+(declare-fun l!956 () List!9301)
 
-(declare-fun isStrictlySorted!403 (List!9264) Bool)
+(declare-fun isStrictlySorted!398 (List!9301) Bool)
 
-(assert (=> start!43766 (= res!288269 (isStrictlySorted!403 l!956))))
+(assert (=> start!43752 (= res!288133 (isStrictlySorted!398 l!956))))
 
-(assert (=> start!43766 e!284789))
+(assert (=> start!43752 e!284610))
 
-(declare-fun e!284790 () Bool)
+(declare-fun e!284609 () Bool)
 
-(assert (=> start!43766 e!284790))
+(assert (=> start!43752 e!284609))
 
-(assert (=> start!43766 true))
+(assert (=> start!43752 true))
 
-(declare-fun tp_is_empty!13905 () Bool)
+(declare-fun tp_is_empty!13903 () Bool)
 
-(assert (=> start!43766 tp_is_empty!13905))
+(assert (=> start!43752 tp_is_empty!13903))
 
-(declare-fun b!483846 () Bool)
+(declare-fun b!483566 () Bool)
 
-(declare-fun res!288268 () Bool)
+(declare-fun res!288134 () Bool)
 
-(assert (=> b!483846 (=> (not res!288268) (not e!284789))))
+(assert (=> b!483566 (=> (not res!288134) (not e!284610))))
 
 (declare-fun key!251 () (_ BitVec 64))
 
-(declare-fun containsKey!366 (List!9264 (_ BitVec 64)) Bool)
+(declare-fun containsKey!363 (List!9301 (_ BitVec 64)) Bool)
 
-(assert (=> b!483846 (= res!288268 (not (containsKey!366 l!956 key!251)))))
+(assert (=> b!483566 (= res!288134 (not (containsKey!363 l!956 key!251)))))
 
-(declare-fun b!483847 () Bool)
+(declare-fun b!483567 () Bool)
 
-(assert (=> b!483847 (= e!284789 false)))
+(assert (=> b!483567 (= e!284610 false)))
 
-(declare-fun value!166 () B!1096)
+(declare-fun lt!219055 () List!9301)
 
-(declare-fun lt!219292 () List!9264)
+(declare-fun value!166 () B!1094)
 
-(declare-fun insertStrictlySorted!221 (List!9264 (_ BitVec 64) B!1096) List!9264)
+(declare-fun insertStrictlySorted!221 (List!9301 (_ BitVec 64) B!1094) List!9301)
 
-(assert (=> b!483847 (= lt!219292 (insertStrictlySorted!221 l!956 key!251 value!166))))
+(assert (=> b!483567 (= lt!219055 (insertStrictlySorted!221 l!956 key!251 value!166))))
 
-(declare-fun b!483848 () Bool)
+(declare-fun b!483568 () Bool)
 
-(declare-fun tp!43447 () Bool)
+(declare-fun tp!43444 () Bool)
 
-(assert (=> b!483848 (= e!284790 (and tp_is_empty!13905 tp!43447))))
+(assert (=> b!483568 (= e!284609 (and tp_is_empty!13903 tp!43444))))
 
-(assert (= (and start!43766 res!288269) b!483846))
+(assert (= (and start!43752 res!288133) b!483566))
 
-(assert (= (and b!483846 res!288268) b!483847))
+(assert (= (and b!483566 res!288134) b!483567))
 
 (get-info :version)
 
-(assert (= (and start!43766 ((_ is Cons!9260) l!956)) b!483848))
+(assert (= (and start!43752 ((_ is Cons!9297) l!956)) b!483568))
 
-(declare-fun m!464739 () Bool)
+(declare-fun m!464001 () Bool)
 
-(assert (=> start!43766 m!464739))
+(assert (=> start!43752 m!464001))
 
-(declare-fun m!464741 () Bool)
+(declare-fun m!464003 () Bool)
 
-(assert (=> b!483846 m!464741))
+(assert (=> b!483566 m!464003))
 
-(declare-fun m!464743 () Bool)
+(declare-fun m!464005 () Bool)
 
-(assert (=> b!483847 m!464743))
+(assert (=> b!483567 m!464005))
 
-(check-sat (not b!483846) (not b!483848) (not b!483847) tp_is_empty!13905 (not start!43766))
+(check-sat (not b!483567) (not b!483568) (not b!483566) tp_is_empty!13903 (not start!43752))
 (check-sat)

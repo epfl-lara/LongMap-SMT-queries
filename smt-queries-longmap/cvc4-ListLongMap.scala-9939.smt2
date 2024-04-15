@@ -1,84 +1,84 @@
 ; Options: -q --produce-models --incremental --print-success --lang smt2.6
-(declare-fun start!117460 () Bool)
+(declare-fun start!117454 () Bool)
 
-(assert start!117460)
+(assert start!117454)
 
-(declare-fun res!922462 () Bool)
+(declare-fun res!922426 () Bool)
 
-(declare-fun e!782035 () Bool)
+(declare-fun e!781999 () Bool)
 
-(assert (=> start!117460 (=> (not res!922462) (not e!782035))))
-
-(declare-fun pivot!40 () (_ BitVec 32))
-
-(declare-datatypes ((array!94011 0))(
-  ( (array!94012 (arr!45400 (Array (_ BitVec 32) (_ BitVec 64))) (size!45950 (_ BitVec 32))) )
-))
-(declare-fun a!3985 () array!94011)
-
-(declare-fun to!159 () (_ BitVec 32))
+(assert (=> start!117454 (=> (not res!922426) (not e!781999))))
 
 (declare-fun knownPivot!5 () (_ BitVec 32))
 
+(declare-fun pivot!40 () (_ BitVec 32))
+
+(declare-datatypes ((array!93959 0))(
+  ( (array!93960 (arr!45374 (Array (_ BitVec 32) (_ BitVec 64))) (size!45926 (_ BitVec 32))) )
+))
+(declare-fun a!3985 () array!93959)
+
 (declare-fun from!3363 () (_ BitVec 32))
 
-(assert (=> start!117460 (= res!922462 (and (bvslt (size!45950 a!3985) #b01111111111111111111111111111111) (bvsge from!3363 #b00000000000000000000000000000000) (bvsge to!159 from!3363) (bvsle to!159 (size!45950 a!3985)) (bvsge pivot!40 from!3363) (bvslt pivot!40 to!159) (bvsle knownPivot!5 pivot!40) (bvsge knownPivot!5 from!3363)))))
+(declare-fun to!159 () (_ BitVec 32))
 
-(assert (=> start!117460 e!782035))
+(assert (=> start!117454 (= res!922426 (and (bvslt (size!45926 a!3985) #b01111111111111111111111111111111) (bvsge from!3363 #b00000000000000000000000000000000) (bvsge to!159 from!3363) (bvsle to!159 (size!45926 a!3985)) (bvsge pivot!40 from!3363) (bvslt pivot!40 to!159) (bvsle knownPivot!5 pivot!40) (bvsge knownPivot!5 from!3363)))))
 
-(assert (=> start!117460 true))
+(assert (=> start!117454 e!781999))
 
-(declare-fun array_inv!34428 (array!94011) Bool)
+(assert (=> start!117454 true))
 
-(assert (=> start!117460 (array_inv!34428 a!3985)))
+(declare-fun array_inv!34607 (array!93959) Bool)
 
-(declare-fun b!1380190 () Bool)
+(assert (=> start!117454 (array_inv!34607 a!3985)))
 
-(declare-fun res!922460 () Bool)
+(declare-fun b!1380112 () Bool)
 
-(assert (=> b!1380190 (=> (not res!922460) (not e!782035))))
+(declare-fun res!922427 () Bool)
 
-(declare-fun isPivot!0 (array!94011 (_ BitVec 32) (_ BitVec 32) (_ BitVec 32)) Bool)
+(assert (=> b!1380112 (=> (not res!922427) (not e!781999))))
 
-(assert (=> b!1380190 (= res!922460 (isPivot!0 a!3985 from!3363 to!159 knownPivot!5))))
+(declare-fun isPivot!0 (array!93959 (_ BitVec 32) (_ BitVec 32) (_ BitVec 32)) Bool)
 
-(declare-fun b!1380191 () Bool)
+(assert (=> b!1380112 (= res!922427 (isPivot!0 a!3985 from!3363 to!159 knownPivot!5))))
 
-(declare-fun res!922461 () Bool)
+(declare-fun b!1380113 () Bool)
 
-(assert (=> b!1380191 (=> (not res!922461) (not e!782035))))
+(declare-fun res!922425 () Bool)
 
-(assert (=> b!1380191 (= res!922461 (= knownPivot!5 pivot!40))))
+(assert (=> b!1380113 (=> (not res!922425) (not e!781999))))
 
-(declare-fun b!1380192 () Bool)
+(assert (=> b!1380113 (= res!922425 (= knownPivot!5 pivot!40))))
 
-(assert (=> b!1380192 (= e!782035 (not (isPivot!0 a!3985 from!3363 to!159 pivot!40)))))
+(declare-fun b!1380114 () Bool)
 
-(assert (= (and start!117460 res!922462) b!1380190))
+(assert (=> b!1380114 (= e!781999 (not (isPivot!0 a!3985 from!3363 to!159 pivot!40)))))
 
-(assert (= (and b!1380190 res!922460) b!1380191))
+(assert (= (and start!117454 res!922426) b!1380112))
 
-(assert (= (and b!1380191 res!922461) b!1380192))
+(assert (= (and b!1380112 res!922427) b!1380113))
 
-(declare-fun m!1265385 () Bool)
+(assert (= (and b!1380113 res!922425) b!1380114))
 
-(assert (=> start!117460 m!1265385))
+(declare-fun m!1264875 () Bool)
 
-(declare-fun m!1265387 () Bool)
+(assert (=> start!117454 m!1264875))
 
-(assert (=> b!1380190 m!1265387))
+(declare-fun m!1264877 () Bool)
 
-(declare-fun m!1265389 () Bool)
+(assert (=> b!1380112 m!1264877))
 
-(assert (=> b!1380192 m!1265389))
+(declare-fun m!1264879 () Bool)
+
+(assert (=> b!1380114 m!1264879))
 
 (push 1)
 
-(assert (not b!1380192))
+(assert (not b!1380112))
 
-(assert (not b!1380190))
+(assert (not start!117454))
 
-(assert (not start!117460))
+(assert (not b!1380114))
 
 (check-sat)
 

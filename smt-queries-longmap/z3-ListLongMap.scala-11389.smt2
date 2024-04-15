@@ -1,157 +1,157 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!132430 () Bool)
+(declare-fun start!132378 () Bool)
 
-(assert start!132430)
+(assert start!132378)
 
-(declare-fun b!1553560 () Bool)
+(declare-fun res!1063180 () Bool)
 
-(declare-fun res!1063322 () Bool)
+(declare-fun e!864769 () Bool)
 
-(declare-fun e!864976 () Bool)
+(assert (=> start!132378 (=> (not res!1063180) (not e!864769))))
 
-(assert (=> b!1553560 (=> (not res!1063322) (not e!864976))))
+(declare-datatypes ((B!2210 0))(
+  ( (B!2211 (val!19191 Int)) )
+))
+(declare-datatypes ((tuple2!24830 0))(
+  ( (tuple2!24831 (_1!12426 (_ BitVec 64)) (_2!12426 B!2210)) )
+))
+(declare-datatypes ((List!36270 0))(
+  ( (Nil!36267) (Cons!36266 (h!37713 tuple2!24830) (t!50983 List!36270)) )
+))
+(declare-datatypes ((ListLongMap!22439 0))(
+  ( (ListLongMap!22440 (toList!11235 List!36270)) )
+))
+(declare-fun lm!249 () ListLongMap!22439)
 
 (declare-fun a0!49 () (_ BitVec 64))
 
+(declare-fun contains!10098 (ListLongMap!22439 (_ BitVec 64)) Bool)
+
+(assert (=> start!132378 (= res!1063180 (contains!10098 lm!249 a0!49))))
+
+(assert (=> start!132378 e!864769))
+
+(declare-fun e!864768 () Bool)
+
+(declare-fun inv!57303 (ListLongMap!22439) Bool)
+
+(assert (=> start!132378 (and (inv!57303 lm!249) e!864768)))
+
+(assert (=> start!132378 true))
+
+(declare-fun tp_is_empty!38221 () Bool)
+
+(assert (=> start!132378 tp_is_empty!38221))
+
+(declare-fun b!1553232 () Bool)
+
+(assert (=> b!1553232 (= e!864769 (not true))))
+
+(declare-fun e!864770 () Bool)
+
+(assert (=> b!1553232 e!864770))
+
+(declare-fun res!1063181 () Bool)
+
+(assert (=> b!1553232 (=> (not res!1063181) (not e!864770))))
+
+(declare-fun lt!669415 () List!36270)
+
+(declare-fun containsKey!756 (List!36270 (_ BitVec 64)) Bool)
+
+(assert (=> b!1553232 (= res!1063181 (containsKey!756 lt!669415 a0!49))))
+
 (declare-fun a!523 () (_ BitVec 64))
 
-(assert (=> b!1553560 (= res!1063322 (not (= a0!49 a!523)))))
+(declare-fun b!96 () B!2210)
 
-(declare-fun b!1553561 () Bool)
+(declare-fun insertStrictlySorted!505 (List!36270 (_ BitVec 64) B!2210) List!36270)
 
-(declare-fun res!1063324 () Bool)
+(assert (=> b!1553232 (= lt!669415 (insertStrictlySorted!505 (toList!11235 lm!249) a!523 b!96))))
 
-(assert (=> b!1553561 (=> (not res!1063324) (not e!864976))))
-
-(declare-datatypes ((B!2212 0))(
-  ( (B!2213 (val!19192 Int)) )
+(declare-datatypes ((Unit!51560 0))(
+  ( (Unit!51561) )
 ))
-(declare-datatypes ((tuple2!24760 0))(
-  ( (tuple2!24761 (_1!12391 (_ BitVec 64)) (_2!12391 B!2212)) )
+(declare-fun lt!669414 () Unit!51560)
+
+(declare-fun lemmaInsertStrictlySortedDoesNotModifyOtherKeyValues!1 (List!36270 (_ BitVec 64) B!2210 (_ BitVec 64)) Unit!51560)
+
+(assert (=> b!1553232 (= lt!669414 (lemmaInsertStrictlySortedDoesNotModifyOtherKeyValues!1 (toList!11235 lm!249) a!523 b!96 a0!49))))
+
+(declare-fun b!1553233 () Bool)
+
+(declare-fun tp!112111 () Bool)
+
+(assert (=> b!1553233 (= e!864768 tp!112111)))
+
+(declare-fun b!1553234 () Bool)
+
+(declare-datatypes ((Option!814 0))(
+  ( (Some!813 (v!21992 B!2210)) (None!812) )
 ))
-(declare-datatypes ((List!36226 0))(
-  ( (Nil!36223) (Cons!36222 (h!37668 tuple2!24760) (t!50947 List!36226)) )
-))
-(declare-datatypes ((ListLongMap!22369 0))(
-  ( (ListLongMap!22370 (toList!11200 List!36226)) )
-))
-(declare-fun lm!249 () ListLongMap!22369)
+(declare-fun getValueByKey!739 (List!36270 (_ BitVec 64)) Option!814)
 
-(declare-fun containsKey!759 (List!36226 (_ BitVec 64)) Bool)
+(assert (=> b!1553234 (= e!864770 (= (getValueByKey!739 lt!669415 a0!49) (getValueByKey!739 (toList!11235 lm!249) a0!49)))))
 
-(assert (=> b!1553561 (= res!1063324 (containsKey!759 (toList!11200 lm!249) a0!49))))
+(declare-fun b!1553235 () Bool)
 
-(declare-fun res!1063321 () Bool)
+(declare-fun res!1063182 () Bool)
 
-(assert (=> start!132430 (=> (not res!1063321) (not e!864976))))
+(assert (=> b!1553235 (=> (not res!1063182) (not e!864769))))
 
-(declare-fun contains!10142 (ListLongMap!22369 (_ BitVec 64)) Bool)
+(assert (=> b!1553235 (= res!1063182 (containsKey!756 (toList!11235 lm!249) a0!49))))
 
-(assert (=> start!132430 (= res!1063321 (contains!10142 lm!249 a0!49))))
+(declare-fun b!1553236 () Bool)
 
-(assert (=> start!132430 e!864976))
+(declare-fun res!1063183 () Bool)
 
-(declare-fun e!864977 () Bool)
+(assert (=> b!1553236 (=> (not res!1063183) (not e!864769))))
 
-(declare-fun inv!57304 (ListLongMap!22369) Bool)
+(assert (=> b!1553236 (= res!1063183 (not (= a0!49 a!523)))))
 
-(assert (=> start!132430 (and (inv!57304 lm!249) e!864977)))
+(assert (= (and start!132378 res!1063180) b!1553236))
 
-(assert (=> start!132430 true))
+(assert (= (and b!1553236 res!1063183) b!1553235))
 
-(declare-fun tp_is_empty!38223 () Bool)
+(assert (= (and b!1553235 res!1063182) b!1553232))
 
-(assert (=> start!132430 tp_is_empty!38223))
+(assert (= (and b!1553232 res!1063181) b!1553234))
 
-(declare-fun b!1553562 () Bool)
+(assert (= start!132378 b!1553233))
 
-(declare-fun tp!112113 () Bool)
+(declare-fun m!1431293 () Bool)
 
-(assert (=> b!1553562 (= e!864977 tp!112113)))
+(assert (=> start!132378 m!1431293))
 
-(declare-fun b!1553563 () Bool)
+(declare-fun m!1431295 () Bool)
 
-(assert (=> b!1553563 (= e!864976 (not true))))
+(assert (=> start!132378 m!1431295))
 
-(declare-fun e!864975 () Bool)
+(declare-fun m!1431297 () Bool)
 
-(assert (=> b!1553563 e!864975))
+(assert (=> b!1553232 m!1431297))
 
-(declare-fun res!1063323 () Bool)
+(declare-fun m!1431299 () Bool)
 
-(assert (=> b!1553563 (=> (not res!1063323) (not e!864975))))
+(assert (=> b!1553232 m!1431299))
 
-(declare-fun lt!669707 () List!36226)
+(declare-fun m!1431301 () Bool)
 
-(assert (=> b!1553563 (= res!1063323 (containsKey!759 lt!669707 a0!49))))
+(assert (=> b!1553232 m!1431301))
 
-(declare-fun b!96 () B!2212)
+(declare-fun m!1431303 () Bool)
 
-(declare-fun insertStrictlySorted!505 (List!36226 (_ BitVec 64) B!2212) List!36226)
+(assert (=> b!1553234 m!1431303))
 
-(assert (=> b!1553563 (= lt!669707 (insertStrictlySorted!505 (toList!11200 lm!249) a!523 b!96))))
+(declare-fun m!1431305 () Bool)
 
-(declare-datatypes ((Unit!51745 0))(
-  ( (Unit!51746) )
-))
-(declare-fun lt!669706 () Unit!51745)
+(assert (=> b!1553234 m!1431305))
 
-(declare-fun lemmaInsertStrictlySortedDoesNotModifyOtherKeyValues!2 (List!36226 (_ BitVec 64) B!2212 (_ BitVec 64)) Unit!51745)
+(declare-fun m!1431307 () Bool)
 
-(assert (=> b!1553563 (= lt!669706 (lemmaInsertStrictlySortedDoesNotModifyOtherKeyValues!2 (toList!11200 lm!249) a!523 b!96 a0!49))))
+(assert (=> b!1553235 m!1431307))
 
-(declare-fun b!1553564 () Bool)
-
-(declare-datatypes ((Option!813 0))(
-  ( (Some!812 (v!21997 B!2212)) (None!811) )
-))
-(declare-fun getValueByKey!737 (List!36226 (_ BitVec 64)) Option!813)
-
-(assert (=> b!1553564 (= e!864975 (= (getValueByKey!737 lt!669707 a0!49) (getValueByKey!737 (toList!11200 lm!249) a0!49)))))
-
-(assert (= (and start!132430 res!1063321) b!1553560))
-
-(assert (= (and b!1553560 res!1063322) b!1553561))
-
-(assert (= (and b!1553561 res!1063324) b!1553563))
-
-(assert (= (and b!1553563 res!1063323) b!1553564))
-
-(assert (= start!132430 b!1553562))
-
-(declare-fun m!1432201 () Bool)
-
-(assert (=> b!1553561 m!1432201))
-
-(declare-fun m!1432203 () Bool)
-
-(assert (=> start!132430 m!1432203))
-
-(declare-fun m!1432205 () Bool)
-
-(assert (=> start!132430 m!1432205))
-
-(declare-fun m!1432207 () Bool)
-
-(assert (=> b!1553563 m!1432207))
-
-(declare-fun m!1432209 () Bool)
-
-(assert (=> b!1553563 m!1432209))
-
-(declare-fun m!1432211 () Bool)
-
-(assert (=> b!1553563 m!1432211))
-
-(declare-fun m!1432213 () Bool)
-
-(assert (=> b!1553564 m!1432213))
-
-(declare-fun m!1432215 () Bool)
-
-(assert (=> b!1553564 m!1432215))
-
-(check-sat tp_is_empty!38223 (not b!1553561) (not start!132430) (not b!1553562) (not b!1553563) (not b!1553564))
+(check-sat (not start!132378) tp_is_empty!38221 (not b!1553235) (not b!1553234) (not b!1553232) (not b!1553233))
 (check-sat)

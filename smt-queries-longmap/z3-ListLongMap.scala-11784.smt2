@@ -1,94 +1,94 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!138430 () Bool)
+(declare-fun start!138392 () Bool)
 
-(assert start!138430)
+(assert start!138392)
 
-(declare-datatypes ((B!3046 0))(
-  ( (B!3047 (val!19885 Int)) )
+(declare-datatypes ((B!3044 0))(
+  ( (B!3045 (val!19884 Int)) )
 ))
-(declare-datatypes ((tuple2!25938 0))(
-  ( (tuple2!25939 (_1!12980 (_ BitVec 64)) (_2!12980 B!3046)) )
+(declare-datatypes ((tuple2!26004 0))(
+  ( (tuple2!26005 (_1!13013 (_ BitVec 64)) (_2!13013 B!3044)) )
 ))
-(declare-datatypes ((List!37005 0))(
-  ( (Nil!37002) (Cons!37001 (h!38544 tuple2!25938) (t!51935 List!37005)) )
+(declare-datatypes ((List!37045 0))(
+  ( (Nil!37042) (Cons!37041 (h!38585 tuple2!26004) (t!51967 List!37045)) )
 ))
-(declare-fun l!628 () List!37005)
+(declare-fun l!628 () List!37045)
 
-(declare-fun ListPrimitiveSize!236 (List!37005) Int)
+(declare-fun ListPrimitiveSize!235 (List!37045) Int)
 
-(assert (=> start!138430 (< (ListPrimitiveSize!236 l!628) 0)))
+(assert (=> start!138392 (< (ListPrimitiveSize!235 l!628) 0)))
 
-(declare-fun e!885876 () Bool)
+(declare-fun e!885672 () Bool)
 
-(assert (=> start!138430 e!885876))
+(assert (=> start!138392 e!885672))
 
-(declare-fun b!1586363 () Bool)
+(declare-fun b!1586044 () Bool)
 
-(declare-fun tp_is_empty!39579 () Bool)
+(declare-fun tp_is_empty!39577 () Bool)
 
-(declare-fun tp!115428 () Bool)
+(declare-fun tp!115425 () Bool)
 
-(assert (=> b!1586363 (= e!885876 (and tp_is_empty!39579 tp!115428))))
+(assert (=> b!1586044 (= e!885672 (and tp_is_empty!39577 tp!115425))))
 
 (get-info :version)
 
-(assert (= (and start!138430 ((_ is Cons!37001) l!628)) b!1586363))
+(assert (= (and start!138392 ((_ is Cons!37041) l!628)) b!1586044))
 
-(declare-fun m!1454741 () Bool)
+(declare-fun m!1453857 () Bool)
 
-(assert (=> start!138430 m!1454741))
+(assert (=> start!138392 m!1453857))
 
-(check-sat (not start!138430) (not b!1586363) tp_is_empty!39579)
+(check-sat (not start!138392) (not b!1586044) tp_is_empty!39577)
 (check-sat)
 (get-model)
 
-(declare-fun d!167919 () Bool)
+(declare-fun d!167677 () Bool)
 
-(declare-fun lt!677526 () Int)
+(declare-fun lt!677241 () Int)
 
-(assert (=> d!167919 (>= lt!677526 0)))
+(assert (=> d!167677 (>= lt!677241 0)))
 
-(declare-fun e!885892 () Int)
+(declare-fun e!885685 () Int)
 
-(assert (=> d!167919 (= lt!677526 e!885892)))
+(assert (=> d!167677 (= lt!677241 e!885685)))
 
-(declare-fun c!147063 () Bool)
+(declare-fun c!146972 () Bool)
 
-(assert (=> d!167919 (= c!147063 ((_ is Nil!37002) l!628))))
+(assert (=> d!167677 (= c!146972 ((_ is Nil!37042) l!628))))
 
-(assert (=> d!167919 (= (ListPrimitiveSize!236 l!628) lt!677526)))
+(assert (=> d!167677 (= (ListPrimitiveSize!235 l!628) lt!677241)))
 
-(declare-fun b!1586391 () Bool)
+(declare-fun b!1586063 () Bool)
 
-(assert (=> b!1586391 (= e!885892 0)))
+(assert (=> b!1586063 (= e!885685 0)))
 
-(declare-fun b!1586392 () Bool)
+(declare-fun b!1586064 () Bool)
 
-(assert (=> b!1586392 (= e!885892 (+ 1 (ListPrimitiveSize!236 (t!51935 l!628))))))
+(assert (=> b!1586064 (= e!885685 (+ 1 (ListPrimitiveSize!235 (t!51967 l!628))))))
 
-(assert (= (and d!167919 c!147063) b!1586391))
+(assert (= (and d!167677 c!146972) b!1586063))
 
-(assert (= (and d!167919 (not c!147063)) b!1586392))
+(assert (= (and d!167677 (not c!146972)) b!1586064))
 
-(declare-fun m!1454749 () Bool)
+(declare-fun m!1453863 () Bool)
 
-(assert (=> b!1586392 m!1454749))
+(assert (=> b!1586064 m!1453863))
 
-(assert (=> start!138430 d!167919))
+(assert (=> start!138392 d!167677))
 
-(declare-fun b!1586399 () Bool)
+(declare-fun b!1586071 () Bool)
 
-(declare-fun e!885897 () Bool)
+(declare-fun e!885689 () Bool)
 
-(declare-fun tp!115440 () Bool)
+(declare-fun tp!115434 () Bool)
 
-(assert (=> b!1586399 (= e!885897 (and tp_is_empty!39579 tp!115440))))
+(assert (=> b!1586071 (= e!885689 (and tp_is_empty!39577 tp!115434))))
 
-(assert (=> b!1586363 (= tp!115428 e!885897)))
+(assert (=> b!1586044 (= tp!115425 e!885689)))
 
-(assert (= (and b!1586363 ((_ is Cons!37001) (t!51935 l!628))) b!1586399))
+(assert (= (and b!1586044 ((_ is Cons!37041) (t!51967 l!628))) b!1586071))
 
-(check-sat (not b!1586392) (not b!1586399) tp_is_empty!39579)
+(check-sat (not b!1586064) (not b!1586071) tp_is_empty!39577)
 (check-sat)

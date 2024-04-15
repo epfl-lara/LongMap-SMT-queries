@@ -1,210 +1,210 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!85120 () Bool)
+(declare-fun start!85100 () Bool)
 
-(assert start!85120)
+(assert start!85100)
 
-(declare-fun res!663419 () Bool)
+(declare-fun res!663300 () Bool)
 
-(declare-fun e!559991 () Bool)
+(declare-fun e!559838 () Bool)
 
-(assert (=> start!85120 (=> (not res!663419) (not e!559991))))
+(assert (=> start!85100 (=> (not res!663300) (not e!559838))))
 
-(declare-datatypes ((List!20891 0))(
-  ( (Nil!20888) (Cons!20887 (h!22049 (_ BitVec 64)) (t!29886 List!20891)) )
+(declare-datatypes ((List!20925 0))(
+  ( (Nil!20922) (Cons!20921 (h!22083 (_ BitVec 64)) (t!29911 List!20925)) )
 ))
-(declare-fun tail!21 () List!20891)
+(declare-fun tail!21 () List!20925)
 
 (declare-fun head!726 () (_ BitVec 64))
 
-(declare-fun contains!5752 (List!20891 (_ BitVec 64)) Bool)
+(declare-fun contains!5724 (List!20925 (_ BitVec 64)) Bool)
 
-(assert (=> start!85120 (= res!663419 (not (contains!5752 tail!21 head!726)))))
+(assert (=> start!85100 (= res!663300 (not (contains!5724 tail!21 head!726)))))
 
-(assert (=> start!85120 e!559991))
+(assert (=> start!85100 e!559838))
 
-(assert (=> start!85120 true))
+(assert (=> start!85100 true))
 
-(declare-fun b!992621 () Bool)
+(declare-fun b!992373 () Bool)
 
-(declare-fun res!663418 () Bool)
+(declare-fun res!663301 () Bool)
 
-(assert (=> b!992621 (=> (not res!663418) (not e!559991))))
+(assert (=> b!992373 (=> (not res!663301) (not e!559838))))
 
 (define-sort InoxSet (T) (Array T Bool))
 
-(declare-fun content!446 (List!20891) (InoxSet (_ BitVec 64)))
+(declare-fun content!443 (List!20925) (InoxSet (_ BitVec 64)))
 
-(assert (=> b!992621 (= res!663418 (not (select (content!446 tail!21) head!726)))))
+(assert (=> b!992373 (= res!663301 (not (select (content!443 tail!21) head!726)))))
 
-(declare-fun b!992622 () Bool)
+(declare-fun b!992374 () Bool)
 
-(declare-fun e!559992 () Bool)
+(declare-fun e!559837 () Bool)
 
-(assert (=> b!992622 (= e!559991 e!559992)))
+(assert (=> b!992374 (= e!559838 e!559837)))
 
-(declare-fun res!663420 () Bool)
+(declare-fun res!663299 () Bool)
 
-(assert (=> b!992622 (=> (not res!663420) (not e!559992))))
+(assert (=> b!992374 (=> (not res!663299) (not e!559837))))
 
-(declare-fun lt!440239 () List!20891)
+(declare-fun lt!440000 () List!20925)
 
-(declare-datatypes ((tuple2!14966 0))(
-  ( (tuple2!14967 (_1!7494 (_ BitVec 64)) (_2!7494 List!20891)) )
+(declare-datatypes ((tuple2!15044 0))(
+  ( (tuple2!15045 (_1!7533 (_ BitVec 64)) (_2!7533 List!20925)) )
 ))
-(declare-datatypes ((Option!538 0))(
-  ( (Some!537 (v!14347 tuple2!14966)) (None!536) )
+(declare-datatypes ((Option!540 0))(
+  ( (Some!539 (v!14345 tuple2!15044)) (None!538) )
 ))
-(declare-fun isEmpty!745 (Option!538) Bool)
+(declare-fun isEmpty!749 (Option!540) Bool)
 
-(declare-fun unapply!17 (List!20891) Option!538)
+(declare-fun unapply!16 (List!20925) Option!540)
 
-(assert (=> b!992622 (= res!663420 (isEmpty!745 (unapply!17 lt!440239)))))
+(assert (=> b!992374 (= res!663299 (isEmpty!749 (unapply!16 lt!440000)))))
 
-(declare-fun $colon$colon!574 (List!20891 (_ BitVec 64)) List!20891)
+(declare-fun $colon$colon!574 (List!20925 (_ BitVec 64)) List!20925)
 
-(assert (=> b!992622 (= lt!440239 ($colon$colon!574 tail!21 head!726))))
+(assert (=> b!992374 (= lt!440000 ($colon$colon!574 tail!21 head!726))))
 
-(declare-fun b!992623 () Bool)
+(declare-fun b!992375 () Bool)
 
 (get-info :version)
 
-(assert (=> b!992623 (= e!559992 (not ((_ is Nil!20888) lt!440239)))))
+(assert (=> b!992375 (= e!559837 (not ((_ is Nil!20922) lt!440000)))))
 
-(assert (= (and start!85120 res!663419) b!992621))
+(assert (= (and start!85100 res!663300) b!992373))
 
-(assert (= (and b!992621 res!663418) b!992622))
+(assert (= (and b!992373 res!663301) b!992374))
 
-(assert (= (and b!992622 res!663420) b!992623))
+(assert (= (and b!992374 res!663299) b!992375))
 
-(declare-fun m!920341 () Bool)
+(declare-fun m!919571 () Bool)
 
-(assert (=> start!85120 m!920341))
+(assert (=> start!85100 m!919571))
 
-(declare-fun m!920343 () Bool)
+(declare-fun m!919573 () Bool)
 
-(assert (=> b!992621 m!920343))
+(assert (=> b!992373 m!919573))
 
-(declare-fun m!920345 () Bool)
+(declare-fun m!919575 () Bool)
 
-(assert (=> b!992621 m!920345))
+(assert (=> b!992373 m!919575))
 
-(declare-fun m!920347 () Bool)
+(declare-fun m!919577 () Bool)
 
-(assert (=> b!992622 m!920347))
+(assert (=> b!992374 m!919577))
 
-(assert (=> b!992622 m!920347))
+(assert (=> b!992374 m!919577))
 
-(declare-fun m!920349 () Bool)
+(declare-fun m!919579 () Bool)
 
-(assert (=> b!992622 m!920349))
+(assert (=> b!992374 m!919579))
 
-(declare-fun m!920351 () Bool)
+(declare-fun m!919581 () Bool)
 
-(assert (=> b!992622 m!920351))
+(assert (=> b!992374 m!919581))
 
-(check-sat (not start!85120) (not b!992621) (not b!992622))
+(check-sat (not b!992374) (not start!85100) (not b!992373))
 (check-sat)
 (get-model)
 
-(declare-fun d!118221 () Bool)
+(declare-fun d!118021 () Bool)
 
-(declare-fun lt!440247 () Bool)
+(assert (=> d!118021 (= (isEmpty!749 (unapply!16 lt!440000)) (not ((_ is Some!539) (unapply!16 lt!440000))))))
 
-(assert (=> d!118221 (= lt!440247 (select (content!446 tail!21) head!726))))
+(assert (=> b!992374 d!118021))
 
-(declare-fun e!560011 () Bool)
+(declare-fun d!118025 () Bool)
 
-(assert (=> d!118221 (= lt!440247 e!560011)))
+(assert (=> d!118025 (= (unapply!16 lt!440000) (ite ((_ is Nil!20922) lt!440000) None!538 (Some!539 (tuple2!15045 (h!22083 lt!440000) (t!29911 lt!440000)))))))
 
-(declare-fun res!663438 () Bool)
+(assert (=> b!992374 d!118025))
 
-(assert (=> d!118221 (=> (not res!663438) (not e!560011))))
+(declare-fun d!118031 () Bool)
 
-(assert (=> d!118221 (= res!663438 ((_ is Cons!20887) tail!21))))
+(assert (=> d!118031 (= ($colon$colon!574 tail!21 head!726) (Cons!20921 head!726 tail!21))))
 
-(assert (=> d!118221 (= (contains!5752 tail!21 head!726) lt!440247)))
+(assert (=> b!992374 d!118031))
 
-(declare-fun b!992647 () Bool)
+(declare-fun d!118033 () Bool)
 
-(declare-fun e!560010 () Bool)
+(declare-fun lt!440014 () Bool)
 
-(assert (=> b!992647 (= e!560011 e!560010)))
+(assert (=> d!118033 (= lt!440014 (select (content!443 tail!21) head!726))))
 
-(declare-fun res!663439 () Bool)
+(declare-fun e!559865 () Bool)
 
-(assert (=> b!992647 (=> res!663439 e!560010)))
+(assert (=> d!118033 (= lt!440014 e!559865)))
 
-(assert (=> b!992647 (= res!663439 (= (h!22049 tail!21) head!726))))
+(declare-fun res!663335 () Bool)
 
-(declare-fun b!992648 () Bool)
+(assert (=> d!118033 (=> (not res!663335) (not e!559865))))
 
-(assert (=> b!992648 (= e!560010 (contains!5752 (t!29886 tail!21) head!726))))
+(assert (=> d!118033 (= res!663335 ((_ is Cons!20921) tail!21))))
 
-(assert (= (and d!118221 res!663438) b!992647))
+(assert (=> d!118033 (= (contains!5724 tail!21 head!726) lt!440014)))
 
-(assert (= (and b!992647 (not res!663439)) b!992648))
+(declare-fun b!992408 () Bool)
 
-(assert (=> d!118221 m!920343))
+(declare-fun e!559866 () Bool)
 
-(assert (=> d!118221 m!920345))
+(assert (=> b!992408 (= e!559865 e!559866)))
 
-(declare-fun m!920369 () Bool)
+(declare-fun res!663334 () Bool)
 
-(assert (=> b!992648 m!920369))
+(assert (=> b!992408 (=> res!663334 e!559866)))
 
-(assert (=> start!85120 d!118221))
+(assert (=> b!992408 (= res!663334 (= (h!22083 tail!21) head!726))))
 
-(declare-fun d!118225 () Bool)
+(declare-fun b!992409 () Bool)
 
-(declare-fun c!100744 () Bool)
+(assert (=> b!992409 (= e!559866 (contains!5724 (t!29911 tail!21) head!726))))
 
-(assert (=> d!118225 (= c!100744 ((_ is Nil!20888) tail!21))))
+(assert (= (and d!118033 res!663335) b!992408))
 
-(declare-fun e!560022 () (InoxSet (_ BitVec 64)))
+(assert (= (and b!992408 (not res!663334)) b!992409))
 
-(assert (=> d!118225 (= (content!446 tail!21) e!560022)))
+(assert (=> d!118033 m!919573))
 
-(declare-fun b!992661 () Bool)
+(assert (=> d!118033 m!919575))
 
-(assert (=> b!992661 (= e!560022 ((as const (Array (_ BitVec 64) Bool)) false))))
+(declare-fun m!919609 () Bool)
 
-(declare-fun b!992662 () Bool)
+(assert (=> b!992409 m!919609))
 
-(assert (=> b!992662 (= e!560022 ((_ map or) (store ((as const (Array (_ BitVec 64) Bool)) false) (h!22049 tail!21) true) (content!446 (t!29886 tail!21))))))
+(assert (=> start!85100 d!118033))
 
-(assert (= (and d!118225 c!100744) b!992661))
+(declare-fun d!118045 () Bool)
 
-(assert (= (and d!118225 (not c!100744)) b!992662))
+(declare-fun c!100682 () Bool)
 
-(declare-fun m!920373 () Bool)
+(assert (=> d!118045 (= c!100682 ((_ is Nil!20922) tail!21))))
 
-(assert (=> b!992662 m!920373))
+(declare-fun e!559877 () (InoxSet (_ BitVec 64)))
 
-(declare-fun m!920377 () Bool)
+(assert (=> d!118045 (= (content!443 tail!21) e!559877)))
 
-(assert (=> b!992662 m!920377))
+(declare-fun b!992428 () Bool)
 
-(assert (=> b!992621 d!118225))
+(assert (=> b!992428 (= e!559877 ((as const (Array (_ BitVec 64) Bool)) false))))
 
-(declare-fun d!118235 () Bool)
+(declare-fun b!992429 () Bool)
 
-(assert (=> d!118235 (= (isEmpty!745 (unapply!17 lt!440239)) (not ((_ is Some!537) (unapply!17 lt!440239))))))
+(assert (=> b!992429 (= e!559877 ((_ map or) (store ((as const (Array (_ BitVec 64) Bool)) false) (h!22083 tail!21) true) (content!443 (t!29911 tail!21))))))
 
-(assert (=> b!992622 d!118235))
+(assert (= (and d!118045 c!100682) b!992428))
 
-(declare-fun d!118241 () Bool)
+(assert (= (and d!118045 (not c!100682)) b!992429))
 
-(assert (=> d!118241 (= (unapply!17 lt!440239) (ite ((_ is Nil!20888) lt!440239) None!536 (Some!537 (tuple2!14967 (h!22049 lt!440239) (t!29886 lt!440239)))))))
+(declare-fun m!919620 () Bool)
 
-(assert (=> b!992622 d!118241))
+(assert (=> b!992429 m!919620))
 
-(declare-fun d!118245 () Bool)
+(declare-fun m!919623 () Bool)
 
-(assert (=> d!118245 (= ($colon$colon!574 tail!21 head!726) (Cons!20887 head!726 tail!21))))
+(assert (=> b!992429 m!919623))
 
-(assert (=> b!992622 d!118245))
+(assert (=> b!992373 d!118045))
 
-(check-sat (not b!992662) (not b!992648) (not d!118221))
+(check-sat (not d!118033) (not b!992409) (not b!992429))
 (check-sat)

@@ -1,40 +1,40 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!106740 () Bool)
+(declare-fun start!106734 () Bool)
 
-(assert start!106740)
+(assert start!106734)
 
-(assert (=> start!106740 false))
+(assert (=> start!106734 false))
 
-(declare-fun e!721859 () Bool)
+(declare-fun e!721811 () Bool)
 
-(assert (=> start!106740 e!721859))
+(assert (=> start!106734 e!721811))
 
-(assert (=> start!106740 true))
+(assert (=> start!106734 true))
 
-(declare-fun b!1267198 () Bool)
+(declare-fun b!1267113 () Bool)
 
-(declare-fun tp_is_empty!32583 () Bool)
+(declare-fun tp_is_empty!32581 () Bool)
 
-(declare-fun tp!96563 () Bool)
+(declare-fun tp!96560 () Bool)
 
-(assert (=> b!1267198 (= e!721859 (and tp_is_empty!32583 tp!96563))))
+(assert (=> b!1267113 (= e!721811 (and tp_is_empty!32581 tp!96560))))
 
-(declare-datatypes ((B!2062 0))(
-  ( (B!2063 (val!16366 Int)) )
+(declare-datatypes ((B!2060 0))(
+  ( (B!2061 (val!16365 Int)) )
 ))
-(declare-datatypes ((tuple2!21250 0))(
-  ( (tuple2!21251 (_1!10636 (_ BitVec 64)) (_2!10636 B!2062)) )
+(declare-datatypes ((tuple2!21330 0))(
+  ( (tuple2!21331 (_1!10676 (_ BitVec 64)) (_2!10676 B!2060)) )
 ))
-(declare-datatypes ((List!28358 0))(
-  ( (Nil!28355) (Cons!28354 (h!29563 tuple2!21250) (t!41885 List!28358)) )
+(declare-datatypes ((List!28441 0))(
+  ( (Nil!28438) (Cons!28437 (h!29646 tuple2!21330) (t!41959 List!28441)) )
 ))
-(declare-fun l!874 () List!28358)
+(declare-fun l!874 () List!28441)
 
 (get-info :version)
 
-(assert (= (and start!106740 ((_ is Cons!28354) l!874)) b!1267198))
+(assert (= (and start!106734 ((_ is Cons!28437) l!874)) b!1267113))
 
-(check-sat (not b!1267198) tp_is_empty!32583)
+(check-sat (not b!1267113) tp_is_empty!32581)
 (check-sat)
