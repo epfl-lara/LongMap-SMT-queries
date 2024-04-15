@@ -1,6 +1,7 @@
 import os
 from enum import Enum
 import subprocess
+import pandas as pd
 
 class Solver(Enum):
     def __str__(self):
@@ -131,12 +132,16 @@ def run_benchmark_smt_solver(solver: Solver, path_to_smt2_file: str, timeout: in
 
 # go through the folder and run the solver on each file
 output_csv = "benchmark_results.csv"
-columns=["Solver", "Query ID", "Elapsed User Space Time", "Elapsed Kernel Time", "CPU Percent", "Elapsed Wall Clock Time (h:mm:ss or m:ss)", "Maxium Resident Set Size", "Exit Status", "Voluntary Context Switches", "Involuntary Context Switches", "Swaps", "Attempts DEV"]
+columns=["Solver", "Query ID", "Stainless solving time (sec)" "Elapsed User Space Time", "Elapsed Kernel Time", "CPU Percent", "Elapsed Wall Clock Time (h:mm:ss or m:ss)", "Maxium Resident Set Size", "Exit Status", "Voluntary Context Switches", "Involuntary Context Switches", "Swaps", "Attempts DEV"]
 with open(output_csv, "w") as f:
   f.write(",".join(columns) + "\n")
 dir = "smt-queries-longmap"
 results = {}
 count = 0
+
+# Open the VC summary csv file and parse it with pandas
+df = pd.read_csv("VCs_summary_nocache.csv")
+
 for file in os.listdir(dir):
     if file.endswith(".smt2"):
         path_to_file = os.path.join(dir, file)
@@ -147,8 +152,10 @@ for file in os.listdir(dir):
         print(f"Solver: {solver}")
         print(f"Query ID: {query_id}")
         print("\n")
+        stainless_solving_time_sec = df[df['SMT Query ID'] == int(query_id)]['Solving Time (sec)'].values[0]
+        print(f"Stainless solving time: {stainless_solving_time_sec}")
         results[(solver, query_id)] = time_stats
-        d = [solver, query_id, time_stats.user_time, time_stats.system_time, time_stats.cpu_percent, time_stats.wall_clock_time, time_stats.max_resident_set_size, time_stats.exit_status, time_stats.voluntary_context_switches, time_stats.involuntary_context_switches, time_stats.swaps, attempts]
+        d = [solver, query_id, stainless_solving_time_sec, time_stats.user_time, time_stats.system_time, time_stats.cpu_percent, time_stats.wall_clock_time, time_stats.max_resident_set_size, time_stats.exit_status, time_stats.voluntary_context_switches, time_stats.involuntary_context_switches, time_stats.swaps, attempts]
 
         print("\n")
         print("OUTPUT:")
