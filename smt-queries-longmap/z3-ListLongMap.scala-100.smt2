@@ -59,13 +59,13 @@
 
 (assert (= start!1644 b!11789))
 
-(declare-fun m!8225 () Bool)
+(declare-fun m!8221 () Bool)
 
-(assert (=> start!1644 m!8225))
+(assert (=> start!1644 m!8221))
 
-(declare-fun m!8227 () Bool)
+(declare-fun m!8223 () Bool)
 
-(assert (=> start!1644 m!8227))
+(assert (=> start!1644 m!8223))
 
 (check-sat (not start!1644) (not b!11789) tp_is_empty!577)
 (check-sat)

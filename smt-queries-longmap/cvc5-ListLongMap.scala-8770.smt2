@@ -1,71 +1,71 @@
 ; Options: -q --produce-models --incremental --print-success --lang smt2.6
-(declare-fun start!106606 () Bool)
+(declare-fun start!106834 () Bool)
 
-(assert start!106606)
+(assert start!106834)
 
-(declare-fun res!843264 () Bool)
+(declare-fun res!843824 () Bool)
 
-(declare-fun e!721510 () Bool)
+(declare-fun e!722402 () Bool)
 
-(assert (=> start!106606 (=> (not res!843264) (not e!721510))))
+(assert (=> start!106834 (=> (not res!843824) (not e!722402))))
 
 (declare-datatypes ((B!2016 0))(
   ( (B!2017 (val!16343 Int)) )
 ))
-(declare-datatypes ((tuple2!21286 0))(
-  ( (tuple2!21287 (_1!10654 (_ BitVec 64)) (_2!10654 B!2016)) )
+(declare-datatypes ((tuple2!21214 0))(
+  ( (tuple2!21215 (_1!10618 (_ BitVec 64)) (_2!10618 B!2016)) )
 ))
-(declare-datatypes ((List!28419 0))(
-  ( (Nil!28416) (Cons!28415 (h!29624 tuple2!21286) (t!41937 List!28419)) )
+(declare-datatypes ((List!28371 0))(
+  ( (Nil!28368) (Cons!28367 (h!29585 tuple2!21214) (t!41890 List!28371)) )
 ))
-(declare-datatypes ((ListLongMap!19081 0))(
-  ( (ListLongMap!19082 (toList!9556 List!28419)) )
+(declare-datatypes ((ListLongMap!19017 0))(
+  ( (ListLongMap!19018 (toList!9524 List!28371)) )
 ))
-(declare-fun lm!209 () ListLongMap!19081)
+(declare-fun lm!209 () ListLongMap!19017)
 
 (declare-fun a!499 () (_ BitVec 64))
 
-(declare-fun contains!7620 (ListLongMap!19081 (_ BitVec 64)) Bool)
+(declare-fun contains!7676 (ListLongMap!19017 (_ BitVec 64)) Bool)
 
-(assert (=> start!106606 (= res!843264 (not (contains!7620 lm!209 a!499)))))
+(assert (=> start!106834 (= res!843824 (not (contains!7676 lm!209 a!499)))))
 
-(assert (=> start!106606 e!721510))
+(assert (=> start!106834 e!722402))
 
-(declare-fun e!721511 () Bool)
+(declare-fun e!722403 () Bool)
 
-(declare-fun inv!44171 (ListLongMap!19081) Bool)
+(declare-fun inv!44171 (ListLongMap!19017) Bool)
 
-(assert (=> start!106606 (and (inv!44171 lm!209) e!721511)))
+(assert (=> start!106834 (and (inv!44171 lm!209) e!722403)))
 
-(assert (=> start!106606 true))
+(assert (=> start!106834 true))
 
-(declare-fun b!1266686 () Bool)
+(declare-fun b!1268073 () Bool)
 
-(assert (=> b!1266686 (= e!721510 false)))
+(assert (=> b!1268073 (= e!722402 false)))
 
-(declare-fun b!1266687 () Bool)
+(declare-fun b!1268074 () Bool)
 
 (declare-fun tp!96467 () Bool)
 
-(assert (=> b!1266687 (= e!721511 tp!96467)))
+(assert (=> b!1268074 (= e!722403 tp!96467)))
 
-(assert (= (and start!106606 res!843264) b!1266686))
+(assert (= (and start!106834 res!843824) b!1268073))
 
-(assert (= start!106606 b!1266687))
+(assert (= start!106834 b!1268074))
 
-(declare-fun m!1165885 () Bool)
+(declare-fun m!1168017 () Bool)
 
-(assert (=> start!106606 m!1165885))
+(assert (=> start!106834 m!1168017))
 
-(declare-fun m!1165887 () Bool)
+(declare-fun m!1168019 () Bool)
 
-(assert (=> start!106606 m!1165887))
+(assert (=> start!106834 m!1168019))
 
 (push 1)
 
-(assert (not start!106606))
+(assert (not start!106834))
 
-(assert (not b!1266687))
+(assert (not b!1268074))
 
 (check-sat)
 

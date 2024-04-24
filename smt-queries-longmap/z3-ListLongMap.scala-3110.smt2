@@ -7,34 +7,34 @@
 
 (assert (=> start!43740 false))
 
-(declare-fun e!284580 () Bool)
+(declare-fun e!284715 () Bool)
 
-(assert (=> start!43740 e!284580))
+(assert (=> start!43740 e!284715))
 
 (assert (=> start!43740 true))
 
-(declare-fun b!483526 () Bool)
+(declare-fun b!483736 () Bool)
 
 (declare-fun tp_is_empty!13891 () Bool)
 
 (declare-fun tp!43426 () Bool)
 
-(assert (=> b!483526 (= e!284580 (and tp_is_empty!13891 tp!43426))))
+(assert (=> b!483736 (= e!284715 (and tp_is_empty!13891 tp!43426))))
 
 (declare-datatypes ((B!1082 0))(
   ( (B!1083 (val!6993 Int)) )
 ))
-(declare-datatypes ((tuple2!9238 0))(
-  ( (tuple2!9239 (_1!4630 (_ BitVec 64)) (_2!4630 B!1082)) )
+(declare-datatypes ((tuple2!9102 0))(
+  ( (tuple2!9103 (_1!4562 (_ BitVec 64)) (_2!4562 B!1082)) )
 ))
-(declare-datatypes ((List!9295 0))(
-  ( (Nil!9292) (Cons!9291 (h!10147 tuple2!9238) (t!15508 List!9295)) )
+(declare-datatypes ((List!9159 0))(
+  ( (Nil!9156) (Cons!9155 (h!10011 tuple2!9102) (t!15373 List!9159)) )
 ))
-(declare-fun l!956 () List!9295)
+(declare-fun l!956 () List!9159)
 
 (get-info :version)
 
-(assert (= (and start!43740 ((_ is Cons!9291) l!956)) b!483526))
+(assert (= (and start!43740 ((_ is Cons!9155) l!956)) b!483736))
 
-(check-sat (not b!483526) tp_is_empty!13891)
+(check-sat (not b!483736) tp_is_empty!13891)
 (check-sat)

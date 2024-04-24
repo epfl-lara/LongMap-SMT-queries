@@ -33,25 +33,25 @@
 ))
 (declare-fun lm!221 () ListLongMap!479)
 
-(declare-fun e!9659 () Bool)
+(declare-fun e!9655 () Bool)
 
 (declare-fun inv!848 (ListLongMap!479) Bool)
 
-(assert (=> start!2640 (and (inv!848 lm!221) e!9659)))
+(assert (=> start!2640 (and (inv!848 lm!221) e!9655)))
 
 (assert (=> start!2640 tp!2732))
 
-(declare-fun b!15821 () Bool)
+(declare-fun b!15815 () Bool)
 
 (declare-fun tp!2731 () Bool)
 
-(assert (=> b!15821 (= e!9659 tp!2731)))
+(assert (=> b!15815 (= e!9655 tp!2731)))
 
-(assert (= start!2640 b!15821))
+(assert (= start!2640 b!15815))
 
 (declare-fun m!10851 () Bool)
 
 (assert (=> start!2640 m!10851))
 
-(check-sat (not start!2640) (not b!15821) b_and!1029 (not b_next!535))
+(check-sat (not start!2640) (not b!15815) b_and!1029 (not b_next!535))
 (check-sat b_and!1029 (not b_next!535))

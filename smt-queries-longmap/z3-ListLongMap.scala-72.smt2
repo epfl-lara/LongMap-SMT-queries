@@ -1318,9 +1318,9 @@
 
 (declare-fun lt!1872 () Unit!165)
 
-(declare-fun choose!140 (array!745 array!747 (_ BitVec 32) (_ BitVec 32) V!731 V!731 (_ BitVec 64) Int) Unit!165)
+(declare-fun choose!141 (array!745 array!747 (_ BitVec 32) (_ BitVec 32) V!731 V!731 (_ BitVec 64) Int) Unit!165)
 
-(assert (=> d!881 (= lt!1872 (choose!140 _keys!1806 _values!1492 mask!2250 extraKeys!1413 zeroValue!1434 minValue!1434 k0!1278 defaultEntry!1495))))
+(assert (=> d!881 (= lt!1872 (choose!141 _keys!1806 _values!1492 mask!2250 extraKeys!1413 zeroValue!1434 minValue!1434 k0!1278 defaultEntry!1495))))
 
 (assert (=> d!881 (validMask!0 mask!2250)))
 

@@ -11,11 +11,11 @@
 
 (assert (=> start!1302 (= b_free!403 (not b_next!403))))
 
-(declare-fun tp!1610 () Bool)
+(declare-fun tp!1608 () Bool)
 
 (declare-fun b_and!585 () Bool)
 
-(assert (=> start!1302 (= tp!1610 b_and!585)))
+(assert (=> start!1302 (= tp!1608 b_and!585)))
 
 (assert (=> start!1302 false))
 
@@ -39,7 +39,7 @@
 
 (assert (=> start!1302 (and (inv!502 lm!227) e!6187)))
 
-(assert (=> start!1302 tp!1610))
+(assert (=> start!1302 tp!1608))
 
 (declare-fun e!6188 () Bool)
 
@@ -47,9 +47,9 @@
 
 (declare-fun b!10633 () Bool)
 
-(declare-fun tp!1608 () Bool)
+(declare-fun tp!1610 () Bool)
 
-(assert (=> b!10633 (= e!6187 tp!1608)))
+(assert (=> b!10633 (= e!6187 tp!1610)))
 
 (declare-fun b!10634 () Bool)
 
@@ -67,9 +67,9 @@
 
 (assert (= (and start!1302 ((_ is Cons!311) kvs!4)) b!10634))
 
-(declare-fun m!6851 () Bool)
+(declare-fun m!6847 () Bool)
 
-(assert (=> start!1302 m!6851))
+(assert (=> start!1302 m!6847))
 
-(check-sat (not start!1302) tp_is_empty!517 (not b!10634) (not b!10633) (not b_next!403) b_and!585)
+(check-sat b_and!585 tp_is_empty!517 (not b!10633) (not b_next!403) (not start!1302) (not b!10634))
 (check-sat b_and!585 (not b_next!403))

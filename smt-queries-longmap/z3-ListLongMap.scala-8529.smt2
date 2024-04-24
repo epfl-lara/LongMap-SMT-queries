@@ -1,616 +1,616 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!103964 () Bool)
+(declare-fun start!104206 () Bool)
 
-(assert start!103964)
+(assert start!104206)
 
-(declare-fun b!1244358 () Bool)
+(declare-fun b!1245764 () Bool)
 
-(declare-fun e!705314 () Bool)
+(declare-fun res!830624 () Bool)
 
-(declare-datatypes ((List!27489 0))(
-  ( (Nil!27486) (Cons!27485 (h!28694 (_ BitVec 64)) (t!40949 List!27489)) )
+(declare-fun e!706220 () Bool)
+
+(assert (=> b!1245764 (=> (not res!830624) (not e!706220))))
+
+(declare-datatypes ((array!80097 0))(
+  ( (array!80098 (arr!38636 (Array (_ BitVec 32) (_ BitVec 64))) (size!39173 (_ BitVec 32))) )
 ))
-(declare-fun noDuplicate!2023 (List!27489) Bool)
-
-(assert (=> b!1244358 (= e!705314 (noDuplicate!2023 Nil!27486))))
-
-(declare-fun b!1244359 () Bool)
-
-(declare-fun res!830049 () Bool)
-
-(declare-fun e!705312 () Bool)
-
-(assert (=> b!1244359 (=> (not res!830049) (not e!705312))))
-
-(declare-datatypes ((array!79982 0))(
-  ( (array!79983 (arr!38585 (Array (_ BitVec 32) (_ BitVec 64))) (size!39123 (_ BitVec 32))) )
-))
-(declare-fun a!3892 () array!79982)
+(declare-fun a!3892 () array!80097)
 
 (declare-fun from!3270 () (_ BitVec 32))
 
-(declare-fun arrayNoDuplicates!0 (array!79982 (_ BitVec 32) List!27489) Bool)
-
-(assert (=> b!1244359 (= res!830049 (arrayNoDuplicates!0 a!3892 from!3270 Nil!27486))))
-
-(declare-fun b!1244360 () Bool)
-
-(declare-datatypes ((Unit!41223 0))(
-  ( (Unit!41224) )
+(declare-datatypes ((List!27452 0))(
+  ( (Nil!27449) (Cons!27448 (h!28666 (_ BitVec 64)) (t!40913 List!27452)) )
 ))
-(declare-fun e!705311 () Unit!41223)
+(declare-fun arrayNoDuplicates!0 (array!80097 (_ BitVec 32) List!27452) Bool)
 
-(declare-fun lt!562565 () Unit!41223)
+(assert (=> b!1245764 (= res!830624 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27449))))
 
-(assert (=> b!1244360 (= e!705311 lt!562565)))
+(declare-fun b!1245765 () Bool)
 
-(declare-fun lemmaArrayNoDuplicateWithAnAccThenWithSubSeqAcc!0 (array!79982 List!27489 List!27489 (_ BitVec 32)) Unit!41223)
+(declare-datatypes ((Unit!41351 0))(
+  ( (Unit!41352) )
+))
+(declare-fun e!706219 () Unit!41351)
 
-(assert (=> b!1244360 (= lt!562565 (lemmaArrayNoDuplicateWithAnAccThenWithSubSeqAcc!0 a!3892 (Cons!27485 (select (arr!38585 a!3892) from!3270) Nil!27486) Nil!27486 (bvadd #b00000000000000000000000000000001 from!3270)))))
+(declare-fun Unit!41353 () Unit!41351)
 
-(assert (=> b!1244360 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27486)))
+(assert (=> b!1245765 (= e!706219 Unit!41353)))
 
-(declare-fun b!1244361 () Bool)
+(declare-fun b!1245766 () Bool)
 
-(declare-fun e!705315 () Bool)
+(declare-fun lt!563231 () Unit!41351)
 
-(assert (=> b!1244361 (= e!705315 (not e!705314))))
+(assert (=> b!1245766 (= e!706219 lt!563231)))
 
-(declare-fun res!830047 () Bool)
+(declare-fun lemmaArrayNoDuplicateWithAnAccThenWithSubSeqAcc!0 (array!80097 List!27452 List!27452 (_ BitVec 32)) Unit!41351)
 
-(assert (=> b!1244361 (=> res!830047 e!705314)))
+(assert (=> b!1245766 (= lt!563231 (lemmaArrayNoDuplicateWithAnAccThenWithSubSeqAcc!0 a!3892 (Cons!27448 (select (arr!38636 a!3892) from!3270) Nil!27449) Nil!27449 (bvadd #b00000000000000000000000000000001 from!3270)))))
+
+(assert (=> b!1245766 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27449)))
+
+(declare-fun b!1245767 () Bool)
+
+(declare-fun res!830620 () Bool)
+
+(declare-fun e!706221 () Bool)
+
+(assert (=> b!1245767 (=> (not res!830620) (not e!706221))))
 
 (declare-fun newFrom!287 () (_ BitVec 32))
 
-(assert (=> b!1244361 (= res!830047 (bvslt newFrom!287 #b00000000000000000000000000000000))))
+(assert (=> b!1245767 (= res!830620 (and (not (= from!3270 newFrom!287)) (bvslt from!3270 (size!39173 a!3892)) (not (= newFrom!287 (size!39173 a!3892)))))))
 
-(assert (=> b!1244361 (arrayNoDuplicates!0 a!3892 newFrom!287 Nil!27486)))
+(declare-fun b!1245768 () Bool)
 
-(declare-fun lt!562564 () Unit!41223)
+(assert (=> b!1245768 (= e!706221 e!706220)))
 
-(declare-fun lemmaNoDuplicateFromThenFromBigger!0 (array!79982 (_ BitVec 32) (_ BitVec 32)) Unit!41223)
+(declare-fun res!830623 () Bool)
 
-(assert (=> b!1244361 (= lt!562564 (lemmaNoDuplicateFromThenFromBigger!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) newFrom!287))))
+(assert (=> b!1245768 (=> (not res!830623) (not e!706220))))
 
-(declare-fun b!1244362 () Bool)
+(assert (=> b!1245768 (= res!830623 (and (bvsge (bvadd #b00000000000000000000000000000001 from!3270) #b00000000000000000000000000000000) (bvsge newFrom!287 (bvadd #b00000000000000000000000000000001 from!3270))))))
 
-(declare-fun res!830050 () Bool)
+(declare-fun lt!563230 () Unit!41351)
 
-(assert (=> b!1244362 (=> (not res!830050) (not e!705315))))
+(assert (=> b!1245768 (= lt!563230 e!706219)))
 
-(assert (=> b!1244362 (= res!830050 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27486))))
-
-(declare-fun res!830052 () Bool)
-
-(assert (=> start!103964 (=> (not res!830052) (not e!705312))))
-
-(assert (=> start!103964 (= res!830052 (and (bvslt (size!39123 a!3892) #b01111111111111111111111111111111) (bvsge from!3270 #b00000000000000000000000000000000) (bvsle from!3270 (size!39123 a!3892)) (bvsge newFrom!287 from!3270) (bvsle newFrom!287 (size!39123 a!3892))))))
-
-(assert (=> start!103964 e!705312))
-
-(declare-fun array_inv!29568 (array!79982) Bool)
-
-(assert (=> start!103964 (array_inv!29568 a!3892)))
-
-(assert (=> start!103964 true))
-
-(declare-fun b!1244363 () Bool)
-
-(declare-fun Unit!41225 () Unit!41223)
-
-(assert (=> b!1244363 (= e!705311 Unit!41225)))
-
-(declare-fun b!1244364 () Bool)
-
-(assert (=> b!1244364 (= e!705312 e!705315)))
-
-(declare-fun res!830051 () Bool)
-
-(assert (=> b!1244364 (=> (not res!830051) (not e!705315))))
-
-(assert (=> b!1244364 (= res!830051 (and (bvsge (bvadd #b00000000000000000000000000000001 from!3270) #b00000000000000000000000000000000) (bvsge newFrom!287 (bvadd #b00000000000000000000000000000001 from!3270))))))
-
-(declare-fun lt!562566 () Unit!41223)
-
-(assert (=> b!1244364 (= lt!562566 e!705311)))
-
-(declare-fun c!121843 () Bool)
+(declare-fun c!122264 () Bool)
 
 (declare-fun validKeyInArray!0 ((_ BitVec 64)) Bool)
 
-(assert (=> b!1244364 (= c!121843 (validKeyInArray!0 (select (arr!38585 a!3892) from!3270)))))
+(assert (=> b!1245768 (= c!122264 (validKeyInArray!0 (select (arr!38636 a!3892) from!3270)))))
 
-(declare-fun b!1244365 () Bool)
+(declare-fun res!830622 () Bool)
 
-(declare-fun res!830048 () Bool)
+(assert (=> start!104206 (=> (not res!830622) (not e!706221))))
 
-(assert (=> b!1244365 (=> (not res!830048) (not e!705312))))
+(assert (=> start!104206 (= res!830622 (and (bvslt (size!39173 a!3892) #b01111111111111111111111111111111) (bvsge from!3270 #b00000000000000000000000000000000) (bvsle from!3270 (size!39173 a!3892)) (bvsge newFrom!287 from!3270) (bvsle newFrom!287 (size!39173 a!3892))))))
 
-(assert (=> b!1244365 (= res!830048 (and (not (= from!3270 newFrom!287)) (bvslt from!3270 (size!39123 a!3892)) (not (= newFrom!287 (size!39123 a!3892)))))))
+(assert (=> start!104206 e!706221))
 
-(assert (= (and start!103964 res!830052) b!1244359))
+(declare-fun array_inv!29574 (array!80097) Bool)
 
-(assert (= (and b!1244359 res!830049) b!1244365))
+(assert (=> start!104206 (array_inv!29574 a!3892)))
 
-(assert (= (and b!1244365 res!830048) b!1244364))
+(assert (=> start!104206 true))
 
-(assert (= (and b!1244364 c!121843) b!1244360))
+(declare-fun b!1245769 () Bool)
 
-(assert (= (and b!1244364 (not c!121843)) b!1244363))
+(declare-fun res!830625 () Bool)
 
-(assert (= (and b!1244364 res!830051) b!1244362))
+(assert (=> b!1245769 (=> (not res!830625) (not e!706221))))
 
-(assert (= (and b!1244362 res!830050) b!1244361))
+(assert (=> b!1245769 (= res!830625 (arrayNoDuplicates!0 a!3892 from!3270 Nil!27449))))
 
-(assert (= (and b!1244361 (not res!830047)) b!1244358))
+(declare-fun b!1245770 () Bool)
 
-(declare-fun m!1146189 () Bool)
+(declare-fun e!706223 () Bool)
 
-(assert (=> b!1244364 m!1146189))
+(assert (=> b!1245770 (= e!706220 (not e!706223))))
 
-(assert (=> b!1244364 m!1146189))
+(declare-fun res!830621 () Bool)
 
-(declare-fun m!1146191 () Bool)
+(assert (=> b!1245770 (=> res!830621 e!706223)))
 
-(assert (=> b!1244364 m!1146191))
+(assert (=> b!1245770 (= res!830621 (bvslt newFrom!287 #b00000000000000000000000000000000))))
 
-(declare-fun m!1146193 () Bool)
+(assert (=> b!1245770 (arrayNoDuplicates!0 a!3892 newFrom!287 Nil!27449)))
 
-(assert (=> b!1244359 m!1146193))
+(declare-fun lt!563229 () Unit!41351)
 
-(declare-fun m!1146195 () Bool)
+(declare-fun lemmaNoDuplicateFromThenFromBigger!0 (array!80097 (_ BitVec 32) (_ BitVec 32)) Unit!41351)
 
-(assert (=> start!103964 m!1146195))
+(assert (=> b!1245770 (= lt!563229 (lemmaNoDuplicateFromThenFromBigger!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) newFrom!287))))
 
-(assert (=> b!1244360 m!1146189))
+(declare-fun b!1245771 () Bool)
 
-(declare-fun m!1146197 () Bool)
+(declare-fun noDuplicate!2023 (List!27452) Bool)
 
-(assert (=> b!1244360 m!1146197))
+(assert (=> b!1245771 (= e!706223 (noDuplicate!2023 Nil!27449))))
 
-(declare-fun m!1146199 () Bool)
+(assert (= (and start!104206 res!830622) b!1245769))
 
-(assert (=> b!1244360 m!1146199))
+(assert (= (and b!1245769 res!830625) b!1245767))
 
-(declare-fun m!1146201 () Bool)
+(assert (= (and b!1245767 res!830620) b!1245768))
 
-(assert (=> b!1244361 m!1146201))
+(assert (= (and b!1245768 c!122264) b!1245766))
 
-(declare-fun m!1146203 () Bool)
+(assert (= (and b!1245768 (not c!122264)) b!1245765))
 
-(assert (=> b!1244361 m!1146203))
+(assert (= (and b!1245768 res!830623) b!1245764))
 
-(declare-fun m!1146205 () Bool)
+(assert (= (and b!1245764 res!830624) b!1245770))
 
-(assert (=> b!1244358 m!1146205))
+(assert (= (and b!1245770 (not res!830621)) b!1245771))
 
-(assert (=> b!1244362 m!1146199))
+(declare-fun m!1148359 () Bool)
 
-(check-sat (not b!1244358) (not b!1244359) (not b!1244360) (not b!1244364) (not start!103964) (not b!1244361) (not b!1244362))
+(assert (=> b!1245770 m!1148359))
+
+(declare-fun m!1148361 () Bool)
+
+(assert (=> b!1245770 m!1148361))
+
+(declare-fun m!1148363 () Bool)
+
+(assert (=> start!104206 m!1148363))
+
+(declare-fun m!1148365 () Bool)
+
+(assert (=> b!1245766 m!1148365))
+
+(declare-fun m!1148367 () Bool)
+
+(assert (=> b!1245766 m!1148367))
+
+(declare-fun m!1148369 () Bool)
+
+(assert (=> b!1245766 m!1148369))
+
+(declare-fun m!1148371 () Bool)
+
+(assert (=> b!1245769 m!1148371))
+
+(declare-fun m!1148373 () Bool)
+
+(assert (=> b!1245771 m!1148373))
+
+(assert (=> b!1245764 m!1148369))
+
+(assert (=> b!1245768 m!1148365))
+
+(assert (=> b!1245768 m!1148365))
+
+(declare-fun m!1148375 () Bool)
+
+(assert (=> b!1245768 m!1148375))
+
+(check-sat (not b!1245764) (not b!1245771) (not b!1245768) (not b!1245766) (not start!104206) (not b!1245770) (not b!1245769))
 (check-sat)
 (get-model)
 
-(declare-fun d!136987 () Bool)
+(declare-fun d!137585 () Bool)
 
-(assert (=> d!136987 (= (validKeyInArray!0 (select (arr!38585 a!3892) from!3270)) (and (not (= (select (arr!38585 a!3892) from!3270) #b0000000000000000000000000000000000000000000000000000000000000000)) (not (= (select (arr!38585 a!3892) from!3270) #b1000000000000000000000000000000000000000000000000000000000000000))))))
+(declare-fun res!830666 () Bool)
 
-(assert (=> b!1244364 d!136987))
+(declare-fun e!706258 () Bool)
 
-(declare-fun call!61392 () Bool)
-
-(declare-fun c!121852 () Bool)
-
-(declare-fun bm!61389 () Bool)
-
-(assert (=> bm!61389 (= call!61392 (arrayNoDuplicates!0 a!3892 (bvadd from!3270 #b00000000000000000000000000000001) (ite c!121852 (Cons!27485 (select (arr!38585 a!3892) from!3270) Nil!27486) Nil!27486)))))
-
-(declare-fun b!1244424 () Bool)
-
-(declare-fun e!705355 () Bool)
-
-(assert (=> b!1244424 (= e!705355 call!61392)))
-
-(declare-fun b!1244425 () Bool)
-
-(assert (=> b!1244425 (= e!705355 call!61392)))
-
-(declare-fun d!136989 () Bool)
-
-(declare-fun res!830097 () Bool)
-
-(declare-fun e!705357 () Bool)
-
-(assert (=> d!136989 (=> res!830097 e!705357)))
-
-(assert (=> d!136989 (= res!830097 (bvsge from!3270 (size!39123 a!3892)))))
-
-(assert (=> d!136989 (= (arrayNoDuplicates!0 a!3892 from!3270 Nil!27486) e!705357)))
-
-(declare-fun b!1244426 () Bool)
-
-(declare-fun e!705356 () Bool)
-
-(assert (=> b!1244426 (= e!705357 e!705356)))
-
-(declare-fun res!830096 () Bool)
-
-(assert (=> b!1244426 (=> (not res!830096) (not e!705356))))
-
-(declare-fun e!705354 () Bool)
-
-(assert (=> b!1244426 (= res!830096 (not e!705354))))
-
-(declare-fun res!830095 () Bool)
-
-(assert (=> b!1244426 (=> (not res!830095) (not e!705354))))
-
-(assert (=> b!1244426 (= res!830095 (validKeyInArray!0 (select (arr!38585 a!3892) from!3270)))))
-
-(declare-fun b!1244427 () Bool)
-
-(declare-fun contains!7398 (List!27489 (_ BitVec 64)) Bool)
-
-(assert (=> b!1244427 (= e!705354 (contains!7398 Nil!27486 (select (arr!38585 a!3892) from!3270)))))
-
-(declare-fun b!1244428 () Bool)
-
-(assert (=> b!1244428 (= e!705356 e!705355)))
-
-(assert (=> b!1244428 (= c!121852 (validKeyInArray!0 (select (arr!38585 a!3892) from!3270)))))
-
-(assert (= (and d!136989 (not res!830097)) b!1244426))
-
-(assert (= (and b!1244426 res!830095) b!1244427))
-
-(assert (= (and b!1244426 res!830096) b!1244428))
-
-(assert (= (and b!1244428 c!121852) b!1244425))
-
-(assert (= (and b!1244428 (not c!121852)) b!1244424))
-
-(assert (= (or b!1244425 b!1244424) bm!61389))
-
-(assert (=> bm!61389 m!1146189))
-
-(declare-fun m!1146243 () Bool)
-
-(assert (=> bm!61389 m!1146243))
-
-(assert (=> b!1244426 m!1146189))
-
-(assert (=> b!1244426 m!1146189))
-
-(assert (=> b!1244426 m!1146191))
-
-(assert (=> b!1244427 m!1146189))
-
-(assert (=> b!1244427 m!1146189))
-
-(declare-fun m!1146245 () Bool)
-
-(assert (=> b!1244427 m!1146245))
-
-(assert (=> b!1244428 m!1146189))
-
-(assert (=> b!1244428 m!1146189))
-
-(assert (=> b!1244428 m!1146191))
-
-(assert (=> b!1244359 d!136989))
-
-(declare-fun d!136991 () Bool)
-
-(declare-fun res!830102 () Bool)
-
-(declare-fun e!705362 () Bool)
-
-(assert (=> d!136991 (=> res!830102 e!705362)))
+(assert (=> d!137585 (=> res!830666 e!706258)))
 
 (get-info :version)
 
-(assert (=> d!136991 (= res!830102 ((_ is Nil!27486) Nil!27486))))
+(assert (=> d!137585 (= res!830666 ((_ is Nil!27449) Nil!27449))))
 
-(assert (=> d!136991 (= (noDuplicate!2023 Nil!27486) e!705362)))
+(assert (=> d!137585 (= (noDuplicate!2023 Nil!27449) e!706258)))
 
-(declare-fun b!1244433 () Bool)
+(declare-fun b!1245824 () Bool)
 
-(declare-fun e!705363 () Bool)
+(declare-fun e!706259 () Bool)
 
-(assert (=> b!1244433 (= e!705362 e!705363)))
+(assert (=> b!1245824 (= e!706258 e!706259)))
 
-(declare-fun res!830103 () Bool)
+(declare-fun res!830667 () Bool)
 
-(assert (=> b!1244433 (=> (not res!830103) (not e!705363))))
+(assert (=> b!1245824 (=> (not res!830667) (not e!706259))))
 
-(assert (=> b!1244433 (= res!830103 (not (contains!7398 (t!40949 Nil!27486) (h!28694 Nil!27486))))))
+(declare-fun contains!7461 (List!27452 (_ BitVec 64)) Bool)
 
-(declare-fun b!1244434 () Bool)
+(assert (=> b!1245824 (= res!830667 (not (contains!7461 (t!40913 Nil!27449) (h!28666 Nil!27449))))))
 
-(assert (=> b!1244434 (= e!705363 (noDuplicate!2023 (t!40949 Nil!27486)))))
+(declare-fun b!1245825 () Bool)
 
-(assert (= (and d!136991 (not res!830102)) b!1244433))
+(assert (=> b!1245825 (= e!706259 (noDuplicate!2023 (t!40913 Nil!27449)))))
 
-(assert (= (and b!1244433 res!830103) b!1244434))
+(assert (= (and d!137585 (not res!830666)) b!1245824))
 
-(declare-fun m!1146247 () Bool)
+(assert (= (and b!1245824 res!830667) b!1245825))
 
-(assert (=> b!1244433 m!1146247))
+(declare-fun m!1148413 () Bool)
 
-(declare-fun m!1146249 () Bool)
+(assert (=> b!1245824 m!1148413))
 
-(assert (=> b!1244434 m!1146249))
+(declare-fun m!1148415 () Bool)
 
-(assert (=> b!1244358 d!136991))
+(assert (=> b!1245825 m!1148415))
 
-(declare-fun call!61393 () Bool)
+(assert (=> b!1245771 d!137585))
 
-(declare-fun c!121853 () Bool)
+(declare-fun d!137587 () Bool)
 
-(declare-fun bm!61390 () Bool)
+(assert (=> d!137587 (= (array_inv!29574 a!3892) (bvsge (size!39173 a!3892) #b00000000000000000000000000000000))))
 
-(assert (=> bm!61390 (= call!61393 (arrayNoDuplicates!0 a!3892 (bvadd newFrom!287 #b00000000000000000000000000000001) (ite c!121853 (Cons!27485 (select (arr!38585 a!3892) newFrom!287) Nil!27486) Nil!27486)))))
+(assert (=> start!104206 d!137587))
 
-(declare-fun b!1244439 () Bool)
+(declare-fun d!137589 () Bool)
 
-(declare-fun e!705369 () Bool)
+(assert (=> d!137589 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27449)))
 
-(assert (=> b!1244439 (= e!705369 call!61393)))
+(declare-fun lt!563252 () Unit!41351)
 
-(declare-fun b!1244440 () Bool)
+(declare-fun choose!80 (array!80097 List!27452 List!27452 (_ BitVec 32)) Unit!41351)
 
-(assert (=> b!1244440 (= e!705369 call!61393)))
+(assert (=> d!137589 (= lt!563252 (choose!80 a!3892 (Cons!27448 (select (arr!38636 a!3892) from!3270) Nil!27449) Nil!27449 (bvadd #b00000000000000000000000000000001 from!3270)))))
 
-(declare-fun d!136995 () Bool)
+(assert (=> d!137589 (bvslt (size!39173 a!3892) #b01111111111111111111111111111111)))
 
-(declare-fun res!830110 () Bool)
+(assert (=> d!137589 (= (lemmaArrayNoDuplicateWithAnAccThenWithSubSeqAcc!0 a!3892 (Cons!27448 (select (arr!38636 a!3892) from!3270) Nil!27449) Nil!27449 (bvadd #b00000000000000000000000000000001 from!3270)) lt!563252)))
 
-(declare-fun e!705371 () Bool)
+(declare-fun bs!35057 () Bool)
 
-(assert (=> d!136995 (=> res!830110 e!705371)))
+(assert (= bs!35057 d!137589))
 
-(assert (=> d!136995 (= res!830110 (bvsge newFrom!287 (size!39123 a!3892)))))
+(assert (=> bs!35057 m!1148369))
 
-(assert (=> d!136995 (= (arrayNoDuplicates!0 a!3892 newFrom!287 Nil!27486) e!705371)))
+(declare-fun m!1148417 () Bool)
 
-(declare-fun b!1244441 () Bool)
+(assert (=> bs!35057 m!1148417))
 
-(declare-fun e!705370 () Bool)
+(assert (=> b!1245766 d!137589))
 
-(assert (=> b!1244441 (= e!705371 e!705370)))
+(declare-fun b!1245846 () Bool)
 
-(declare-fun res!830109 () Bool)
+(declare-fun e!706277 () Bool)
 
-(assert (=> b!1244441 (=> (not res!830109) (not e!705370))))
+(assert (=> b!1245846 (= e!706277 (contains!7461 Nil!27449 (select (arr!38636 a!3892) (bvadd #b00000000000000000000000000000001 from!3270))))))
 
-(declare-fun e!705368 () Bool)
+(declare-fun b!1245847 () Bool)
 
-(assert (=> b!1244441 (= res!830109 (not e!705368))))
+(declare-fun e!706276 () Bool)
 
-(declare-fun res!830108 () Bool)
+(declare-fun call!61481 () Bool)
 
-(assert (=> b!1244441 (=> (not res!830108) (not e!705368))))
+(assert (=> b!1245847 (= e!706276 call!61481)))
 
-(assert (=> b!1244441 (= res!830108 (validKeyInArray!0 (select (arr!38585 a!3892) newFrom!287)))))
+(declare-fun bm!61478 () Bool)
 
-(declare-fun b!1244442 () Bool)
+(declare-fun c!122275 () Bool)
 
-(assert (=> b!1244442 (= e!705368 (contains!7398 Nil!27486 (select (arr!38585 a!3892) newFrom!287)))))
+(assert (=> bm!61478 (= call!61481 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270 #b00000000000000000000000000000001) (ite c!122275 (Cons!27448 (select (arr!38636 a!3892) (bvadd #b00000000000000000000000000000001 from!3270)) Nil!27449) Nil!27449)))))
 
-(declare-fun b!1244443 () Bool)
+(declare-fun b!1245849 () Bool)
 
-(assert (=> b!1244443 (= e!705370 e!705369)))
+(assert (=> b!1245849 (= e!706276 call!61481)))
 
-(assert (=> b!1244443 (= c!121853 (validKeyInArray!0 (select (arr!38585 a!3892) newFrom!287)))))
+(declare-fun b!1245850 () Bool)
 
-(assert (= (and d!136995 (not res!830110)) b!1244441))
+(declare-fun e!706278 () Bool)
 
-(assert (= (and b!1244441 res!830108) b!1244442))
+(declare-fun e!706279 () Bool)
 
-(assert (= (and b!1244441 res!830109) b!1244443))
+(assert (=> b!1245850 (= e!706278 e!706279)))
 
-(assert (= (and b!1244443 c!121853) b!1244440))
+(declare-fun res!830682 () Bool)
 
-(assert (= (and b!1244443 (not c!121853)) b!1244439))
+(assert (=> b!1245850 (=> (not res!830682) (not e!706279))))
 
-(assert (= (or b!1244440 b!1244439) bm!61390))
+(assert (=> b!1245850 (= res!830682 (not e!706277))))
 
-(declare-fun m!1146251 () Bool)
+(declare-fun res!830681 () Bool)
 
-(assert (=> bm!61390 m!1146251))
+(assert (=> b!1245850 (=> (not res!830681) (not e!706277))))
 
-(declare-fun m!1146253 () Bool)
+(assert (=> b!1245850 (= res!830681 (validKeyInArray!0 (select (arr!38636 a!3892) (bvadd #b00000000000000000000000000000001 from!3270))))))
 
-(assert (=> bm!61390 m!1146253))
+(declare-fun d!137591 () Bool)
 
-(assert (=> b!1244441 m!1146251))
+(declare-fun res!830680 () Bool)
 
-(assert (=> b!1244441 m!1146251))
+(assert (=> d!137591 (=> res!830680 e!706278)))
 
-(declare-fun m!1146255 () Bool)
+(assert (=> d!137591 (= res!830680 (bvsge (bvadd #b00000000000000000000000000000001 from!3270) (size!39173 a!3892)))))
 
-(assert (=> b!1244441 m!1146255))
+(assert (=> d!137591 (= (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27449) e!706278)))
 
-(assert (=> b!1244442 m!1146251))
+(declare-fun b!1245848 () Bool)
 
-(assert (=> b!1244442 m!1146251))
+(assert (=> b!1245848 (= e!706279 e!706276)))
 
-(declare-fun m!1146257 () Bool)
+(assert (=> b!1245848 (= c!122275 (validKeyInArray!0 (select (arr!38636 a!3892) (bvadd #b00000000000000000000000000000001 from!3270))))))
 
-(assert (=> b!1244442 m!1146257))
+(assert (= (and d!137591 (not res!830680)) b!1245850))
 
-(assert (=> b!1244443 m!1146251))
+(assert (= (and b!1245850 res!830681) b!1245846))
 
-(assert (=> b!1244443 m!1146251))
+(assert (= (and b!1245850 res!830682) b!1245848))
 
-(assert (=> b!1244443 m!1146255))
+(assert (= (and b!1245848 c!122275) b!1245847))
 
-(assert (=> b!1244361 d!136995))
+(assert (= (and b!1245848 (not c!122275)) b!1245849))
 
-(declare-fun d!136997 () Bool)
+(assert (= (or b!1245847 b!1245849) bm!61478))
 
-(assert (=> d!136997 (arrayNoDuplicates!0 a!3892 newFrom!287 Nil!27486)))
+(declare-fun m!1148419 () Bool)
 
-(declare-fun lt!562587 () Unit!41223)
+(assert (=> b!1245846 m!1148419))
 
-(declare-fun choose!39 (array!79982 (_ BitVec 32) (_ BitVec 32)) Unit!41223)
+(assert (=> b!1245846 m!1148419))
 
-(assert (=> d!136997 (= lt!562587 (choose!39 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) newFrom!287))))
+(declare-fun m!1148421 () Bool)
 
-(assert (=> d!136997 (bvslt (size!39123 a!3892) #b01111111111111111111111111111111)))
+(assert (=> b!1245846 m!1148421))
 
-(assert (=> d!136997 (= (lemmaNoDuplicateFromThenFromBigger!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) newFrom!287) lt!562587)))
+(assert (=> bm!61478 m!1148419))
 
-(declare-fun bs!35011 () Bool)
+(declare-fun m!1148423 () Bool)
 
-(assert (= bs!35011 d!136997))
+(assert (=> bm!61478 m!1148423))
 
-(assert (=> bs!35011 m!1146201))
+(assert (=> b!1245850 m!1148419))
 
-(declare-fun m!1146263 () Bool)
+(assert (=> b!1245850 m!1148419))
 
-(assert (=> bs!35011 m!1146263))
+(declare-fun m!1148425 () Bool)
 
-(assert (=> b!1244361 d!136997))
+(assert (=> b!1245850 m!1148425))
 
-(declare-fun c!121854 () Bool)
+(assert (=> b!1245848 m!1148419))
 
-(declare-fun bm!61391 () Bool)
+(assert (=> b!1245848 m!1148419))
 
-(declare-fun call!61394 () Bool)
+(assert (=> b!1245848 m!1148425))
 
-(assert (=> bm!61391 (= call!61394 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270 #b00000000000000000000000000000001) (ite c!121854 (Cons!27485 (select (arr!38585 a!3892) (bvadd #b00000000000000000000000000000001 from!3270)) Nil!27486) Nil!27486)))))
+(assert (=> b!1245766 d!137591))
 
-(declare-fun b!1244446 () Bool)
+(declare-fun b!1245851 () Bool)
 
-(declare-fun e!705375 () Bool)
+(declare-fun e!706281 () Bool)
 
-(assert (=> b!1244446 (= e!705375 call!61394)))
+(assert (=> b!1245851 (= e!706281 (contains!7461 Nil!27449 (select (arr!38636 a!3892) newFrom!287)))))
 
-(declare-fun b!1244447 () Bool)
+(declare-fun b!1245852 () Bool)
 
-(assert (=> b!1244447 (= e!705375 call!61394)))
+(declare-fun e!706280 () Bool)
 
-(declare-fun d!137007 () Bool)
+(declare-fun call!61482 () Bool)
 
-(declare-fun res!830115 () Bool)
+(assert (=> b!1245852 (= e!706280 call!61482)))
 
-(declare-fun e!705377 () Bool)
+(declare-fun c!122276 () Bool)
 
-(assert (=> d!137007 (=> res!830115 e!705377)))
+(declare-fun bm!61479 () Bool)
 
-(assert (=> d!137007 (= res!830115 (bvsge (bvadd #b00000000000000000000000000000001 from!3270) (size!39123 a!3892)))))
+(assert (=> bm!61479 (= call!61482 (arrayNoDuplicates!0 a!3892 (bvadd newFrom!287 #b00000000000000000000000000000001) (ite c!122276 (Cons!27448 (select (arr!38636 a!3892) newFrom!287) Nil!27449) Nil!27449)))))
 
-(assert (=> d!137007 (= (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27486) e!705377)))
+(declare-fun b!1245854 () Bool)
 
-(declare-fun b!1244448 () Bool)
+(assert (=> b!1245854 (= e!706280 call!61482)))
 
-(declare-fun e!705376 () Bool)
+(declare-fun b!1245855 () Bool)
 
-(assert (=> b!1244448 (= e!705377 e!705376)))
+(declare-fun e!706282 () Bool)
 
-(declare-fun res!830114 () Bool)
+(declare-fun e!706283 () Bool)
 
-(assert (=> b!1244448 (=> (not res!830114) (not e!705376))))
+(assert (=> b!1245855 (= e!706282 e!706283)))
 
-(declare-fun e!705374 () Bool)
+(declare-fun res!830685 () Bool)
 
-(assert (=> b!1244448 (= res!830114 (not e!705374))))
+(assert (=> b!1245855 (=> (not res!830685) (not e!706283))))
 
-(declare-fun res!830113 () Bool)
+(assert (=> b!1245855 (= res!830685 (not e!706281))))
 
-(assert (=> b!1244448 (=> (not res!830113) (not e!705374))))
+(declare-fun res!830684 () Bool)
 
-(assert (=> b!1244448 (= res!830113 (validKeyInArray!0 (select (arr!38585 a!3892) (bvadd #b00000000000000000000000000000001 from!3270))))))
+(assert (=> b!1245855 (=> (not res!830684) (not e!706281))))
 
-(declare-fun b!1244449 () Bool)
+(assert (=> b!1245855 (= res!830684 (validKeyInArray!0 (select (arr!38636 a!3892) newFrom!287)))))
 
-(assert (=> b!1244449 (= e!705374 (contains!7398 Nil!27486 (select (arr!38585 a!3892) (bvadd #b00000000000000000000000000000001 from!3270))))))
+(declare-fun d!137595 () Bool)
 
-(declare-fun b!1244450 () Bool)
+(declare-fun res!830683 () Bool)
 
-(assert (=> b!1244450 (= e!705376 e!705375)))
+(assert (=> d!137595 (=> res!830683 e!706282)))
 
-(assert (=> b!1244450 (= c!121854 (validKeyInArray!0 (select (arr!38585 a!3892) (bvadd #b00000000000000000000000000000001 from!3270))))))
+(assert (=> d!137595 (= res!830683 (bvsge newFrom!287 (size!39173 a!3892)))))
 
-(assert (= (and d!137007 (not res!830115)) b!1244448))
+(assert (=> d!137595 (= (arrayNoDuplicates!0 a!3892 newFrom!287 Nil!27449) e!706282)))
 
-(assert (= (and b!1244448 res!830113) b!1244449))
+(declare-fun b!1245853 () Bool)
 
-(assert (= (and b!1244448 res!830114) b!1244450))
+(assert (=> b!1245853 (= e!706283 e!706280)))
 
-(assert (= (and b!1244450 c!121854) b!1244447))
+(assert (=> b!1245853 (= c!122276 (validKeyInArray!0 (select (arr!38636 a!3892) newFrom!287)))))
 
-(assert (= (and b!1244450 (not c!121854)) b!1244446))
+(assert (= (and d!137595 (not res!830683)) b!1245855))
 
-(assert (= (or b!1244447 b!1244446) bm!61391))
+(assert (= (and b!1245855 res!830684) b!1245851))
 
-(declare-fun m!1146265 () Bool)
+(assert (= (and b!1245855 res!830685) b!1245853))
 
-(assert (=> bm!61391 m!1146265))
+(assert (= (and b!1245853 c!122276) b!1245852))
 
-(declare-fun m!1146267 () Bool)
+(assert (= (and b!1245853 (not c!122276)) b!1245854))
 
-(assert (=> bm!61391 m!1146267))
+(assert (= (or b!1245852 b!1245854) bm!61479))
 
-(assert (=> b!1244448 m!1146265))
+(declare-fun m!1148427 () Bool)
 
-(assert (=> b!1244448 m!1146265))
+(assert (=> b!1245851 m!1148427))
 
-(declare-fun m!1146269 () Bool)
+(assert (=> b!1245851 m!1148427))
 
-(assert (=> b!1244448 m!1146269))
+(declare-fun m!1148429 () Bool)
 
-(assert (=> b!1244449 m!1146265))
+(assert (=> b!1245851 m!1148429))
 
-(assert (=> b!1244449 m!1146265))
+(assert (=> bm!61479 m!1148427))
 
-(declare-fun m!1146271 () Bool)
+(declare-fun m!1148431 () Bool)
 
-(assert (=> b!1244449 m!1146271))
+(assert (=> bm!61479 m!1148431))
 
-(assert (=> b!1244450 m!1146265))
+(assert (=> b!1245855 m!1148427))
 
-(assert (=> b!1244450 m!1146265))
+(assert (=> b!1245855 m!1148427))
 
-(assert (=> b!1244450 m!1146269))
+(declare-fun m!1148433 () Bool)
 
-(assert (=> b!1244362 d!137007))
+(assert (=> b!1245855 m!1148433))
 
-(declare-fun d!137011 () Bool)
+(assert (=> b!1245853 m!1148427))
 
-(assert (=> d!137011 (= (array_inv!29568 a!3892) (bvsge (size!39123 a!3892) #b00000000000000000000000000000000))))
+(assert (=> b!1245853 m!1148427))
 
-(assert (=> start!103964 d!137011))
+(assert (=> b!1245853 m!1148433))
 
-(declare-fun d!137013 () Bool)
+(assert (=> b!1245770 d!137595))
 
-(assert (=> d!137013 (arrayNoDuplicates!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) Nil!27486)))
+(declare-fun d!137597 () Bool)
 
-(declare-fun lt!562590 () Unit!41223)
+(assert (=> d!137597 (arrayNoDuplicates!0 a!3892 newFrom!287 Nil!27449)))
 
-(declare-fun choose!80 (array!79982 List!27489 List!27489 (_ BitVec 32)) Unit!41223)
+(declare-fun lt!563255 () Unit!41351)
 
-(assert (=> d!137013 (= lt!562590 (choose!80 a!3892 (Cons!27485 (select (arr!38585 a!3892) from!3270) Nil!27486) Nil!27486 (bvadd #b00000000000000000000000000000001 from!3270)))))
+(declare-fun choose!39 (array!80097 (_ BitVec 32) (_ BitVec 32)) Unit!41351)
 
-(assert (=> d!137013 (bvslt (size!39123 a!3892) #b01111111111111111111111111111111)))
+(assert (=> d!137597 (= lt!563255 (choose!39 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) newFrom!287))))
 
-(assert (=> d!137013 (= (lemmaArrayNoDuplicateWithAnAccThenWithSubSeqAcc!0 a!3892 (Cons!27485 (select (arr!38585 a!3892) from!3270) Nil!27486) Nil!27486 (bvadd #b00000000000000000000000000000001 from!3270)) lt!562590)))
+(assert (=> d!137597 (bvslt (size!39173 a!3892) #b01111111111111111111111111111111)))
 
-(declare-fun bs!35012 () Bool)
+(assert (=> d!137597 (= (lemmaNoDuplicateFromThenFromBigger!0 a!3892 (bvadd #b00000000000000000000000000000001 from!3270) newFrom!287) lt!563255)))
 
-(assert (= bs!35012 d!137013))
+(declare-fun bs!35058 () Bool)
 
-(assert (=> bs!35012 m!1146199))
+(assert (= bs!35058 d!137597))
 
-(declare-fun m!1146273 () Bool)
+(assert (=> bs!35058 m!1148359))
 
-(assert (=> bs!35012 m!1146273))
+(declare-fun m!1148443 () Bool)
 
-(assert (=> b!1244360 d!137013))
+(assert (=> bs!35058 m!1148443))
 
-(assert (=> b!1244360 d!137007))
+(assert (=> b!1245770 d!137597))
 
-(check-sat (not b!1244450) (not b!1244433) (not b!1244442) (not b!1244443) (not d!137013) (not bm!61390) (not b!1244434) (not d!136997) (not b!1244441) (not b!1244428) (not b!1244448) (not b!1244426) (not b!1244449) (not bm!61391) (not bm!61389) (not b!1244427))
+(declare-fun b!1245861 () Bool)
+
+(declare-fun e!706289 () Bool)
+
+(assert (=> b!1245861 (= e!706289 (contains!7461 Nil!27449 (select (arr!38636 a!3892) from!3270)))))
+
+(declare-fun b!1245862 () Bool)
+
+(declare-fun e!706288 () Bool)
+
+(declare-fun call!61484 () Bool)
+
+(assert (=> b!1245862 (= e!706288 call!61484)))
+
+(declare-fun bm!61481 () Bool)
+
+(declare-fun c!122278 () Bool)
+
+(assert (=> bm!61481 (= call!61484 (arrayNoDuplicates!0 a!3892 (bvadd from!3270 #b00000000000000000000000000000001) (ite c!122278 (Cons!27448 (select (arr!38636 a!3892) from!3270) Nil!27449) Nil!27449)))))
+
+(declare-fun b!1245864 () Bool)
+
+(assert (=> b!1245864 (= e!706288 call!61484)))
+
+(declare-fun b!1245865 () Bool)
+
+(declare-fun e!706290 () Bool)
+
+(declare-fun e!706291 () Bool)
+
+(assert (=> b!1245865 (= e!706290 e!706291)))
+
+(declare-fun res!830691 () Bool)
+
+(assert (=> b!1245865 (=> (not res!830691) (not e!706291))))
+
+(assert (=> b!1245865 (= res!830691 (not e!706289))))
+
+(declare-fun res!830690 () Bool)
+
+(assert (=> b!1245865 (=> (not res!830690) (not e!706289))))
+
+(assert (=> b!1245865 (= res!830690 (validKeyInArray!0 (select (arr!38636 a!3892) from!3270)))))
+
+(declare-fun d!137601 () Bool)
+
+(declare-fun res!830689 () Bool)
+
+(assert (=> d!137601 (=> res!830689 e!706290)))
+
+(assert (=> d!137601 (= res!830689 (bvsge from!3270 (size!39173 a!3892)))))
+
+(assert (=> d!137601 (= (arrayNoDuplicates!0 a!3892 from!3270 Nil!27449) e!706290)))
+
+(declare-fun b!1245863 () Bool)
+
+(assert (=> b!1245863 (= e!706291 e!706288)))
+
+(assert (=> b!1245863 (= c!122278 (validKeyInArray!0 (select (arr!38636 a!3892) from!3270)))))
+
+(assert (= (and d!137601 (not res!830689)) b!1245865))
+
+(assert (= (and b!1245865 res!830690) b!1245861))
+
+(assert (= (and b!1245865 res!830691) b!1245863))
+
+(assert (= (and b!1245863 c!122278) b!1245862))
+
+(assert (= (and b!1245863 (not c!122278)) b!1245864))
+
+(assert (= (or b!1245862 b!1245864) bm!61481))
+
+(assert (=> b!1245861 m!1148365))
+
+(assert (=> b!1245861 m!1148365))
+
+(declare-fun m!1148445 () Bool)
+
+(assert (=> b!1245861 m!1148445))
+
+(assert (=> bm!61481 m!1148365))
+
+(declare-fun m!1148447 () Bool)
+
+(assert (=> bm!61481 m!1148447))
+
+(assert (=> b!1245865 m!1148365))
+
+(assert (=> b!1245865 m!1148365))
+
+(assert (=> b!1245865 m!1148375))
+
+(assert (=> b!1245863 m!1148365))
+
+(assert (=> b!1245863 m!1148365))
+
+(assert (=> b!1245863 m!1148375))
+
+(assert (=> b!1245769 d!137601))
+
+(assert (=> b!1245764 d!137591))
+
+(declare-fun d!137603 () Bool)
+
+(assert (=> d!137603 (= (validKeyInArray!0 (select (arr!38636 a!3892) from!3270)) (and (not (= (select (arr!38636 a!3892) from!3270) #b0000000000000000000000000000000000000000000000000000000000000000)) (not (= (select (arr!38636 a!3892) from!3270) #b1000000000000000000000000000000000000000000000000000000000000000))))))
+
+(assert (=> b!1245768 d!137603))
+
+(check-sat (not bm!61478) (not b!1245865) (not d!137589) (not b!1245851) (not bm!61479) (not b!1245853) (not b!1245863) (not b!1245861) (not b!1245850) (not b!1245824) (not bm!61481) (not b!1245848) (not b!1245825) (not b!1245855) (not d!137597) (not b!1245846))
 (check-sat)

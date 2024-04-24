@@ -1,67 +1,32 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!136804 () Bool)
+(declare-fun start!137264 () Bool)
 
-(assert start!136804)
+(assert start!137264)
 
-(declare-fun res!1078638 () Bool)
+(declare-fun from!2846 () (_ BitVec 32))
 
-(declare-fun e!880477 () Bool)
-
-(assert (=> start!136804 (=> (not res!1078638) (not e!880477))))
-
-(declare-datatypes ((B!2558 0))(
-  ( (B!2559 (val!19641 Int)) )
+(declare-datatypes ((array!105953 0))(
+  ( (array!105954 (arr!51076 (Array (_ BitVec 32) (_ BitVec 64))) (size!51627 (_ BitVec 32))) )
 ))
-(declare-datatypes ((tuple2!25452 0))(
-  ( (tuple2!25453 (_1!12737 (_ BitVec 64)) (_2!12737 B!2558)) )
-))
-(declare-datatypes ((List!36802 0))(
-  ( (Nil!36799) (Cons!36798 (h!38342 tuple2!25452) (t!51708 List!36802)) )
-))
-(declare-datatypes ((ListLongMap!22791 0))(
-  ( (ListLongMap!22792 (toList!11411 List!36802)) )
-))
-(declare-fun lm!251 () ListLongMap!22791)
+(declare-fun a!3471 () array!105953)
 
-(declare-fun a0!51 () (_ BitVec 64))
+(assert (=> start!137264 (and (bvsge from!2846 #b00000000000000000000000000000000) (bvslt from!2846 (size!51627 a!3471)) (bvslt (size!51627 a!3471) #b01111111111111111111111111111111) (bvslt (bvsub (size!51627 a!3471) from!2846) #b00000000000000000000000000000000))))
 
-(declare-fun contains!10388 (ListLongMap!22791 (_ BitVec 64)) Bool)
+(assert (=> start!137264 true))
 
-(assert (=> start!136804 (= res!1078638 (not (contains!10388 lm!251 a0!51)))))
+(declare-fun array_inv!40031 (array!105953) Bool)
 
-(assert (=> start!136804 e!880477))
+(assert (=> start!137264 (array_inv!40031 a!3471)))
 
-(declare-fun e!880478 () Bool)
+(declare-fun bs!45729 () Bool)
 
-(declare-fun inv!58912 (ListLongMap!22791) Bool)
+(assert (= bs!45729 start!137264))
 
-(assert (=> start!136804 (and (inv!58912 lm!251) e!880478)))
+(declare-fun m!1453167 () Bool)
 
-(assert (=> start!136804 true))
+(assert (=> bs!45729 m!1453167))
 
-(declare-fun b!1578517 () Bool)
-
-(assert (=> b!1578517 (= e!880477 false)))
-
-(declare-fun b!1578518 () Bool)
-
-(declare-fun tp!114253 () Bool)
-
-(assert (=> b!1578518 (= e!880478 tp!114253)))
-
-(assert (= (and start!136804 res!1078638) b!1578517))
-
-(assert (= start!136804 b!1578518))
-
-(declare-fun m!1449993 () Bool)
-
-(assert (=> start!136804 m!1449993))
-
-(declare-fun m!1449995 () Bool)
-
-(assert (=> start!136804 m!1449995))
-
-(check-sat (not start!136804) (not b!1578518))
+(check-sat (not start!137264))
 (check-sat)

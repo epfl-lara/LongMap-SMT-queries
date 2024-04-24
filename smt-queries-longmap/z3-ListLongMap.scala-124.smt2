@@ -5,11 +5,11 @@
 
 (assert start!2130)
 
-(declare-fun res!11122 () Bool)
+(declare-fun res!11119 () Bool)
 
-(declare-fun e!8588 () Bool)
+(declare-fun e!8583 () Bool)
 
-(assert (=> start!2130 (=> (not res!11122) (not e!8588))))
+(assert (=> start!2130 (=> (not res!11119) (not e!8583))))
 
 (declare-datatypes ((B!542 0))(
   ( (B!543 (val!369 Int)) )
@@ -22,49 +22,49 @@
 ))
 (declare-fun l!522 () List!420)
 
-(declare-fun isStrictlySorted!108 (List!420) Bool)
+(declare-fun isStrictlySorted!105 (List!420) Bool)
 
-(assert (=> start!2130 (= res!11122 (isStrictlySorted!108 l!522))))
+(assert (=> start!2130 (= res!11119 (isStrictlySorted!105 l!522))))
 
-(assert (=> start!2130 e!8588))
+(assert (=> start!2130 e!8583))
 
-(declare-fun e!8587 () Bool)
+(declare-fun e!8584 () Bool)
 
-(assert (=> start!2130 e!8587))
+(assert (=> start!2130 e!8584))
 
 (declare-fun tp_is_empty!721 () Bool)
 
 (assert (=> start!2130 tp_is_empty!721))
 
-(declare-fun b!14349 () Bool)
+(declare-fun b!14343 () Bool)
 
-(declare-fun res!11121 () Bool)
+(declare-fun res!11120 () Bool)
 
-(assert (=> b!14349 (=> (not res!11121) (not e!8588))))
+(assert (=> b!14343 (=> (not res!11120) (not e!8583))))
 
 (declare-fun value!159 () B!542)
 
 (get-info :version)
 
-(assert (=> b!14349 (= res!11121 (and (not (= (_2!267 (h!982 l!522)) value!159)) ((_ is Cons!416) l!522)))))
+(assert (=> b!14343 (= res!11120 (and (not (= (_2!267 (h!982 l!522)) value!159)) ((_ is Cons!416) l!522)))))
 
-(declare-fun b!14350 () Bool)
+(declare-fun b!14344 () Bool)
 
 (declare-fun ListPrimitiveSize!25 (List!420) Int)
 
-(assert (=> b!14350 (= e!8588 (>= (ListPrimitiveSize!25 (t!2819 l!522)) (ListPrimitiveSize!25 l!522)))))
+(assert (=> b!14344 (= e!8583 (>= (ListPrimitiveSize!25 (t!2819 l!522)) (ListPrimitiveSize!25 l!522)))))
 
-(declare-fun b!14351 () Bool)
+(declare-fun b!14345 () Bool)
 
 (declare-fun tp!2324 () Bool)
 
-(assert (=> b!14351 (= e!8587 (and tp_is_empty!721 tp!2324))))
+(assert (=> b!14345 (= e!8584 (and tp_is_empty!721 tp!2324))))
 
-(assert (= (and start!2130 res!11122) b!14349))
+(assert (= (and start!2130 res!11119) b!14343))
 
-(assert (= (and b!14349 res!11121) b!14350))
+(assert (= (and b!14343 res!11120) b!14344))
 
-(assert (= (and start!2130 ((_ is Cons!416) l!522)) b!14351))
+(assert (= (and start!2130 ((_ is Cons!416) l!522)) b!14345))
 
 (declare-fun m!9603 () Bool)
 
@@ -72,131 +72,131 @@
 
 (declare-fun m!9605 () Bool)
 
-(assert (=> b!14350 m!9605))
+(assert (=> b!14344 m!9605))
 
 (declare-fun m!9607 () Bool)
 
-(assert (=> b!14350 m!9607))
+(assert (=> b!14344 m!9607))
 
-(check-sat (not b!14350) (not start!2130) (not b!14351) tp_is_empty!721)
+(check-sat (not b!14344) (not start!2130) (not b!14345) tp_is_empty!721)
 (check-sat)
 (get-model)
 
-(declare-fun d!2241 () Bool)
+(declare-fun d!2239 () Bool)
 
-(declare-fun lt!3597 () Int)
+(declare-fun lt!3601 () Int)
 
-(assert (=> d!2241 (>= lt!3597 0)))
+(assert (=> d!2239 (>= lt!3601 0)))
 
 (declare-fun e!8603 () Int)
 
-(assert (=> d!2241 (= lt!3597 e!8603)))
+(assert (=> d!2239 (= lt!3601 e!8603)))
 
-(declare-fun c!1337 () Bool)
+(declare-fun c!1339 () Bool)
 
-(assert (=> d!2241 (= c!1337 ((_ is Nil!417) (t!2819 l!522)))))
+(assert (=> d!2239 (= c!1339 ((_ is Nil!417) (t!2819 l!522)))))
 
-(assert (=> d!2241 (= (ListPrimitiveSize!25 (t!2819 l!522)) lt!3597)))
-
-(declare-fun b!14374 () Bool)
-
-(assert (=> b!14374 (= e!8603 0)))
-
-(declare-fun b!14375 () Bool)
-
-(assert (=> b!14375 (= e!8603 (+ 1 (ListPrimitiveSize!25 (t!2819 (t!2819 l!522)))))))
-
-(assert (= (and d!2241 c!1337) b!14374))
-
-(assert (= (and d!2241 (not c!1337)) b!14375))
-
-(declare-fun m!9621 () Bool)
-
-(assert (=> b!14375 m!9621))
-
-(assert (=> b!14350 d!2241))
-
-(declare-fun d!2245 () Bool)
-
-(declare-fun lt!3598 () Int)
-
-(assert (=> d!2245 (>= lt!3598 0)))
-
-(declare-fun e!8604 () Int)
-
-(assert (=> d!2245 (= lt!3598 e!8604)))
-
-(declare-fun c!1338 () Bool)
-
-(assert (=> d!2245 (= c!1338 ((_ is Nil!417) l!522))))
-
-(assert (=> d!2245 (= (ListPrimitiveSize!25 l!522) lt!3598)))
+(assert (=> d!2239 (= (ListPrimitiveSize!25 (t!2819 l!522)) lt!3601)))
 
 (declare-fun b!14376 () Bool)
 
-(assert (=> b!14376 (= e!8604 0)))
+(assert (=> b!14376 (= e!8603 0)))
 
 (declare-fun b!14377 () Bool)
 
-(assert (=> b!14377 (= e!8604 (+ 1 (ListPrimitiveSize!25 (t!2819 l!522))))))
+(assert (=> b!14377 (= e!8603 (+ 1 (ListPrimitiveSize!25 (t!2819 (t!2819 l!522)))))))
 
-(assert (= (and d!2245 c!1338) b!14376))
+(assert (= (and d!2239 c!1339) b!14376))
 
-(assert (= (and d!2245 (not c!1338)) b!14377))
-
-(assert (=> b!14377 m!9605))
-
-(assert (=> b!14350 d!2245))
-
-(declare-fun d!2249 () Bool)
-
-(declare-fun res!11139 () Bool)
-
-(declare-fun e!8613 () Bool)
-
-(assert (=> d!2249 (=> res!11139 e!8613)))
-
-(assert (=> d!2249 (= res!11139 (or ((_ is Nil!417) l!522) ((_ is Nil!417) (t!2819 l!522))))))
-
-(assert (=> d!2249 (= (isStrictlySorted!108 l!522) e!8613)))
-
-(declare-fun b!14390 () Bool)
-
-(declare-fun e!8614 () Bool)
-
-(assert (=> b!14390 (= e!8613 e!8614)))
-
-(declare-fun res!11140 () Bool)
-
-(assert (=> b!14390 (=> (not res!11140) (not e!8614))))
-
-(assert (=> b!14390 (= res!11140 (bvslt (_1!267 (h!982 l!522)) (_1!267 (h!982 (t!2819 l!522)))))))
-
-(declare-fun b!14391 () Bool)
-
-(assert (=> b!14391 (= e!8614 (isStrictlySorted!108 (t!2819 l!522)))))
-
-(assert (= (and d!2249 (not res!11139)) b!14390))
-
-(assert (= (and b!14390 res!11140) b!14391))
+(assert (= (and d!2239 (not c!1339)) b!14377))
 
 (declare-fun m!9623 () Bool)
 
-(assert (=> b!14391 m!9623))
+(assert (=> b!14377 m!9623))
 
-(assert (=> start!2130 d!2249))
+(assert (=> b!14344 d!2239))
 
-(declare-fun b!14404 () Bool)
+(declare-fun d!2245 () Bool)
 
-(declare-fun e!8621 () Bool)
+(declare-fun lt!3602 () Int)
 
-(declare-fun tp!2333 () Bool)
+(assert (=> d!2245 (>= lt!3602 0)))
 
-(assert (=> b!14404 (= e!8621 (and tp_is_empty!721 tp!2333))))
+(declare-fun e!8606 () Int)
 
-(assert (=> b!14351 (= tp!2324 e!8621)))
+(assert (=> d!2245 (= lt!3602 e!8606)))
 
-(assert (= (and b!14351 ((_ is Cons!416) (t!2819 l!522))) b!14404))
+(declare-fun c!1340 () Bool)
 
-(check-sat (not b!14377) tp_is_empty!721 (not b!14391) (not b!14375) (not b!14404))
+(assert (=> d!2245 (= c!1340 ((_ is Nil!417) l!522))))
+
+(assert (=> d!2245 (= (ListPrimitiveSize!25 l!522) lt!3602)))
+
+(declare-fun b!14378 () Bool)
+
+(assert (=> b!14378 (= e!8606 0)))
+
+(declare-fun b!14379 () Bool)
+
+(assert (=> b!14379 (= e!8606 (+ 1 (ListPrimitiveSize!25 (t!2819 l!522))))))
+
+(assert (= (and d!2245 c!1340) b!14378))
+
+(assert (= (and d!2245 (not c!1340)) b!14379))
+
+(assert (=> b!14379 m!9605))
+
+(assert (=> b!14344 d!2245))
+
+(declare-fun d!2247 () Bool)
+
+(declare-fun res!11143 () Bool)
+
+(declare-fun e!8619 () Bool)
+
+(assert (=> d!2247 (=> res!11143 e!8619)))
+
+(assert (=> d!2247 (= res!11143 (or ((_ is Nil!417) l!522) ((_ is Nil!417) (t!2819 l!522))))))
+
+(assert (=> d!2247 (= (isStrictlySorted!105 l!522) e!8619)))
+
+(declare-fun b!14398 () Bool)
+
+(declare-fun e!8620 () Bool)
+
+(assert (=> b!14398 (= e!8619 e!8620)))
+
+(declare-fun res!11144 () Bool)
+
+(assert (=> b!14398 (=> (not res!11144) (not e!8620))))
+
+(assert (=> b!14398 (= res!11144 (bvslt (_1!267 (h!982 l!522)) (_1!267 (h!982 (t!2819 l!522)))))))
+
+(declare-fun b!14399 () Bool)
+
+(assert (=> b!14399 (= e!8620 (isStrictlySorted!105 (t!2819 l!522)))))
+
+(assert (= (and d!2247 (not res!11143)) b!14398))
+
+(assert (= (and b!14398 res!11144) b!14399))
+
+(declare-fun m!9627 () Bool)
+
+(assert (=> b!14399 m!9627))
+
+(assert (=> start!2130 d!2247))
+
+(declare-fun b!14407 () Bool)
+
+(declare-fun e!8625 () Bool)
+
+(declare-fun tp!2336 () Bool)
+
+(assert (=> b!14407 (= e!8625 (and tp_is_empty!721 tp!2336))))
+
+(assert (=> b!14345 (= tp!2324 e!8625)))
+
+(assert (= (and b!14345 ((_ is Cons!416) (t!2819 l!522))) b!14407))
+
+(check-sat (not b!14399) (not b!14407) (not b!14379) tp_is_empty!721 (not b!14377))
 (check-sat)

@@ -1,252 +1,252 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!86058 () Bool)
+(declare-fun start!86242 () Bool)
 
-(assert start!86058)
+(assert start!86242)
 
-(declare-fun b!996777 () Bool)
+(declare-fun b!997926 () Bool)
 
-(declare-fun res!667021 () Bool)
+(declare-fun res!667475 () Bool)
 
-(declare-fun e!562249 () Bool)
+(declare-fun e!562983 () Bool)
 
-(assert (=> b!996777 (=> (not res!667021) (not e!562249))))
+(assert (=> b!997926 (=> (not res!667475) (not e!562983))))
 
-(declare-datatypes ((array!63010 0))(
-  ( (array!63011 (arr!30336 (Array (_ BitVec 32) (_ BitVec 64))) (size!30840 (_ BitVec 32))) )
+(declare-datatypes ((array!63117 0))(
+  ( (array!63118 (arr!30385 (Array (_ BitVec 32) (_ BitVec 64))) (size!30888 (_ BitVec 32))) )
 ))
-(declare-fun a!3219 () array!63010)
+(declare-fun a!3219 () array!63117)
+
+(declare-fun mask!3464 () (_ BitVec 32))
+
+(declare-fun arrayForallSeekEntryOrOpenFound!0 ((_ BitVec 32) array!63117 (_ BitVec 32)) Bool)
+
+(assert (=> b!997926 (= res!667475 (arrayForallSeekEntryOrOpenFound!0 #b00000000000000000000000000000000 a!3219 mask!3464))))
+
+(declare-fun b!997927 () Bool)
+
+(declare-fun res!667482 () Bool)
+
+(declare-fun e!562986 () Bool)
+
+(assert (=> b!997927 (=> (not res!667482) (not e!562986))))
+
+(declare-fun j!170 () (_ BitVec 32))
+
+(declare-fun validKeyInArray!0 ((_ BitVec 64)) Bool)
+
+(assert (=> b!997927 (= res!667482 (validKeyInArray!0 (select (arr!30385 a!3219) j!170)))))
+
+(declare-fun b!997928 () Bool)
+
+(declare-fun res!667474 () Bool)
+
+(declare-fun e!562985 () Bool)
+
+(assert (=> b!997928 (=> (not res!667474) (not e!562985))))
+
+(declare-fun index!1507 () (_ BitVec 32))
+
+(declare-datatypes ((SeekEntryResult!9253 0))(
+  ( (MissingZero!9253 (index!39383 (_ BitVec 32))) (Found!9253 (index!39384 (_ BitVec 32))) (Intermediate!9253 (undefined!10065 Bool) (index!39385 (_ BitVec 32)) (x!86967 (_ BitVec 32))) (Undefined!9253) (MissingVacant!9253 (index!39386 (_ BitVec 32))) )
+))
+(declare-fun lt!441691 () SeekEntryResult!9253)
 
 (declare-fun x!1245 () (_ BitVec 32))
 
-(declare-fun index!1507 () (_ BitVec 32))
+(declare-fun seekKeyOrZeroOrLongMinValue!0 ((_ BitVec 32) (_ BitVec 32) (_ BitVec 64) array!63117 (_ BitVec 32)) SeekEntryResult!9253)
+
+(assert (=> b!997928 (= res!667474 (= (seekKeyOrZeroOrLongMinValue!0 x!1245 index!1507 (select (arr!30385 a!3219) j!170) a!3219 mask!3464) lt!441691))))
+
+(declare-fun b!997929 () Bool)
+
+(assert (=> b!997929 (= e!562983 e!562985)))
+
+(declare-fun res!667483 () Bool)
+
+(assert (=> b!997929 (=> (not res!667483) (not e!562985))))
+
+(declare-fun toIndex!0 ((_ BitVec 64) (_ BitVec 32)) (_ BitVec 32))
+
+(assert (=> b!997929 (= res!667483 (= (seekKeyOrZeroOrLongMinValue!0 #b00000000000000000000000000000000 (toIndex!0 (select (arr!30385 a!3219) j!170) mask!3464) (select (arr!30385 a!3219) j!170) a!3219 mask!3464) lt!441691))))
 
 (declare-fun resIndex!38 () (_ BitVec 32))
 
 (declare-fun resX!38 () (_ BitVec 32))
 
-(assert (=> b!996777 (= res!667021 (and (bvsle x!1245 resX!38) (bvsge x!1245 #b00000000000000000000000000000000) (bvsle resX!38 #b01111111111111111111111111111110) (bvsge index!1507 #b00000000000000000000000000000000) (bvslt index!1507 (size!30840 a!3219)) (bvsge resIndex!38 #b00000000000000000000000000000000) (bvslt resIndex!38 (size!30840 a!3219))))))
+(assert (=> b!997929 (= lt!441691 (Intermediate!9253 false resIndex!38 resX!38))))
 
-(declare-fun b!996778 () Bool)
+(declare-fun b!997930 () Bool)
 
-(declare-fun res!667022 () Bool)
+(declare-fun res!667477 () Bool)
 
-(assert (=> b!996778 (=> (not res!667022) (not e!562249))))
-
-(declare-datatypes ((List!21078 0))(
-  ( (Nil!21075) (Cons!21074 (h!22239 (_ BitVec 64)) (t!30070 List!21078)) )
-))
-(declare-fun arrayNoDuplicates!0 (array!63010 (_ BitVec 32) List!21078) Bool)
-
-(assert (=> b!996778 (= res!667022 (arrayNoDuplicates!0 a!3219 #b00000000000000000000000000000000 Nil!21075))))
-
-(declare-fun b!996779 () Bool)
-
-(declare-fun e!562250 () Bool)
-
-(assert (=> b!996779 (= e!562250 e!562249)))
-
-(declare-fun res!667020 () Bool)
-
-(assert (=> b!996779 (=> (not res!667020) (not e!562249))))
-
-(declare-datatypes ((SeekEntryResult!9293 0))(
-  ( (MissingZero!9293 (index!39543 (_ BitVec 32))) (Found!9293 (index!39544 (_ BitVec 32))) (Intermediate!9293 (undefined!10105 Bool) (index!39545 (_ BitVec 32)) (x!86988 (_ BitVec 32))) (Undefined!9293) (MissingVacant!9293 (index!39546 (_ BitVec 32))) )
-))
-(declare-fun lt!441093 () SeekEntryResult!9293)
-
-(declare-fun i!1194 () (_ BitVec 32))
-
-(assert (=> b!996779 (= res!667020 (or (= lt!441093 (MissingVacant!9293 i!1194)) (= lt!441093 (MissingZero!9293 i!1194))))))
-
-(declare-fun mask!3464 () (_ BitVec 32))
+(assert (=> b!997930 (=> (not res!667477) (not e!562986))))
 
 (declare-fun k0!2224 () (_ BitVec 64))
 
-(declare-fun seekEntryOrOpen!0 ((_ BitVec 64) array!63010 (_ BitVec 32)) SeekEntryResult!9293)
+(assert (=> b!997930 (= res!667477 (validKeyInArray!0 k0!2224))))
 
-(assert (=> b!996779 (= lt!441093 (seekEntryOrOpen!0 k0!2224 a!3219 mask!3464))))
+(declare-fun res!667480 () Bool)
 
-(declare-fun b!996780 () Bool)
-
-(declare-fun e!562248 () Bool)
-
-(assert (=> b!996780 (= e!562248 (bvslt mask!3464 #b00000000000000000000000000000000))))
-
-(declare-fun b!996781 () Bool)
-
-(declare-fun res!667023 () Bool)
-
-(assert (=> b!996781 (=> (not res!667023) (not e!562250))))
-
-(declare-fun validKeyInArray!0 ((_ BitVec 64)) Bool)
-
-(assert (=> b!996781 (= res!667023 (validKeyInArray!0 k0!2224))))
-
-(declare-fun res!667017 () Bool)
-
-(assert (=> start!86058 (=> (not res!667017) (not e!562250))))
+(assert (=> start!86242 (=> (not res!667480) (not e!562986))))
 
 (declare-fun validMask!0 ((_ BitVec 32)) Bool)
 
-(assert (=> start!86058 (= res!667017 (validMask!0 mask!3464))))
+(assert (=> start!86242 (= res!667480 (validMask!0 mask!3464))))
 
-(assert (=> start!86058 e!562250))
+(assert (=> start!86242 e!562986))
 
-(declare-fun array_inv!23479 (array!63010) Bool)
+(declare-fun array_inv!23521 (array!63117) Bool)
 
-(assert (=> start!86058 (array_inv!23479 a!3219)))
+(assert (=> start!86242 (array_inv!23521 a!3219)))
 
-(assert (=> start!86058 true))
+(assert (=> start!86242 true))
 
-(declare-fun b!996782 () Bool)
+(declare-fun b!997931 () Bool)
 
-(declare-fun res!667025 () Bool)
+(declare-fun res!667479 () Bool)
 
-(assert (=> b!996782 (=> (not res!667025) (not e!562250))))
+(assert (=> b!997931 (=> (not res!667479) (not e!562986))))
 
-(declare-fun arrayContainsKey!0 (array!63010 (_ BitVec 64) (_ BitVec 32)) Bool)
+(declare-fun arrayContainsKey!0 (array!63117 (_ BitVec 64) (_ BitVec 32)) Bool)
 
-(assert (=> b!996782 (= res!667025 (not (arrayContainsKey!0 a!3219 k0!2224 #b00000000000000000000000000000000)))))
+(assert (=> b!997931 (= res!667479 (not (arrayContainsKey!0 a!3219 k0!2224 #b00000000000000000000000000000000)))))
 
-(declare-fun b!996783 () Bool)
+(declare-fun b!997932 () Bool)
 
-(declare-fun res!667016 () Bool)
+(declare-fun res!667484 () Bool)
 
-(assert (=> b!996783 (=> (not res!667016) (not e!562248))))
+(assert (=> b!997932 (=> (not res!667484) (not e!562986))))
 
-(declare-fun j!170 () (_ BitVec 32))
+(declare-fun i!1194 () (_ BitVec 32))
 
-(declare-fun lt!441094 () SeekEntryResult!9293)
+(assert (=> b!997932 (= res!667484 (and (= (size!30888 a!3219) (bvadd #b00000000000000000000000000000001 mask!3464)) (bvsge i!1194 #b00000000000000000000000000000000) (bvslt i!1194 (size!30888 a!3219)) (bvsge j!170 #b00000000000000000000000000000000) (bvslt j!170 (size!30888 a!3219)) (not (= i!1194 j!170))))))
 
-(declare-fun seekKeyOrZeroOrLongMinValue!0 ((_ BitVec 32) (_ BitVec 32) (_ BitVec 64) array!63010 (_ BitVec 32)) SeekEntryResult!9293)
+(declare-fun b!997933 () Bool)
 
-(assert (=> b!996783 (= res!667016 (= (seekKeyOrZeroOrLongMinValue!0 x!1245 index!1507 (select (arr!30336 a!3219) j!170) a!3219 mask!3464) lt!441094))))
+(assert (=> b!997933 (= e!562986 e!562983)))
 
-(declare-fun b!996784 () Bool)
+(declare-fun res!667478 () Bool)
 
-(declare-fun res!667018 () Bool)
+(assert (=> b!997933 (=> (not res!667478) (not e!562983))))
 
-(assert (=> b!996784 (=> (not res!667018) (not e!562249))))
+(declare-fun lt!441692 () SeekEntryResult!9253)
 
-(declare-fun arrayForallSeekEntryOrOpenFound!0 ((_ BitVec 32) array!63010 (_ BitVec 32)) Bool)
+(assert (=> b!997933 (= res!667478 (or (= lt!441692 (MissingVacant!9253 i!1194)) (= lt!441692 (MissingZero!9253 i!1194))))))
 
-(assert (=> b!996784 (= res!667018 (arrayForallSeekEntryOrOpenFound!0 #b00000000000000000000000000000000 a!3219 mask!3464))))
+(declare-fun seekEntryOrOpen!0 ((_ BitVec 64) array!63117 (_ BitVec 32)) SeekEntryResult!9253)
 
-(declare-fun b!996785 () Bool)
+(assert (=> b!997933 (= lt!441692 (seekEntryOrOpen!0 k0!2224 a!3219 mask!3464))))
 
-(assert (=> b!996785 (= e!562249 e!562248)))
+(declare-fun b!997934 () Bool)
 
-(declare-fun res!667024 () Bool)
+(declare-fun res!667476 () Bool)
 
-(assert (=> b!996785 (=> (not res!667024) (not e!562248))))
+(assert (=> b!997934 (=> (not res!667476) (not e!562983))))
 
-(declare-fun toIndex!0 ((_ BitVec 64) (_ BitVec 32)) (_ BitVec 32))
+(declare-datatypes ((List!21032 0))(
+  ( (Nil!21029) (Cons!21028 (h!22199 (_ BitVec 64)) (t!30025 List!21032)) )
+))
+(declare-fun arrayNoDuplicates!0 (array!63117 (_ BitVec 32) List!21032) Bool)
 
-(assert (=> b!996785 (= res!667024 (= (seekKeyOrZeroOrLongMinValue!0 #b00000000000000000000000000000000 (toIndex!0 (select (arr!30336 a!3219) j!170) mask!3464) (select (arr!30336 a!3219) j!170) a!3219 mask!3464) lt!441094))))
+(assert (=> b!997934 (= res!667476 (arrayNoDuplicates!0 a!3219 #b00000000000000000000000000000000 Nil!21029))))
 
-(assert (=> b!996785 (= lt!441094 (Intermediate!9293 false resIndex!38 resX!38))))
+(declare-fun b!997935 () Bool)
 
-(declare-fun b!996786 () Bool)
+(declare-fun res!667481 () Bool)
 
-(declare-fun res!667015 () Bool)
+(assert (=> b!997935 (=> (not res!667481) (not e!562983))))
 
-(assert (=> b!996786 (=> (not res!667015) (not e!562250))))
+(assert (=> b!997935 (= res!667481 (and (bvsle x!1245 resX!38) (bvsge x!1245 #b00000000000000000000000000000000) (bvsle resX!38 #b01111111111111111111111111111110) (bvsge index!1507 #b00000000000000000000000000000000) (bvslt index!1507 (size!30888 a!3219)) (bvsge resIndex!38 #b00000000000000000000000000000000) (bvslt resIndex!38 (size!30888 a!3219))))))
 
-(assert (=> b!996786 (= res!667015 (validKeyInArray!0 (select (arr!30336 a!3219) j!170)))))
+(declare-fun b!997936 () Bool)
 
-(declare-fun b!996787 () Bool)
+(assert (=> b!997936 (= e!562985 (bvslt mask!3464 #b00000000000000000000000000000000))))
 
-(declare-fun res!667019 () Bool)
+(assert (= (and start!86242 res!667480) b!997932))
 
-(assert (=> b!996787 (=> (not res!667019) (not e!562250))))
+(assert (= (and b!997932 res!667484) b!997927))
 
-(assert (=> b!996787 (= res!667019 (and (= (size!30840 a!3219) (bvadd #b00000000000000000000000000000001 mask!3464)) (bvsge i!1194 #b00000000000000000000000000000000) (bvslt i!1194 (size!30840 a!3219)) (bvsge j!170 #b00000000000000000000000000000000) (bvslt j!170 (size!30840 a!3219)) (not (= i!1194 j!170))))))
+(assert (= (and b!997927 res!667482) b!997930))
 
-(assert (= (and start!86058 res!667017) b!996787))
+(assert (= (and b!997930 res!667477) b!997931))
 
-(assert (= (and b!996787 res!667019) b!996786))
+(assert (= (and b!997931 res!667479) b!997933))
 
-(assert (= (and b!996786 res!667015) b!996781))
+(assert (= (and b!997933 res!667478) b!997926))
 
-(assert (= (and b!996781 res!667023) b!996782))
+(assert (= (and b!997926 res!667475) b!997934))
 
-(assert (= (and b!996782 res!667025) b!996779))
+(assert (= (and b!997934 res!667476) b!997935))
 
-(assert (= (and b!996779 res!667020) b!996784))
+(assert (= (and b!997935 res!667481) b!997929))
 
-(assert (= (and b!996784 res!667018) b!996778))
+(assert (= (and b!997929 res!667483) b!997928))
 
-(assert (= (and b!996778 res!667022) b!996777))
+(assert (= (and b!997928 res!667474) b!997936))
 
-(assert (= (and b!996777 res!667021) b!996785))
+(declare-fun m!925319 () Bool)
 
-(assert (= (and b!996785 res!667024) b!996783))
+(assert (=> b!997934 m!925319))
 
-(assert (= (and b!996783 res!667016) b!996780))
+(declare-fun m!925321 () Bool)
 
-(declare-fun m!923251 () Bool)
+(assert (=> b!997926 m!925321))
 
-(assert (=> start!86058 m!923251))
+(declare-fun m!925323 () Bool)
 
-(declare-fun m!923253 () Bool)
+(assert (=> b!997933 m!925323))
 
-(assert (=> start!86058 m!923253))
+(declare-fun m!925325 () Bool)
 
-(declare-fun m!923255 () Bool)
+(assert (=> b!997931 m!925325))
 
-(assert (=> b!996779 m!923255))
+(declare-fun m!925327 () Bool)
 
-(declare-fun m!923257 () Bool)
+(assert (=> start!86242 m!925327))
 
-(assert (=> b!996782 m!923257))
+(declare-fun m!925329 () Bool)
 
-(declare-fun m!923259 () Bool)
+(assert (=> start!86242 m!925329))
 
-(assert (=> b!996781 m!923259))
+(declare-fun m!925331 () Bool)
 
-(declare-fun m!923261 () Bool)
+(assert (=> b!997929 m!925331))
 
-(assert (=> b!996784 m!923261))
+(assert (=> b!997929 m!925331))
 
-(declare-fun m!923263 () Bool)
+(declare-fun m!925333 () Bool)
 
-(assert (=> b!996785 m!923263))
+(assert (=> b!997929 m!925333))
 
-(assert (=> b!996785 m!923263))
+(assert (=> b!997929 m!925333))
 
-(declare-fun m!923265 () Bool)
+(assert (=> b!997929 m!925331))
 
-(assert (=> b!996785 m!923265))
+(declare-fun m!925335 () Bool)
 
-(assert (=> b!996785 m!923265))
+(assert (=> b!997929 m!925335))
 
-(assert (=> b!996785 m!923263))
+(assert (=> b!997928 m!925331))
 
-(declare-fun m!923267 () Bool)
+(assert (=> b!997928 m!925331))
 
-(assert (=> b!996785 m!923267))
+(declare-fun m!925337 () Bool)
 
-(assert (=> b!996783 m!923263))
+(assert (=> b!997928 m!925337))
 
-(assert (=> b!996783 m!923263))
+(assert (=> b!997927 m!925331))
 
-(declare-fun m!923269 () Bool)
+(assert (=> b!997927 m!925331))
 
-(assert (=> b!996783 m!923269))
+(declare-fun m!925339 () Bool)
 
-(assert (=> b!996786 m!923263))
+(assert (=> b!997927 m!925339))
 
-(assert (=> b!996786 m!923263))
+(declare-fun m!925341 () Bool)
 
-(declare-fun m!923271 () Bool)
+(assert (=> b!997930 m!925341))
 
-(assert (=> b!996786 m!923271))
-
-(declare-fun m!923273 () Bool)
-
-(assert (=> b!996778 m!923273))
-
-(check-sat (not b!996783) (not b!996779) (not start!86058) (not b!996784) (not b!996781) (not b!996785) (not b!996786) (not b!996782) (not b!996778))
+(check-sat (not b!997934) (not b!997933) (not b!997931) (not start!86242) (not b!997929) (not b!997927) (not b!997928) (not b!997926) (not b!997930))
 (check-sat)

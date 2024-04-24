@@ -1,135 +1,135 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!5228 () Bool)
+(declare-fun start!5234 () Bool)
 
-(assert start!5228)
+(assert start!5234)
 
-(declare-fun res!22926 () Bool)
+(declare-fun res!22918 () Bool)
 
-(declare-fun e!24117 () Bool)
+(declare-fun e!24107 () Bool)
 
-(assert (=> start!5228 (=> (not res!22926) (not e!24117))))
+(assert (=> start!5234 (=> (not res!22918) (not e!24107))))
 
 (declare-datatypes ((B!788 0))(
   ( (B!789 (val!894 Int)) )
 ))
 (declare-fun b!99 () B!788)
 
-(declare-datatypes ((tuple2!1452 0))(
-  ( (tuple2!1453 (_1!737 (_ BitVec 64)) (_2!737 B!788)) )
+(declare-datatypes ((tuple2!1430 0))(
+  ( (tuple2!1431 (_1!726 (_ BitVec 64)) (_2!726 B!788)) )
 ))
-(declare-datatypes ((List!997 0))(
-  ( (Nil!994) (Cons!993 (h!1561 tuple2!1452) (t!3829 List!997)) )
+(declare-datatypes ((List!990 0))(
+  ( (Nil!987) (Cons!986 (h!1554 tuple2!1430) (t!3823 List!990)) )
 ))
-(declare-datatypes ((ListLongMap!1017 0))(
-  ( (ListLongMap!1018 (toList!524 List!997)) )
+(declare-datatypes ((ListLongMap!1001 0))(
+  ( (ListLongMap!1002 (toList!516 List!990)) )
 ))
-(declare-fun lm!264 () ListLongMap!1017)
+(declare-fun lm!264 () ListLongMap!1001)
 
 (declare-fun a!526 () (_ BitVec 64))
 
-(declare-fun contains!476 (List!997 tuple2!1452) Bool)
+(declare-fun contains!469 (List!990 tuple2!1430) Bool)
 
-(assert (=> start!5228 (= res!22926 (contains!476 (toList!524 lm!264) (tuple2!1453 a!526 b!99)))))
+(assert (=> start!5234 (= res!22918 (contains!469 (toList!516 lm!264) (tuple2!1431 a!526 b!99)))))
 
-(assert (=> start!5228 e!24117))
+(assert (=> start!5234 e!24107))
 
-(declare-fun e!24115 () Bool)
+(declare-fun e!24108 () Bool)
 
-(declare-fun inv!1699 (ListLongMap!1017) Bool)
+(declare-fun inv!1699 (ListLongMap!1001) Bool)
 
-(assert (=> start!5228 (and (inv!1699 lm!264) e!24115)))
+(assert (=> start!5234 (and (inv!1699 lm!264) e!24108)))
 
-(assert (=> start!5228 true))
+(assert (=> start!5234 true))
 
 (declare-fun tp_is_empty!1711 () Bool)
 
-(assert (=> start!5228 tp_is_empty!1711))
+(assert (=> start!5234 tp_is_empty!1711))
 
-(declare-fun b!37958 () Bool)
+(declare-fun b!37940 () Bool)
 
-(declare-fun e!24116 () Bool)
+(declare-fun e!24106 () Bool)
 
-(assert (=> b!37958 (= e!24117 (not e!24116))))
+(assert (=> b!37940 (= e!24107 (not e!24106))))
 
-(declare-fun res!22927 () Bool)
+(declare-fun res!22919 () Bool)
 
-(assert (=> b!37958 (=> res!22927 e!24116)))
+(assert (=> b!37940 (=> res!22919 e!24106)))
 
-(declare-fun isStrictlySorted!194 (List!997) Bool)
+(declare-fun isStrictlySorted!187 (List!990) Bool)
 
-(assert (=> b!37958 (= res!22927 (not (isStrictlySorted!194 (toList!524 lm!264))))))
+(assert (=> b!37940 (= res!22919 (not (isStrictlySorted!187 (toList!516 lm!264))))))
 
-(declare-fun containsKey!62 (List!997 (_ BitVec 64)) Bool)
+(declare-fun containsKey!63 (List!990 (_ BitVec 64)) Bool)
 
-(assert (=> b!37958 (containsKey!62 (toList!524 lm!264) a!526)))
+(assert (=> b!37940 (containsKey!63 (toList!516 lm!264) a!526)))
 
-(declare-datatypes ((Unit!884 0))(
-  ( (Unit!885) )
+(declare-datatypes ((Unit!887 0))(
+  ( (Unit!888) )
 ))
-(declare-fun lt!13964 () Unit!884)
+(declare-fun lt!13924 () Unit!887)
 
-(declare-fun lemmaContainsTupleThenContainsKey!7 (List!997 (_ BitVec 64) B!788) Unit!884)
+(declare-fun lemmaContainsTupleThenContainsKey!7 (List!990 (_ BitVec 64) B!788) Unit!887)
 
-(assert (=> b!37958 (= lt!13964 (lemmaContainsTupleThenContainsKey!7 (toList!524 lm!264) a!526 b!99))))
+(assert (=> b!37940 (= lt!13924 (lemmaContainsTupleThenContainsKey!7 (toList!516 lm!264) a!526 b!99))))
 
-(declare-fun b!37959 () Bool)
+(declare-fun b!37941 () Bool)
 
-(assert (=> b!37959 (= e!24116 true)))
+(assert (=> b!37941 (= e!24106 true)))
 
-(declare-datatypes ((Option!98 0))(
-  ( (Some!97 (v!1972 B!788)) (None!96) )
+(declare-datatypes ((Option!99 0))(
+  ( (Some!98 (v!1973 B!788)) (None!97) )
 ))
-(declare-fun getValueByKey!92 (List!997 (_ BitVec 64)) Option!98)
+(declare-fun getValueByKey!93 (List!990 (_ BitVec 64)) Option!99)
 
-(assert (=> b!37959 (= (getValueByKey!92 (toList!524 lm!264) a!526) (Some!97 b!99))))
+(assert (=> b!37941 (= (getValueByKey!93 (toList!516 lm!264) a!526) (Some!98 b!99))))
 
-(declare-fun lt!13963 () Unit!884)
+(declare-fun lt!13923 () Unit!887)
 
-(declare-fun lemmaContainsTupThenGetReturnValue!20 (List!997 (_ BitVec 64) B!788) Unit!884)
+(declare-fun lemmaContainsTupThenGetReturnValue!20 (List!990 (_ BitVec 64) B!788) Unit!887)
 
-(assert (=> b!37959 (= lt!13963 (lemmaContainsTupThenGetReturnValue!20 (toList!524 lm!264) a!526 b!99))))
+(assert (=> b!37941 (= lt!13923 (lemmaContainsTupThenGetReturnValue!20 (toList!516 lm!264) a!526 b!99))))
 
-(declare-fun b!37960 () Bool)
+(declare-fun b!37942 () Bool)
 
 (declare-fun tp!5642 () Bool)
 
-(assert (=> b!37960 (= e!24115 tp!5642)))
+(assert (=> b!37942 (= e!24108 tp!5642)))
 
-(assert (= (and start!5228 res!22926) b!37958))
+(assert (= (and start!5234 res!22918) b!37940))
 
-(assert (= (and b!37958 (not res!22927)) b!37959))
+(assert (= (and b!37940 (not res!22919)) b!37941))
 
-(assert (= start!5228 b!37960))
+(assert (= start!5234 b!37942))
 
-(declare-fun m!30623 () Bool)
+(declare-fun m!30541 () Bool)
 
-(assert (=> start!5228 m!30623))
+(assert (=> start!5234 m!30541))
 
-(declare-fun m!30625 () Bool)
+(declare-fun m!30543 () Bool)
 
-(assert (=> start!5228 m!30625))
+(assert (=> start!5234 m!30543))
 
-(declare-fun m!30627 () Bool)
+(declare-fun m!30545 () Bool)
 
-(assert (=> b!37958 m!30627))
+(assert (=> b!37940 m!30545))
 
-(declare-fun m!30629 () Bool)
+(declare-fun m!30547 () Bool)
 
-(assert (=> b!37958 m!30629))
+(assert (=> b!37940 m!30547))
 
-(declare-fun m!30631 () Bool)
+(declare-fun m!30549 () Bool)
 
-(assert (=> b!37958 m!30631))
+(assert (=> b!37940 m!30549))
 
-(declare-fun m!30633 () Bool)
+(declare-fun m!30551 () Bool)
 
-(assert (=> b!37959 m!30633))
+(assert (=> b!37941 m!30551))
 
-(declare-fun m!30635 () Bool)
+(declare-fun m!30553 () Bool)
 
-(assert (=> b!37959 m!30635))
+(assert (=> b!37941 m!30553))
 
-(check-sat (not b!37958) (not b!37959) (not start!5228) tp_is_empty!1711 (not b!37960))
+(check-sat (not b!37942) (not start!5234) (not b!37940) (not b!37941) tp_is_empty!1711)
 (check-sat)

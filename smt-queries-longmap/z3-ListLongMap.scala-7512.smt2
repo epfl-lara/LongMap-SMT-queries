@@ -1,45 +1,45 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!95242 () Bool)
+(declare-fun start!95484 () Bool)
 
-(assert start!95242)
+(assert start!95484)
 
-(assert (=> start!95242 false))
+(assert (=> start!95484 false))
 
-(assert (=> start!95242 true))
+(assert (=> start!95484 true))
 
 (declare-datatypes ((B!1754 0))(
   ( (B!1755 (val!13080 Int)) )
 ))
-(declare-datatypes ((tuple2!16738 0))(
-  ( (tuple2!16739 (_1!8380 (_ BitVec 64)) (_2!8380 B!1754)) )
+(declare-datatypes ((tuple2!16662 0))(
+  ( (tuple2!16663 (_1!8342 (_ BitVec 64)) (_2!8342 B!1754)) )
 ))
-(declare-datatypes ((List!23253 0))(
-  ( (Nil!23250) (Cons!23249 (h!24458 tuple2!16738) (t!32603 List!23253)) )
+(declare-datatypes ((List!23210 0))(
+  ( (Nil!23207) (Cons!23206 (h!24424 tuple2!16662) (t!32561 List!23210)) )
 ))
-(declare-datatypes ((ListLongMap!14707 0))(
-  ( (ListLongMap!14708 (toList!7369 List!23253)) )
+(declare-datatypes ((ListLongMap!14639 0))(
+  ( (ListLongMap!14640 (toList!7335 List!23210)) )
 ))
-(declare-fun lm!214 () ListLongMap!14707)
+(declare-fun lm!214 () ListLongMap!14639)
 
-(declare-fun e!615351 () Bool)
+(declare-fun e!616299 () Bool)
 
-(declare-fun inv!37837 (ListLongMap!14707) Bool)
+(declare-fun inv!37837 (ListLongMap!14639) Bool)
 
-(assert (=> start!95242 (and (inv!37837 lm!214) e!615351)))
+(assert (=> start!95484 (and (inv!37837 lm!214) e!616299)))
 
-(declare-fun b!1076464 () Bool)
+(declare-fun b!1077944 () Bool)
 
 (declare-fun tp!78242 () Bool)
 
-(assert (=> b!1076464 (= e!615351 tp!78242)))
+(assert (=> b!1077944 (= e!616299 tp!78242)))
 
-(assert (= start!95242 b!1076464))
+(assert (= start!95484 b!1077944))
 
-(declare-fun m!994997 () Bool)
+(declare-fun m!997295 () Bool)
 
-(assert (=> start!95242 m!994997))
+(assert (=> start!95484 m!997295))
 
-(check-sat (not start!95242) (not b!1076464))
+(check-sat (not start!95484) (not b!1077944))
 (check-sat)

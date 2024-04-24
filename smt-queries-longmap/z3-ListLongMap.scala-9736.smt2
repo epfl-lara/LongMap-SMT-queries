@@ -1,69 +1,69 @@
 ; Options: -in -smt2
 (set-option :produce-unsat-assumptions true)
 
-(declare-fun start!115360 () Bool)
+(declare-fun start!115594 () Bool)
 
-(assert start!115360)
+(assert start!115594)
 
-(declare-fun res!908249 () Bool)
+(declare-fun res!908796 () Bool)
 
-(declare-fun e!773952 () Bool)
+(declare-fun e!774829 () Bool)
 
-(assert (=> start!115360 (=> (not res!908249) (not e!773952))))
+(assert (=> start!115594 (=> (not res!908796) (not e!774829))))
 
-(declare-datatypes ((List!31910 0))(
-  ( (Nil!31907) (Cons!31906 (h!33115 (_ BitVec 64)) (t!46596 List!31910)) )
+(declare-datatypes ((List!31897 0))(
+  ( (Nil!31894) (Cons!31893 (h!33111 (_ BitVec 64)) (t!46583 List!31897)) )
 ))
-(declare-fun l!3677 () List!31910)
+(declare-fun l!3677 () List!31897)
 
-(declare-datatypes ((tuple2!24480 0))(
-  ( (tuple2!24481 (_1!12251 (_ BitVec 64)) (_2!12251 List!31910)) )
+(declare-datatypes ((tuple2!24462 0))(
+  ( (tuple2!24463 (_1!12242 (_ BitVec 64)) (_2!12242 List!31897)) )
 ))
-(declare-datatypes ((Option!800 0))(
-  ( (Some!799 (v!21596 tuple2!24480)) (None!798) )
+(declare-datatypes ((Option!793 0))(
+  ( (Some!792 (v!21592 tuple2!24462)) (None!791) )
 ))
-(declare-fun isEmpty!1127 (Option!800) Bool)
+(declare-fun isEmpty!1125 (Option!793) Bool)
 
-(declare-fun unapply!64 (List!31910) Option!800)
+(declare-fun unapply!64 (List!31897) Option!793)
 
-(assert (=> start!115360 (= res!908249 (isEmpty!1127 (unapply!64 l!3677)))))
+(assert (=> start!115594 (= res!908796 (isEmpty!1125 (unapply!64 l!3677)))))
 
-(assert (=> start!115360 e!773952))
+(assert (=> start!115594 e!774829))
 
-(assert (=> start!115360 true))
+(assert (=> start!115594 true))
 
-(declare-fun b!1364632 () Bool)
+(declare-fun b!1366003 () Bool)
 
 (get-info :version)
 
-(assert (=> b!1364632 (= e!773952 (not ((_ is Nil!31907) l!3677)))))
+(assert (=> b!1366003 (= e!774829 (not ((_ is Nil!31894) l!3677)))))
 
-(assert (= (and start!115360 res!908249) b!1364632))
+(assert (= (and start!115594 res!908796) b!1366003))
 
-(declare-fun m!1248949 () Bool)
+(declare-fun m!1251067 () Bool)
 
-(assert (=> start!115360 m!1248949))
+(assert (=> start!115594 m!1251067))
 
-(assert (=> start!115360 m!1248949))
+(assert (=> start!115594 m!1251067))
 
-(declare-fun m!1248951 () Bool)
+(declare-fun m!1251069 () Bool)
 
-(assert (=> start!115360 m!1248951))
+(assert (=> start!115594 m!1251069))
 
-(check-sat (not start!115360))
+(check-sat (not start!115594))
 (check-sat)
 (get-model)
 
-(declare-fun d!146437 () Bool)
+(declare-fun d!147013 () Bool)
 
-(assert (=> d!146437 (= (isEmpty!1127 (unapply!64 l!3677)) (not ((_ is Some!799) (unapply!64 l!3677))))))
+(assert (=> d!147013 (= (isEmpty!1125 (unapply!64 l!3677)) (not ((_ is Some!792) (unapply!64 l!3677))))))
 
-(assert (=> start!115360 d!146437))
+(assert (=> start!115594 d!147013))
 
-(declare-fun d!146439 () Bool)
+(declare-fun d!147016 () Bool)
 
-(assert (=> d!146439 (= (unapply!64 l!3677) (ite ((_ is Nil!31907) l!3677) None!798 (Some!799 (tuple2!24481 (h!33115 l!3677) (t!46596 l!3677)))))))
+(assert (=> d!147016 (= (unapply!64 l!3677) (ite ((_ is Nil!31894) l!3677) None!791 (Some!792 (tuple2!24463 (h!33111 l!3677) (t!46583 l!3677)))))))
 
-(assert (=> start!115360 d!146439))
+(assert (=> start!115594 d!147016))
 
 (check-sat)
